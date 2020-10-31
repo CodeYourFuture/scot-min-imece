@@ -2,7 +2,7 @@ const config = {
 	development: {
 		user: "app_user",
 		host: "localhost",
-		database: "final_project",
+		database: "min_imece",
 		password: "password",
 		port: 5432,
 	},
