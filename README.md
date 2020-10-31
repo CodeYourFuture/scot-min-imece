@@ -8,16 +8,16 @@ After cloning the project, we will create the local database that the project wi
 - Open the terminal, and `cd` into `server`
 - Create your database: 
     - Option 1:
-        - `createdb final_project`
+        - `createdb min_imece`
     - Option 2:
         ```bash
       sudo -i -u postgres
-      create database final_project  
+      create database min_imece  
       ```
       
 - Create a DB user:
     ```bash
-    psql final_project
+    psql min_imece
     create user app_user password 'password';
     GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO app_user;
     GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO app_user;
