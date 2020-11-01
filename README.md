@@ -1,3 +1,17 @@
+# People involved:
+Coung
+etza
+Gianluca
+Hacer
+irina
+Luke
+Mawaddah
+mimi
+Natalia
+Rares
+Samuel
+sugun fatma
+
 # Get started
 
 Clone this project on your local machine.
