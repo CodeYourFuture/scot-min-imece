@@ -1,39 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Home from "./components/Home";
 import "semantic-ui-css/semantic.min.css";
 import About from "./components/About";
 import Status from "./components/Status";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { NavLink, BrowserRouter as Router, Route } from "react-router-dom";
+import { Menu, Container, Image, Input } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
+import banner from "./styles/banner.jpg";
 
 const Routes = () => {
   return (
     <Router>
-      <div>
-        <ul>
-          <li>
-            <Link className="nav-link" to="/">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link className="nav-link" to="/about">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link className="nav-link" to="/status">
-              Status
-            </Link>
-          </li>
-        </ul>
+      <Menu inverted>
+        <Container>
+          <Menu.Item header>
+            <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
+          </Menu.Item>
 
-        <div>
-          <Route path="/" exact component={Home} />
-          <Route path="/about/" component={About} />
-          <Route path="/status/" component={Status} />
-        </div>
+          <Menu.Item header as={NavLink} to="/" name="home" />
+          <Menu.Item header as={NavLink} to="/about" name="about" />
+          <Menu.Item header as={NavLink} to="/status" name="status" />
+        </Container>
+      </Menu>
+
+      <div>
+        <Route path="/" exact component={Home} />
+        <Route path="/about/" component={About} />
+        <Route path="/status/" component={Status} />
       </div>
     </Router>
   );
