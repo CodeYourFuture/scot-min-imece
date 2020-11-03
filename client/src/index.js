@@ -7,8 +7,6 @@ import About from "./components/About";
 import Status from "./components/Status";
 import { NavLink, BrowserRouter as Router, Route } from "react-router-dom";
 import { Menu, Container, Image, Input } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
-import banner from "./styles/banner.jpg";
 
 const Routes = () => {
   return (
@@ -16,7 +14,10 @@ const Routes = () => {
       <Menu inverted>
         <Container>
           <Menu.Item header>
-            <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
+            <Image
+              size="small"
+              src="http://www.maryhillintegration.org.uk/wp-content/uploads/2016/10/banner.jpg"
+            />
           </Menu.Item>
 
           <Menu.Item header as={NavLink} to="/" name="home" />
