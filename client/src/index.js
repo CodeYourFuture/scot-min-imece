@@ -6,6 +6,7 @@ import "semantic-ui-css/semantic.min.css";
 import About from "./components/About";
 import Status from "./components/Status";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Footer from "./components/Footer";
 
 const Routes = () => {
   return (
@@ -34,6 +35,7 @@ const Routes = () => {
           <Route path="/about/" component={About} />
           <Route path="/status/" component={Status} />
         </div>
+        <Footer />
       </div>
     </Router>
   );
