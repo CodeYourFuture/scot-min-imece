@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { signApi } from "../api/auth";
+import "semantic-ui-css/semantic.min.css";
+import { loginUser } from "../api/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,10 +15,9 @@ const Login = () => {
     }
   };
   const signIn = () => {
-    signApi(email, password)
+    loginUser(email, password)
       .then(data => {
         const token = data.token;
-        console.log(token);
 
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(data.user));
@@ -33,21 +33,32 @@ const Login = () => {
   } else
     return (
       <div>
-        Login
-        <input
-          onChange={handleChange}
-          name="email"
-          type="email"
-          placeholder="email"
-        />
-        <input
-          onChange={handleChange}
-          name="password"
-          type="password"
-          placeholder="password"
-        />
-        <button onClick={signIn}>Sign in</button>
-        {error ? <div>Wrong information. Try again</div> : null}
+        <form class="ui form">
+          <div class="field">
+            <label>Email</label>
+            <input
+              onChange={handleChange}
+              name="email"
+              type="email"
+              placeholder="Example@email.com"
+            />
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input
+              onChange={handleChange}
+              name="password"
+              type="password"
+              placeholder=" Enter password"
+            />
+          </div>
+          <button onClick={signIn} class="ui button">
+            Sign in
+          </button>
+          {error ? (
+            <div>The login details are not correct. Please try again</div>
+          ) : null}
+        </form>
       </div>
     );
 };
