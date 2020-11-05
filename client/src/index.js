@@ -8,6 +8,7 @@ import Status from "./components/Status";
 import { NavLink, BrowserRouter as Router, Route } from "react-router-dom";
 import { Menu, Container, Image } from "semantic-ui-react";
 import Footer from "./components/Footer";
+import banner from "./assets/banner.jpg";
 
 const Routes = () => {
   return (
@@ -15,10 +16,7 @@ const Routes = () => {
       <Menu inverted>
         <Container>
           <Menu.Item>
-            <Image
-              size="small"
-              src="http://www.maryhillintegration.org.uk/wp-content/uploads/2016/10/banner.jpg"
-            />
+            <Image size="small" src={banner} alt="Maryhill Integration logo" />
           </Menu.Item>
           <Menu.Item as={NavLink} to="/" name="home" />
           <Menu.Item as={NavLink} to="/about" name="about" />
