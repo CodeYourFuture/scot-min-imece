@@ -7,6 +7,7 @@ import About from "./components/About";
 import Status from "./components/Status";
 import { NavLink, BrowserRouter as Router, Route } from "react-router-dom";
 import { Menu, Container, Image } from "semantic-ui-react";
+import Footer from "./components/Footer";
 
 const Routes = () => {
   return (
@@ -28,6 +29,7 @@ const Routes = () => {
         <Route path="/" exact component={Home} />
         <Route path="/about/" component={About} />
         <Route path="/status/" component={Status} />
+        <Footer />
       </div>
     </Router>
   );
