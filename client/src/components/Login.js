@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "semantic-ui-css/semantic.min.css";
+import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
 import { loginUser } from "../api/auth";
 
 const Login = () => {
@@ -14,6 +14,7 @@ const Login = () => {
       setPassword(event.target.value);
     }
   };
+
   const signIn = () => {
     loginUser(email, password)
       .then(data => {
@@ -27,40 +28,41 @@ const Login = () => {
         setError(true);
       });
   };
-  const token = localStorage.getItem("token");
-  if (token) {
-    return <div>You are already logged in.</div>;
-  } else
-    return (
-      <div>
-        <form class="ui form">
-          <div class="field">
-            <label>Email</label>
-            <input
+
+  return (
+    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as="h2" color="teal" textAlign="center">
+          Log-in to your account
+        </Header>
+        <Form size="large">
+          <Segment stacked>
+            <Form.Input
               onChange={handleChange}
-              name="email"
-              type="email"
-              placeholder="Example@email.com"
+              fluid
+              icon="user"
+              iconPosition="left"
+              placeholder="E-mail address"
             />
-          </div>
-          <div class="field">
-            <label>Password</label>
-            <input
+            <Form.Input
               onChange={handleChange}
-              name="password"
+              fluid
+              icon="lock"
+              iconPosition="left"
+              placeholder="Password"
               type="password"
-              placeholder=" Enter password"
             />
-          </div>
-          <button onClick={signIn} class="ui button">
-            Sign in
-          </button>
-          {error ? (
-            <div>The login details are not correct. Please try again</div>
-          ) : null}
-        </form>
-      </div>
-    );
+            <Button onClick={signIn} color="teal" fluid size="large">
+              Login
+            </Button>
+            {error ? (
+              <div>The login details are not correct. Please try again</div>
+            ) : null}
+          </Segment>
+        </Form>
+      </Grid.Column>
+    </Grid>
+  );
 };
 
 export default Login;
