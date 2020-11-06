@@ -5,3 +5,7 @@ export const getStatus = () => {
 export const getUsers = () => {
   return fetch("/api/users").then(res => res.json());
 };
+
+export const getProfiles = () => {
+  return fetch("/api/profiles").then(res => res.json());
+};
