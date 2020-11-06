@@ -38,6 +38,7 @@ const Login = () => {
         <Form size="large">
           <Segment stacked>
             <Form.Input
+              name="email"
               onChange={handleChange}
               fluid
               icon="user"
@@ -45,6 +46,7 @@ const Login = () => {
               placeholder="E-mail address"
             />
             <Form.Input
+              name="password"
               onChange={handleChange}
               fluid
               icon="lock"
