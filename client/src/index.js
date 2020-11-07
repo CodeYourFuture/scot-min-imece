@@ -2,11 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Home from "./components/Home";
-import "semantic-ui-css/semantic.min.css";
 import About from "./components/About";
 import Status from "./components/Status";
 import AddNewProfile from "./components/AddNewProfile";
+import Login from "./components/Login";
+import "semantic-ui-css/semantic.min.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Footer from "./components/Footer";
+
+const logout = e => {
+  e.preventDefault();
+  localStorage.removeItem("token");
+  document.location.reload();
+};
 
 const Routes = () => {
   return (
@@ -28,6 +36,15 @@ const Routes = () => {
               Status
             </Link>
           </li>
+          <li>
+            {localStorage.getItem("token") ? (
+              <button onClick={logout}>Logout</button>
+            ) : (
+              <Link className="nav-link" to="/login">
+                Login
+              </Link>
+            )}
+          </li>
         </ul>
 
         <div>
@@ -35,7 +52,9 @@ const Routes = () => {
           <Route path="/about/" component={About} />
           <Route path="/status/" component={Status} />
           <Route path="/add-new-profile" component={AddNewProfile} />
+          <Route path="/login/" component={Login} />
         </div>
+        <Footer />
       </div>
     </Router>
   );
