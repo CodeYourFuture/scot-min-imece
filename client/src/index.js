@@ -4,36 +4,45 @@ import "./index.css";
 import Home from "./components/Home";
 import About from "./components/About";
 import Status from "./components/Status";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { NavLink, BrowserRouter as Router, Route } from "react-router-dom";
+import { Menu, Container, Image, Button } from "semantic-ui-react";
+import Login from "./components/Login";
+import "semantic-ui-css/semantic.min.css";
+import Footer from "./components/Footer";
+import banner from "./assets/banner.jpg";
+
+const logout = e => {
+  e.preventDefault();
+  localStorage.removeItem("token");
+  document.location.reload();
+};
 
 const Routes = () => {
   return (
     <Router>
+      <Menu inverted>
+        <Container>
+          <Menu.Item>
+            <Image size="small" src={banner} alt="Maryhill Integration logo" />
+          </Menu.Item>
+          <Menu.Item as={NavLink} exact to="/" name="home" />
+          <Menu.Item as={NavLink} to="/about" name="about" />
+          <Menu.Item as={NavLink} to="/status" name="status" />
+          {localStorage.getItem("token") ? (
+            <Menu.Item onClick={logout} position="right" name="logout" />
+          ) : (
+            <Menu.Item as={NavLink} to="/login" name="login" position="right" />
+          )}
+        </Container>
+      </Menu>
       <div>
-        <ul>
-          <li>
-            <Link className="nav-link" to="/">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link className="nav-link" to="/about">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link className="nav-link" to="/status">
-              Status
-            </Link>
-          </li>
-        </ul>
-
-        <div>
-          <Route path="/" exact component={Home} />
-          <Route path="/about/" component={About} />
-          <Route path="/status/" component={Status} />
-        </div>
+        <Route path="/" exact component={Home} />
+        <Route path="/about/" component={About} />
+        <Route path="/status/" component={Status} />
+        <Route path="/login/" component={Login} />
       </div>
+
+      <Footer />
     </Router>
   );
 };
