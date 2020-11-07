@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Home.css";
-import Profiles from "../api/profiles";
+import Profiles from "../components/Profiles";
 
 const Home = () => {
   return (
