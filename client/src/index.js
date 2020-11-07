@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import "semantic-ui-css/semantic.min.css";
 import About from "./components/About";
 import Status from "./components/Status";
+import AddNewProfile from "./components/AddNewProfile";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const Routes = () => {
@@ -33,6 +34,7 @@ const Routes = () => {
           <Route path="/" exact component={Home} />
           <Route path="/about/" component={About} />
           <Route path="/status/" component={Status} />
+          <Route path="/add-new-profile" component={AddNewProfile} />
         </div>
       </div>
     </Router>
