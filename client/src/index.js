@@ -41,7 +41,6 @@ const Routes = () => {
         <Route path="/status/" component={Status} />
         <Route path="/login/" component={Login} />
       </div>
-
       <Footer />
     </Router>
   );
