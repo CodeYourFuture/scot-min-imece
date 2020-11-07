@@ -8,9 +8,8 @@ const Footer = () => {
     <div className="footer">
       <Grid divided columns={3}>
         <Grid.Column>
-          {" "}
           <div className="team-container">
-            <p>Min-Imece-Team</p>
+            <h3>Min-Imece-Team</h3>
             <span>Samuel</span>
             <span>Hacer</span>
             <span>Fatma</span>
@@ -19,11 +18,11 @@ const Footer = () => {
           </div>
         </Grid.Column>
         <Grid.Column>
-          <h3>
-            Migrants' Questions and Answers is an open source project, created
-            by CodeYourFuture students. Many thanks to Samuel Odudare for the
-            logo
-          </h3>
+          <p>
+            A dashboard for Maryhill Integration Network that staff can use to
+            better track, and support service users and volunteers created by
+            CodeYourFuture Students
+          </p>
         </Grid.Column>
         <Grid.Column>
           <img class="footer-image" src={CYFLogo} alt="CYFLogo" />
