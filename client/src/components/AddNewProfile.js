@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
+import { getProfiles } from "../api/profiles";
 
 const AddNewProfile = () => {
   const [profileData, setProfileData] = useState({
@@ -14,6 +15,8 @@ const AddNewProfile = () => {
     support_type: ""
   });
 
+  const [profileCreated, setProfileCreated] = useState(null);
+
   const handleChange = event => {
     const updatedProfileData = {
       ...profileData,
@@ -23,17 +26,20 @@ const AddNewProfile = () => {
     setProfileData(updatedProfileData);
   };
 
-  const createProfile = () => {
-    console.log("Do something with the form values...");
-    console.log(`Username = ${profileData.firstname}`);
-    console.log(`Email = ${profileData.email}`);
+  const createProfile = event => {
+    getProfiles(profileData).then(isSuccessful => {
+      console.log(isSuccessful);
+      setProfileCreated(isSuccessful);
+      event.preventDefault();
+    });
   };
 
   return (
-    <Form>
+    <Form onSubmit={createProfile}>
       <Form.Field>
         <label>First name</label>
         <input
+          id="first-name"
           placeholder="First Name"
           name="firstname"
           value={profileData.firstname}
@@ -43,6 +49,7 @@ const AddNewProfile = () => {
       <Form.Field>
         <label>Last Name</label>
         <input
+          id="last-name"
           placeholder="Last Name"
           name="lastname"
           value={profileData.lastname}
@@ -52,6 +59,7 @@ const AddNewProfile = () => {
       <Form.Field>
         <label>DOB</label>
         <input
+          id="dob"
           type="date"
           placeholder="Date of birth"
           name="dob"
@@ -62,6 +70,7 @@ const AddNewProfile = () => {
       <Form.Field>
         <label>Address</label>
         <input
+          id="address"
           placeholder="Address"
           name="address"
           value={profileData.address}
@@ -71,6 +80,7 @@ const AddNewProfile = () => {
       <Form.Field>
         <label>Email</label>
         <input
+          id="email"
           type="email"
           placeholder="Email Address"
           name="email"
@@ -81,6 +91,7 @@ const AddNewProfile = () => {
       <Form.Field>
         <label>Phone</label>
         <input
+          id="phone"
           type="tel"
           placeholder="Phone"
           name="phone"
@@ -91,6 +102,7 @@ const AddNewProfile = () => {
       <Form.Field>
         <label>Gender</label>
         <input
+          id="gender"
           placeholder="Gender"
           name="gender"
           value={profileData.gender}
@@ -100,6 +112,7 @@ const AddNewProfile = () => {
       <Form.Field>
         <label>Groups</label>
         <input
+          id="groups"
           placeholder="Groups"
           name="groups"
           value={profileData.groups}
@@ -109,15 +122,16 @@ const AddNewProfile = () => {
       <Form.Field>
         <label>Support type</label>
         <input
+          id="support"
           placeholder="Support type"
           name="support_type"
           value={profileData.support_type}
           onChange={handleChange}
         />
       </Form.Field>
-      <Button type="submit" onClick={createProfile}>
+      <Form.Button primary type="submit">
         Add new profile
-      </Button>
+      </Form.Button>
     </Form>
   );
 };
