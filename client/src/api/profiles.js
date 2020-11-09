@@ -1,4 +1,4 @@
-export const getProfiles = profile => {
+export const postProfile = profile => {
   const sendProfile = {
     method: "POST",
     body: JSON.stringify(profile),

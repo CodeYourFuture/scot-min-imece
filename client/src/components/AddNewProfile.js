@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form } from "semantic-ui-react";
-import { getProfiles } from "../api/profiles";
+import { postProfile } from "../api/profiles";
 
 const AddNewProfile = () => {
   const [profileData, setProfileData] = useState({
@@ -27,17 +27,15 @@ const AddNewProfile = () => {
   };
 
   const createProfile = event => {
-    getProfiles(profileData).then(isSuccessful => {
-      console.log(isSuccessful);
+    postProfile(profileData).then(isSuccessful => {
       setProfileCreated(isSuccessful);
-      event.preventDefault();
     });
   };
 
   return (
     <Form onSubmit={createProfile}>
       <Form.Field>
-        <label>First name</label>
+        <label htmlFor="first-name">First name</label>
         <input
           id="first-name"
           placeholder="First Name"
@@ -47,7 +45,7 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label>Last Name</label>
+        <label htmlFor="last-name">Last Name</label>
         <input
           id="last-name"
           placeholder="Last Name"
@@ -57,7 +55,7 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label>DOB</label>
+        <label htmlFor="dob">DOB</label>
         <input
           id="dob"
           type="date"
@@ -68,7 +66,7 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label>Address</label>
+        <label htmlFor="address">Address</label>
         <input
           id="address"
           placeholder="Address"
@@ -78,7 +76,7 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label>Email</label>
+        <label htmlFor="email">Email</label>
         <input
           id="email"
           type="email"
@@ -89,7 +87,7 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label>Phone</label>
+        <label htmlFor="phone">Phone</label>
         <input
           id="phone"
           type="tel"
@@ -100,7 +98,7 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label>Gender</label>
+        <label htmlFor="gender">Gender</label>
         <input
           id="gender"
           placeholder="Gender"
@@ -110,7 +108,7 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label>Groups</label>
+        <label htmlFor="groups">Groups</label>
         <input
           id="groups"
           placeholder="Groups"
@@ -120,7 +118,7 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label>Support type</label>
+        <label htmlFor="support">Support type</label>
         <input
           id="support"
           placeholder="Support type"
