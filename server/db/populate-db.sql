@@ -10,3 +10,8 @@ INSERT INTO profiles (first_name, last_name, gender, date_of_birth, email, addre
 INSERT INTO profiles (first_name, last_name, gender, date_of_birth, email, address) values ('Natalia', 'Andrei', 'female', '1950-07-05', 'nat_and@cyf.org', '176 Battal Gazi sok., Dalaman');
 INSERT INTO profiles (first_name, last_name, gender, date_of_birth, email, address) values ('Rares', 'Smith', 'male', '1989-10-15', 'rares_smith@cyf.org', '6 Seyfettin ince cad., Dalaman');
 INSERT INTO profiles (first_name, last_name, gender, date_of_birth, email, address, phone_number, occupation) values ('Mimi', 'Mouse', 'female', '1967-01-30', 'happy_mood@cyf.org', '176 Battal Gazi sok., Dalaman', '+44 1345 56788', 'teacher');
+
+COPY nationalities(nationality)
+FROM '/home/coder/codeyourfuture/scot-min-imece/nationalities.csv'
+DELIMITER ','
+CSV HEADER;
