@@ -14,4 +14,17 @@ router.get("/", (req, res) => {
 		});
 });
 
+router.post("/", (req, res) => {
+	const newProfile = req.body;
+	usersDb
+		.createProfile(newProfile)
+		.then((data) => {
+			res.sendStatus(201);
+		})
+		.catch((err) => {
+			console.error(err);
+			res.sendStatus(500);
+		});
+});
+
 module.exports = router;
