@@ -19,8 +19,14 @@ CREATE TABLE profiles (
   last_name       VARCHAR(100) NOT NULL CHECK (last_name <> ''),
   date_of_birth   DATE CHECK (date_of_birth > '1920-01-01'),
   gender          gender NOT NULL,
+  nationality_id INT REFERENCES nationalities(id),
   email           VARCHAR(200) NOT NULL CHECK (email <> '') UNIQUE,
   address         VARCHAR(200) CHECK (address <> ''),
   phone_number    VARCHAR(50) CHECK (length(phone_number) > 9),
   occupation      VARCHAR(100) CHECK (occupation <> '')
+);
+
+CREATE TABLE nationalities (
+  id SERIAL PRIMARY KEY,
+ nationality   VARCHAR(100) NOT NULL
 );
