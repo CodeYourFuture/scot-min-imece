@@ -26,7 +26,7 @@ const AddNewProfile = () => {
     setProfileData(updatedProfileData);
   };
 
-  const createProfile = event => {
+  const createProfile = () => {
     postProfile(profileData).then(isSuccessful => {
       setProfileCreated(isSuccessful);
     });
@@ -130,6 +130,7 @@ const AddNewProfile = () => {
       <Form.Button primary type="submit">
         Add new profile
       </Form.Button>
+      { profileCreated === false && <div>Profile has not been created</div>}
     </Form>
   );
 };

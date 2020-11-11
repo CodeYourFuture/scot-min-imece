@@ -1,3 +1,7 @@
+export const getProfiles = () => {
+  return fetch("/api/profiles").then(res => res.json());
+};
+
 export const postProfile = profile => {
   const sendProfile = {
     method: "POST",
@@ -7,5 +11,5 @@ export const postProfile = profile => {
     }
   };
 
-  return fetch("/api/profiles").then(res => res.ok);
+  return fetch("/api/profiles", sendProfile).then(res => res.ok);
 };
