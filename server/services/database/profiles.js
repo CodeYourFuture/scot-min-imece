@@ -7,11 +7,7 @@ const getAllProfiles = () => {
 		.query(
 			"SELECT id, first_name, last_name, phone_number, email FROM profiles",
 		)
-		.then((result) => result.rows)
-		.catch((error) => {
-			console.error(error);
-			throw error;
-		});
+		.then((result) => result.rows);
 };
 
 const createProfile = (newProfile) => {
@@ -28,11 +24,7 @@ const createProfile = (newProfile) => {
 				newProfile.phone,
 			],
 		)
-		.then((result) => result.rows)
-		.catch((error) => {
-			console.error(error);
-			throw error;
-		});
+		.then((result) => result.rows);
 };
 
 module.exports = {
