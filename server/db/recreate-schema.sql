@@ -1,6 +1,7 @@
 -- Drop tables in case they already exist
 DROP TABLE if exists users;
 DROP TABLE if exists profiles;
+DROP TABLE if exists nationalities;
 DROP TYPE if exists gender;
 
 -- Custom Types
@@ -11,6 +12,11 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email    VARCHAR(200) NOT NULL,
   password VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE nationalities (
+  id           INT PRIMARY KEY,
+  nationality   VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE profiles (
@@ -26,7 +32,3 @@ CREATE TABLE profiles (
   occupation      VARCHAR(100)
 );
 
-CREATE TABLE nationalities (
-  id SERIAL PRIMARY KEY,
- nationality   VARCHAR(100) NOT NULL
-);
