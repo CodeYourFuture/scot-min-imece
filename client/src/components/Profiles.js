@@ -12,36 +12,22 @@ const Profiles = () => {
 
   useEffect(() => {
     getProfiles().then(response => {
-      setProfiles(() => {
-        return !searchInput
-          ? response
-          : response.filter(
-              profile =>
-                profile.first_name
-                  .toLowerCase()
-                  .includes(searchInput.toLowerCase()) ||
-                profile.last_name
-                  .toLowerCase()
-                  .includes(searchInput.toLowerCase()) ||
-                profile.email
-                  .toLowerCase()
-                  .includes(searchInput.toLowerCase()) ||
-                (profile.address &&
-                  profile.address
-                    .toLowerCase()
-                    .includes(searchInput.toLowerCase())) ||
-                (profile.phone_number &&
-                  profile.phone_number
-                    .toLowerCase()
-                    .includes(searchInput.toLowerCase())) ||
-                (profile.occupation &&
-                  profile.occupation
-                    .toLowerCase()
-                    .includes(searchInput.toLowerCase()))
-            );
-      });
+      setProfiles(response);
     });
-  }, [searchInput]);
+  }, []);
+
+  const searchString = searchInput.toLowerCase();
+  const isMatch = field => field.toLowerCase().includes(searchString);
+
+  let filteredProfiles = profiles.filter(
+    profile =>
+      isMatch(profile.first_name) ||
+      isMatch(profile.last_name) ||
+      isMatch(profile.email) ||
+      (profile.address && isMatch(profile.address)) ||
+      (profile.phone_number && isMatch(profile.phone_number)) ||
+      (profile.occupation && isMatch(profile.occupation))
+  );
 
   return (
     <Container text>
@@ -51,7 +37,7 @@ const Profiles = () => {
         value={searchInput}
         showNoResults={false}
       />
-      {profiles.length === 0 ? (
+      {filteredProfiles.length === 0 ? (
         <Message>No matching profiles found</Message>
       ) : (
         <Table celled collapsing>
@@ -64,7 +50,7 @@ const Profiles = () => {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {profiles.map(profile => (
+            {filteredProfiles.map(profile => (
               <Table.Row key={profile.id}>
                 <Table.Cell children={profile.id}></Table.Cell>
                 <Table.Cell
