@@ -4,8 +4,9 @@ import "./index.css";
 import Home from "./components/Home";
 import About from "./components/About";
 import Status from "./components/Status";
+import AddNewProfile from "./components/AddNewProfile";
 import { NavLink, BrowserRouter as Router, Route } from "react-router-dom";
-import { Menu, Container, Image, Button } from "semantic-ui-react";
+import { Menu, Container, Image } from "semantic-ui-react";
 import Login from "./components/Login";
 import "semantic-ui-css/semantic.min.css";
 import Footer from "./components/Footer";
@@ -40,8 +41,8 @@ const Routes = () => {
         <Route path="/about/" component={About} />
         <Route path="/status/" component={Status} />
         <Route path="/login/" component={Login} />
+        <Route path="/add-new-profile" component={AddNewProfile} />
       </div>
-
       <Footer />
     </Router>
   );
