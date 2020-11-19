@@ -5,11 +5,13 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Status from "./components/Status";
 import { NavLink, BrowserRouter as Router, Route } from "react-router-dom";
-import { Menu, Container, Image, Button } from "semantic-ui-react";
+import { Menu, Container, Image } from "semantic-ui-react";
 import Login from "./components/Login";
 import "semantic-ui-css/semantic.min.css";
 import Footer from "./components/Footer";
 import banner from "./assets/banner.jpg";
+import ViewProfile from "./components/ViewProfile";
+import Profiles from "./components/Profiles";
 
 const logout = e => {
   e.preventDefault();
@@ -40,6 +42,7 @@ const Routes = () => {
         <Route path="/about/" component={About} />
         <Route path="/status/" component={Status} />
         <Route path="/login/" component={Login} />
+        <Route path="/profiles/:profileId" component={ViewProfile} />
       </div>
 
       <Footer />
