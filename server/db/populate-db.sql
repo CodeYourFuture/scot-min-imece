@@ -231,11 +231,11 @@ INSERT INTO nationalities (id, nationality) VALUES (225, 'Zimbabwean');
 
 
 
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, email) values ('Fatma', 'Oymak', 'female', 209, 'sun@cyf.org');
-INSERT INTO profiles (first_name, last_name, gender, email) values ('Su', 'Oymak', 'female', 'water@cyf.org');
-INSERT INTO profiles (first_name, last_name, gender, email, address) values ('Gun', 'Ozguven', 'male', 'bedizma@cyf.org', '29, White hart lane, N8 1UG');
-INSERT INTO profiles (first_name, last_name, gender, date_of_birth, email, address) values ('Arda', 'Acar', 'male', '2008-07-30', 's@cyf.org', '1 Glasgow street, Edinburgh');
-INSERT INTO profiles (first_name, last_name, gender, date_of_birth, email, address) values ('Natalia', 'Andrei', 'female', '1950-07-05', 'nat_and@cyf.org', '176 Battal Gazi sok., Dalaman');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, date_of_birth, email, address) values ('Rares', 'Smith', 'male', 200, '1989-10-15', 'rares_smith@cyf.org', '6 Seyfettin ince cad., Dalaman');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, date_of_birth, email, address, phone_number, occupation) values ('Mimi', 'Mouse', 'female', 100, '1967-01-30', 'happy_mood@cyf.org', '176 Battal Gazi sok., Dalaman', '+44 1345 56788', 'teacher');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, email, type) values ('Fatma', 'Oymak', 'female', 209, 'sun@cyf.org', 'service_user');
+INSERT INTO profiles (first_name, last_name, gender, email, type) values ('Su', 'Oymak', 'female', 'water@cyf.org', 'service_user');
+INSERT INTO profiles (first_name, last_name, gender, email, address, type) values ('Gun', 'Ozguven', 'male', 'bedizma@cyf.org', '29, White hart lane, N8 1UG', 'service_user');
+INSERT INTO profiles (first_name, last_name, gender, date_of_birth, email, address, type) values ('Arda', 'Acar', 'male', '2008-07-30', 's@cyf.org', '1 Glasgow street, Edinburgh', 'service_user');
+INSERT INTO profiles (first_name, last_name, gender, date_of_birth, email, address, type) values ('Natalia', 'Andrei', 'female', '1950-07-05', 'nat_and@cyf.org', '176 Battal Gazi sok., Dalaman', 'service_user');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, date_of_birth, email, address, type) values ('Rares', 'Smith', 'male', 200, '1989-10-15', 'rares_smith@cyf.org', '6 Seyfettin ince cad., Dalaman', 'service_user');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, date_of_birth, email, address, phone_number, occupation, type) values ('Mimi', 'Mouse', 'female', 100, '1967-01-30', 'happy_mood@cyf.org', '176 Battal Gazi sok., Dalaman', '+44 1345 56788', 'teacher', 'service_user');
 
