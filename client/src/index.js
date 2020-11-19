@@ -4,6 +4,7 @@ import "./index.css";
 import Home from "./components/Home";
 import About from "./components/About";
 import Status from "./components/Status";
+import AddNewProfile from "./components/AddNewProfile";
 import { NavLink, BrowserRouter as Router, Route } from "react-router-dom";
 import { Menu, Container, Image } from "semantic-ui-react";
 import Login from "./components/Login";
@@ -44,7 +45,6 @@ const Routes = () => {
         <Route path="/login/" component={Login} />
         <Route path="/profiles/:profileId" component={ViewProfile} />
       </div>
-
       <Footer />
     </Router>
   );
