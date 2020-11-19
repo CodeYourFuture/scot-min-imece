@@ -44,6 +44,7 @@ const Routes = () => {
         <Route path="/status/" component={Status} />
         <Route path="/login/" component={Login} />
         <Route path="/profiles/:profileId" component={ViewProfile} />
+        <Route path="/add-new-profile" component={AddNewProfile} />
       </div>
       <Footer />
     </Router>
