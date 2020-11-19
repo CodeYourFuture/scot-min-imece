@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Container, Message, Search, Table } from "semantic-ui-react";
+import { Container, Message, Search, Table, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import { getProfiles } from "../api/profiles";
 
 const Profiles = () => {
@@ -72,6 +73,18 @@ const Profiles = () => {
                 ></Table.Cell>
                 <Table.Cell children={profile.phone_number}></Table.Cell>
                 <Table.Cell children={profile.email}></Table.Cell>
+                <Table.Cell>
+                  {" "}
+                  <Button
+                    as={Link}
+                    to={`/profiles/${profile.id}`}
+                    size="mini"
+                    basic
+                    color="black"
+                  >
+                    View
+                  </Button>{" "}
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
