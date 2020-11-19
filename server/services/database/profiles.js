@@ -11,6 +11,17 @@ const getAllProfiles = () => {
 	});
 };
 
+const getProfileById = (id) => {
+	return pool
+		.query("SELECT * FROM profiles where id = $1", [id])
+		.then((result) => result.rows[0])
+		.catch((error) => {
+			console.error(error);
+			throw error;
+		});
+};
+
 module.exports = {
-	getAllProfiles
+	getAllProfiles,
+	getProfileById
 };
