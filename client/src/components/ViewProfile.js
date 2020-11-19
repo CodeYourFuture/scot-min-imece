@@ -14,8 +14,8 @@ const ViewProfile = () => {
       document.title =
         response.first_name + " " + response.last_name + " Profile";
     });
-    console.log(profileId);
   }, [profileId]);
+
   return (
     <Container text>
       <Card color="black">
