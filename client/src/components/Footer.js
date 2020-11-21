@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/Footer.css";
 import CYFLogo from "../assets/CYF.jpeg";
 import {
   Container,
@@ -7,23 +6,22 @@ import {
   Image,
   Segment,
   List,
-  Header,
-  Divider
+  Header
 } from "semantic-ui-react";
 
 const Footer = () => {
   return (
-    <Segment className="footer" inverted vertical textAlign="center">
-      <Container textAlign="center">
+    <Segment inverted textAlign="center">
+      <Container>
         <Grid divided columns={3}>
           <Grid.Column width={4}>
             <Header inverted as="h4" content="Min-Imece-Team" />
             <List link inverted>
-              <List.Item as="a">Samuel</List.Item>
-              <List.Item as="a">Natalia</List.Item>
-              <List.Item as="a">Mawaddah</List.Item>
-              <List.Item as="a">Fatma</List.Item>
-              <List.Item as="a">Hacer</List.Item>
+              <List.Item>Samuel</List.Item>
+              <List.Item>Natalia</List.Item>
+              <List.Item>Mawaddah</List.Item>
+              <List.Item>Fatma</List.Item>
+              <List.Item>Hacer</List.Item>
             </List>
           </Grid.Column>
           <Grid.Column width={8}>
@@ -39,7 +37,6 @@ const Footer = () => {
               as="a"
               size="tiny"
               href="https://codeyourfuture.io"
-              target="CYF"
             />
           </Grid.Column>
         </Grid>
