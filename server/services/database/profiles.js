@@ -34,9 +34,16 @@ const deleteProfile = (profileId) => {
 	   )
 	   .then((result) => result.rows);
 };
+  
+const getProfileById = (id) => {
+	return pool
+		.query("SELECT * FROM profiles where id = $1", [id])
+		.then((result) => result.rows[0])
+};
 
 module.exports = {
 	getAllProfiles,
+	getProfileById,
 	createProfile,
 	deleteProfile
 };

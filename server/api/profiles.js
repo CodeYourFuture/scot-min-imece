@@ -14,6 +14,18 @@ router.get("/", (req, res) => {
 		});
 });
 
+router.get("/:profileId", (req, res) => {
+	const profileId = req.params.profileId;
+	usersDb
+		.getProfileById(profileId)
+		.then((data) => {
+			res.send(data);
+		})
+		.catch((err) => {
+			console.error(err);
+			res.send(500);
+		});
+});
 router.post("/", (req, res) => {
 	const newProfile = req.body;
 	usersDb
