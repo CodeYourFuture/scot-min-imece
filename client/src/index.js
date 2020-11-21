@@ -28,8 +28,7 @@ const Routes = () => {
           </Menu.Item>
           <Menu.Item as={NavLink} to="/about" name="about">
             FAQ
-          </Menu.Item>{" "}
-          />
+          </Menu.Item>
           <Menu.Item as={NavLink} to="/add-new-profile" name="addNewProfile" />
           {localStorage.getItem("token") ? (
             <Menu.Item onClick={logout} position="right" name="logout" />
