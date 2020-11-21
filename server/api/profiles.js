@@ -39,4 +39,17 @@ router.post("/", (req, res) => {
 		});
 });
 
+router.delete("/:profileId",(req, res)=>{
+	 const profileId = req.param("profileId");
+	 usersDb
+		  .deleteProfile(profileId)
+		  .then((rows) =>{
+			  res.send("Profile deleted");
+		  })
+		  .catch((err) => {
+			console.error(err);
+			res.sendStatus(500);
+		});
+});
+
 module.exports = router;

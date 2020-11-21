@@ -1,11 +1,16 @@
 -- Drop tables in case they already exist
-DROP TABLE if exists users;
 DROP TABLE if exists profiles;
 DROP TABLE if exists nationalities;
+DROP TABLE if exists users;
 DROP TYPE if exists gender;
+DROP TYPE if exists profile_type;
+DROP TYPE if exists status;
 
 -- Custom Types
 CREATE TYPE gender AS ENUM ('female', 'male', 'other', 'not_provided');
+CREATE TYPE profile_type AS ENUM ('volunteer', 'service_user');
+CREATE TYPE status AS ENUM ('new', 'active', 'inactive');
+
 
 -- Create tables
 CREATE TABLE users (
@@ -29,6 +34,11 @@ CREATE TABLE profiles (
   email           VARCHAR(200) NOT NULL CHECK (email <> '') UNIQUE,
   address         VARCHAR(200) CHECK (address <> ''),
   phone_number    VARCHAR(50) CHECK (length(phone_number) > 9),
-  occupation      VARCHAR(100) CHECK (occupation <> '')
+  occupation      VARCHAR(100) CHECK (occupation <> ''),
+  type            profile_type NOT NULL,
+  status          status NOT NULL DEFAULT 'new',
+  join_date       DATE NOT NULL DEFAULT current_date,
+  updated_date    DATE,
+  last_edited_by  int references users(id)
 );
 
