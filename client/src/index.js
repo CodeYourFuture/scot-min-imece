@@ -36,7 +36,7 @@ const Routes = () => {
           )}
         </Container>
       </Menu>
-      <div>
+      <div className="content">
         <Route path="/" exact component={Home} />
         <Route path="/about/" component={About} />
         <Route path="/status/" component={Status} />
