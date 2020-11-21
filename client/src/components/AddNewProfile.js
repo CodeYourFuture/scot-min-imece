@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Form } from "semantic-ui-react";
+import SemanticDatepicker from "react-semantic-ui-datepickers";
+import { Form, Dropdown } from "semantic-ui-react";
 import { postProfile } from "../api/profiles";
 
 const AddNewProfile = () => {
@@ -12,18 +13,16 @@ const AddNewProfile = () => {
     phone: "",
     gender: "",
     groups: "",
-    support_type: ""
+    support_type: "",
+    profile_type: "",
+    status: "",
+    join_date: ""
   });
 
   const [profileCreated, setProfileCreated] = useState(null);
 
   const handleChange = event => {
-    const updatedProfileData = {
-      ...profileData,
-      [event.target.name]: event.target.value
-    };
-
-    setProfileData(updatedProfileData);
+    updateField(event.target.name, event.target.value);
   };
 
   const createProfile = () => {
@@ -31,6 +30,37 @@ const AddNewProfile = () => {
       setProfileCreated(isSuccessful);
     });
   };
+
+  const profileTypeChange = (event, data) => {
+    updateField("profile_type", data.value);
+  };
+
+  const statusChange = (event, data) => {
+    updateField("status", data.value);
+  };
+
+  const dateChange = (event, data) => {
+    updateField("join_date", data.value);
+  };
+
+  const updateField = (name, value) => {
+    const updatedProfileData = {
+      ...profileData,
+      [name]: value
+    };
+    setProfileData(updatedProfileData);
+  };
+
+  const profileTypeOptions = [
+    { key: "volunteer", value: "volunteer", text: "Volunteer" },
+    { key: "service user", value: "service_user", text: "Service user" }
+  ];
+
+  const statusOptions = [
+    { key: "new", value: "new", text: "New" },
+    { key: "active", value: "active", text: "Active" },
+    { key: "inactive", value: "inactive", text: "Inactive" }
+  ];
 
   return (
     <Form onSubmit={createProfile}>
@@ -127,10 +157,35 @@ const AddNewProfile = () => {
           onChange={handleChange}
         />
       </Form.Field>
+      <Form.Field>
+        <Dropdown
+          onChange={profileTypeChange}
+          placeholder="Select profile type"
+          fluid
+          selection
+          options={profileTypeOptions}
+        />
+      </Form.Field>
+      <Form.Field>
+        <Dropdown
+          onChange={statusChange}
+          placeholder="Select status"
+          defaultValue="new"
+          fluid
+          selection
+          options={statusOptions}
+        />
+      </Form.Field>
+      <Form.Field>
+        <label>Join date</label>
+        <SemanticDatepicker onChange={dateChange} />
+      </Form.Field>
       <Form.Button primary type="submit">
         Add new profile
       </Form.Button>
-      { profileCreated === false && <p>Something went wrong when creating the profile. Please try again.</p>}
+      {profileCreated === false && (
+        <p>Something went wrong when creating the profile. Please try again.</p>
+      )}
     </Form>
   );
 };
