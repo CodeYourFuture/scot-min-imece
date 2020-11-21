@@ -12,7 +12,6 @@ import "semantic-ui-css/semantic.min.css";
 import Footer from "./components/Footer";
 import banner from "./assets/banner.jpg";
 import ViewProfile from "./components/ViewProfile";
-import Profiles from "./components/Profiles";
 
 const logout = e => {
   e.preventDefault();
@@ -39,14 +38,16 @@ const Routes = () => {
           )}
         </Container>
       </Menu>
-      <div className="content">
-        <Route path="/" exact component={Home} />
-        <Route path="/about/" component={About} />
-        <Route path="/status/" component={Status} />
-        <Route path="/login/" component={Login} />
-        <Route path="/profiles/:profileId" component={ViewProfile} />
-        <Route path="/add-new-profile" component={AddNewProfile} />
-      </div>
+      <main className="content">
+        <Container text>
+          <Route path="/" exact component={Home} />
+          <Route path="/about/" component={About} />
+          <Route path="/status/" component={Status} />
+          <Route path="/login/" component={Login} />
+          <Route path="/profiles/:profileId" component={ViewProfile} />
+          <Route path="/add-new-profile" component={AddNewProfile} />
+        </Container>
+      </main>
       <Footer />
     </Router>
   );
