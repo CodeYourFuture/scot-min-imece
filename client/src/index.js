@@ -23,12 +23,14 @@ const Routes = () => {
     <Router>
       <Menu inverted>
         <Container>
-          <Menu.Item>
+          <Menu.Item as={NavLink} to="/">
             <Image size="small" src={banner} alt="Maryhill Integration logo" />
           </Menu.Item>
-          <Menu.Item as={NavLink} exact to="/" name="home" />
-          <Menu.Item as={NavLink} to="/about" name="about" />
-          <Menu.Item as={NavLink} to="/status" name="status" />
+          <Menu.Item as={NavLink} to="/about" name="about">
+            FAQ
+          </Menu.Item>{" "}
+          />
+          <Menu.Item as={NavLink} to="/add-new-profile" name="addNewProfile" />
           {localStorage.getItem("token") ? (
             <Menu.Item onClick={logout} position="right" name="logout" />
           ) : (
