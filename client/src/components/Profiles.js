@@ -55,12 +55,11 @@ const Profiles = () => {
               <Table.Row key={profile.id}>
                 <Table.Cell children={profile.id}></Table.Cell>
                 <Table.Cell
-                  children={profile.first_name + " " + profile.last_name}
+                  children={`${profile.first_name} ${profile.last_name}`}
                 ></Table.Cell>
                 <Table.Cell children={profile.phone_number}></Table.Cell>
                 <Table.Cell children={profile.email}></Table.Cell>
                 <Table.Cell>
-                  {" "}
                   <Button
                     as={Link}
                     to={`/profiles/${profile.id}`}
@@ -69,7 +68,7 @@ const Profiles = () => {
                     color="black"
                   >
                     View
-                  </Button>{" "}
+                  </Button>
                 </Table.Cell>
               </Table.Row>
             ))}
