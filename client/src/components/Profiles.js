@@ -31,14 +31,13 @@ const Profiles = () => {
   );
 
   return (
-    <Container text>
+    <>
       <Search
         style={{ margin: "30px 0px" }}
         onSearchChange={handleSearchChange}
         value={searchInput}
         showNoResults={false}
       />
-
       {filteredProfiles.length === 0 ? (
         <Message>No matching profiles found</Message>
       ) : (
@@ -76,7 +75,7 @@ const Profiles = () => {
           </Table.Body>
         </Table>
       )}
-    </Container>
+    </>
   );
 };
 
