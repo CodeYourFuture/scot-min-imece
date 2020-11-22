@@ -1,0 +1,21 @@
+name: Review App Test
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  review-app-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run review-app test
+        id: review_app_test
+        uses: niteoweb/reviewapps-deploy-status@v1.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check review_app_url
+        run: |
+          echo "Outputs :"
+          echo "- App name: ${{ steps.review_app_test.outputs.review_app_name }}"
+          echo "- App url: ${{ steps.review_app_test.outputs.review_app_url }}"

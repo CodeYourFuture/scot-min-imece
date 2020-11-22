@@ -12,7 +12,6 @@ import "semantic-ui-css/semantic.min.css";
 import Footer from "./components/Footer";
 import banner from "./assets/banner.jpg";
 import ViewProfile from "./components/ViewProfile";
-import Profiles from "./components/Profiles";
 
 const logout = e => {
   e.preventDefault();
