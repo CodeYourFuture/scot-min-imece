@@ -38,6 +38,7 @@ const Profiles = () => {
         value={searchInput}
         showNoResults={false}
       />
+
       {filteredProfiles.length === 0 ? (
         <Message>No matching profiles found</Message>
       ) : (
