@@ -1,18 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import Home from "./components/Home";
-import About from "./components/About";
-import Status from "./components/Status";
-import AddNewProfile from "./components/AddNewProfile";
-import { NavLink, BrowserRouter as Router, Route } from "react-router-dom";
-import { Menu, Container, Image } from "semantic-ui-react";
-import Login from "./components/Login";
-import "semantic-ui-css/semantic.min.css";
-import Footer from "./components/Footer";
-import banner from "./assets/banner.jpg";
-import ViewProfile from "./components/ViewProfile";
-
 const logout = e => {
   e.preventDefault();
   localStorage.removeItem("token");
