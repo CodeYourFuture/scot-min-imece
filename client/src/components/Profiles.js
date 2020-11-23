@@ -31,7 +31,7 @@ const Profiles = () => {
   );
 
   return (
-    <Container text>
+    <>
       <Search
         style={{ margin: "30px 0px" }}
         onSearchChange={handleSearchChange}
@@ -75,7 +75,7 @@ const Profiles = () => {
           </Table.Body>
         </Table>
       )}
-    </Container>
+    </>
   );
 };
 

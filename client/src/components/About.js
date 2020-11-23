@@ -3,7 +3,7 @@ import { Header, Container } from "semantic-ui-react";
 
 const About = () => {
   return (
-    <Container text>
+    <>
       <Header as="h1">About</Header>
       <p>
         A dashboard for Maryhill Integration Network that staff can use to
@@ -26,7 +26,7 @@ const About = () => {
         part in worthwhile activities to improve their lives and the life of
         their communities.
       </p>
-    </Container>
+    </>
   );
 };
 
