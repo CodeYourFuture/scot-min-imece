@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Form } from "semantic-ui-react";
+import SemanticDatepicker from "react-semantic-ui-datepickers";
+import { Form, Dropdown } from "semantic-ui-react";
 import { postProfile } from "../api/profiles";
 
 const AddNewProfile = () => {
@@ -12,18 +13,16 @@ const AddNewProfile = () => {
     phone: "",
     gender: "",
     groups: "",
-    support_type: ""
+    support_type: "",
+    profile_type: "",
+    status: "new",
+    join_date: new Date()
   });
 
   const [profileCreated, setProfileCreated] = useState(null);
 
   const handleChange = event => {
-    const updatedProfileData = {
-      ...profileData,
-      [event.target.name]: event.target.value
-    };
-
-    setProfileData(updatedProfileData);
+    updateField(event.target.name, event.target.value);
   };
 
   const createProfile = () => {
@@ -31,6 +30,29 @@ const AddNewProfile = () => {
       setProfileCreated(isSuccessful);
     });
   };
+
+  const handleDropdownAndDateChange = (event, data) => {
+    updateField(data.name, data.value);
+  };
+
+  const updateField = (name, value) => {
+    const updatedProfileData = {
+      ...profileData,
+      [name]: value
+    };
+    setProfileData(updatedProfileData);
+  };
+
+  const profileTypeOptions = [
+    { key: "volunteer", value: "volunteer", text: "Volunteer" },
+    { key: "service user", value: "service_user", text: "Service user" }
+  ];
+
+  const statusOptions = [
+    { key: "new", value: "new", text: "New" },
+    { key: "active", value: "active", text: "Active" },
+    { key: "inactive", value: "inactive", text: "Inactive" }
+  ];
 
   return (
     <Form onSubmit={createProfile}>
@@ -125,6 +147,39 @@ const AddNewProfile = () => {
           name="support_type"
           value={profileData.support_type}
           onChange={handleChange}
+        />
+      </Form.Field>
+      <Form.Field>
+        <label>Profile type</label>
+        <Dropdown
+          onChange={handleDropdownAndDateChange}
+          name="profile_type"
+          value={profileData.profile_type}
+          placeholder="Select profile type"
+          fluid
+          selection
+          options={profileTypeOptions}
+        />
+      </Form.Field>
+      <Form.Field>
+        <label>Status</label>
+        <Dropdown
+          onChange={handleDropdownAndDateChange}
+          name="status"
+          value={profileData.status}
+          placeholder="Select status"
+          fluid
+          selection
+          options={statusOptions}
+        />
+      </Form.Field>
+      <Form.Field>
+        <label for="join-date">Join date</label>
+        <SemanticDatepicker
+          id="join-date"
+          onChange={handleDropdownAndDateChange}
+          name="join_date"
+          value={profileData.join_date}
         />
       </Form.Field>
       <Form.Button primary type="submit">
