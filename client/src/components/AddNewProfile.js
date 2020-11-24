@@ -150,9 +150,8 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label for="profile-type">Profile type</label>
+        <label>Profile type</label>
         <Dropdown
-          id="profile-type"
           onChange={handleDropdownAndDateChange}
           name="profile_type"
           value={profileData.profile_type}
@@ -163,9 +162,8 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label for="Status">Status</label>
+        <label>Status</label>
         <Dropdown
-          id="Status"
           onChange={handleDropdownAndDateChange}
           name="status"
           value={profileData.status}
