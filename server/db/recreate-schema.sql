@@ -1,15 +1,18 @@
 -- Drop tables in case they already exist
 DROP TABLE if exists profiles;
 DROP TABLE if exists nationalities;
+DROP TABLE if exists groups;
+DROP TABLE if exists languages;
 DROP TABLE if exists users;
 DROP TYPE if exists gender;
 DROP TYPE if exists profile_type;
 DROP TYPE if exists status;
-
+DROP TYPE if exists asylum_status;
 -- Custom Types
 CREATE TYPE gender AS ENUM ('female', 'male', 'other', 'not_provided');
 CREATE TYPE profile_type AS ENUM ('volunteer', 'service_user');
 CREATE TYPE status AS ENUM ('new', 'active', 'inactive');
+CREATE TYPE asylum_status AS ENUM ('seeking_asylum', 'refugee', 'other');
 
 
 -- Create tables
@@ -22,6 +25,16 @@ CREATE TABLE users (
 CREATE TABLE nationalities (
   id           INT PRIMARY KEY,
   nationality   VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE groups (
+  id      INT PRIMARY KEY,
+  group_name   VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE languages(
+  id          INT PRIMARY KEY,
+  language    VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE profiles (
@@ -39,6 +52,11 @@ CREATE TABLE profiles (
   status          status NOT NULL DEFAULT 'new',
   join_date       DATE NOT NULL DEFAULT current_date,
   updated_date    DATE,
-  last_edited_by  int references users(id)
+  last_edited_by  int references users(id),
+  group_id        int references groups(id),
+  language_id     int references languages(id),
+  asylum_status   asylum_status NOT NULL  DEFAULT 'other',
+  how_did_they_hear VARCHAR(200),
+  notes           text
 );
 

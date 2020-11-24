@@ -229,6 +229,39 @@ INSERT INTO nationalities (id, nationality) VALUES (223, 'Yemeni');
 INSERT INTO nationalities (id, nationality) VALUES (224, 'Zambian');
 INSERT INTO nationalities (id, nationality) VALUES (225, 'Zimbabwean');
 
+INSERT INTO groups (id, group_name) VALUES (1, 'MIN Voices');
+INSERT INTO groups (id, group_name) VALUES (2, 'Oasis Women Group');
+INSERT INTO groups (id, group_name) VALUES (3, 'Men Group');
+INSERT INTO groups (id, group_name) VALUES (4, 'Family Group');
+INSERT INTO groups (id, group_name) VALUES (5, 'Gardening Group');
+INSERT INTO groups (id, group_name) VALUES (6, 'Joyous Choir');
+INSERT INTO groups (id, group_name) VALUES (7, 'ESOL');
+INSERT INTO groups (id, group_name) VALUES (8, 'Volunteer');
+INSERT INTO groups (id, group_name) VALUES (9, 'Knit for Unity');
+INSERT INTO groups (id, group_name) VALUES (10, 'Echo Dance Project');
+
+INSERT INTO languages (id, language) VALUES (1, 'Albanian ');
+INSERT INTO languages (id, language) VALUES (2, 'Amharic');
+INSERT INTO languages (id, language) VALUES (3, 'Arabic');
+INSERT INTO languages (id, language) VALUES (4, 'English');
+INSERT INTO languages (id, language) VALUES (5, 'Farsi ');
+INSERT INTO languages (id, language) VALUES (6, 'French ');
+INSERT INTO languages (id, language) VALUES (7, 'Fulani ');
+INSERT INTO languages (id, language) VALUES (8, 'Greek');
+INSERT INTO languages (id, language) VALUES (9, 'Gujarati ');
+INSERT INTO languages (id, language) VALUES (10, 'Hindi ');
+INSERT INTO languages (id, language) VALUES (11, 'Maninka ');
+INSERT INTO languages (id, language) VALUES (12, 'Marathi');
+INSERT INTO languages (id, language) VALUES (13, 'Punjabi ');
+INSERT INTO languages (id, language) VALUES (14, 'Spanish ');
+INSERT INTO languages (id, language) VALUES (15, 'Swahili');
+INSERT INTO languages (id, language) VALUES (16, 'Tirinya');
+INSERT INTO languages (id, language) VALUES (17, 'Turkish');
+INSERT INTO languages (id, language) VALUES (18, 'Twi');
+INSERT INTO languages (id, language) VALUES (19, 'Urdu');
+INSERT INTO languages (id, language) VALUES (20, 'Urubu');
+INSERT INTO languages (id, language) VALUES (21, 'Wolof');
+INSERT INTO languages (id, language) VALUES (22, 'Yoruba');
 
 
 INSERT INTO profiles (first_name, last_name, gender, nationality_id, email, type) values ('Fatma', 'Oymak', 'female', 209, 'sun@cyf.org', 'service_user');
