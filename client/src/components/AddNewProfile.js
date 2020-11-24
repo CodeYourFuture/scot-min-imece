@@ -15,8 +15,8 @@ const AddNewProfile = () => {
     groups: "",
     support_type: "",
     profile_type: "",
-    status: "",
-    join_date: ""
+    status: "new",
+    join_date: new Date()
   });
 
   const [profileCreated, setProfileCreated] = useState(null);
@@ -31,16 +31,8 @@ const AddNewProfile = () => {
     });
   };
 
-  const profileTypeChange = (event, data) => {
-    updateField("profile_type", data.value);
-  };
-
-  const statusChange = (event, data) => {
-    updateField("status", data.value);
-  };
-
-  const dateChange = (event, data) => {
-    updateField("join_date", data.value);
+  const handleDropdownAndDateChange = (event, data) => {
+    updateField(data.name, data.value);
   };
 
   const updateField = (name, value) => {
@@ -158,8 +150,12 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
+        <label for="profile-type">Profile type</label>
         <Dropdown
-          onChange={profileTypeChange}
+          id="profile-type"
+          onChange={handleDropdownAndDateChange}
+          name="profile_type"
+          value={profileData.profile_type}
           placeholder="Select profile type"
           fluid
           selection
@@ -167,18 +163,26 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
+        <label for="Status">Status</label>
         <Dropdown
-          onChange={statusChange}
+          id="Status"
+          onChange={handleDropdownAndDateChange}
+          name="status"
+          value={profileData.status}
           placeholder="Select status"
-          defaultValue="new"
           fluid
           selection
           options={statusOptions}
         />
       </Form.Field>
       <Form.Field>
-        <label>Join date</label>
-        <SemanticDatepicker onChange={dateChange} />
+        <label for="join-date">Join date</label>
+        <SemanticDatepicker
+          id="join-date"
+          onChange={handleDropdownAndDateChange}
+          name="join_date"
+          value={profileData.join_date}
+        />
       </Form.Field>
       <Form.Button primary type="submit">
         Add new profile
