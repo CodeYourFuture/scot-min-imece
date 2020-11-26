@@ -64,6 +64,5 @@ CREATE TABLE groups (
 CREATE TABLE profile_group (
   profile_id       INT REFERENCES profiles(id),
   group_id         INT REFERENCES groups(id),
-  number_of_groups    numeric NOT NULL DEFAULT 1,
   PRIMARY KEY (profile_id, group_id)
 );
