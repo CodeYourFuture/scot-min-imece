@@ -6,6 +6,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
   const handleChange = event => {
     if (event.target.name === "email") {
       setEmail(event.target.value);
@@ -19,7 +20,6 @@ const Login = () => {
     loginUser(email, password)
       .then(data => {
         const token = data.token;
-
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(data.user));
         document.location.reload();

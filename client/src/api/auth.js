@@ -6,5 +6,9 @@ export const loginUser = (email, password) => {
       "content-type": "application/json"
     }
   };
-  return fetch("/auth/login", options).then(res => res.json());
+  return fetch("/auth/login", options)
+    .then(res => res.json())
+    .then(data => {
+      return data;
+    });
 };
