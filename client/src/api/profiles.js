@@ -1,9 +1,13 @@
+import fetchWithAuthorization from "./authorization";
+
 export const getProfiles = () => {
-  return fetch("/api/profiles").then(res => res.json());
+  return fetchWithAuthorization("/api/profiles").then(res => res.json());
 };
 
 export const getProfile = profileId => {
-  return fetch(`/api/profiles/${profileId}`).then(res => res.json());
+  return fetchWithAuthorization(`/api/profiles/${profileId}`).then(res =>
+    res.json()
+  );
 };
 
 export const postProfile = profile => {
@@ -15,5 +19,7 @@ export const postProfile = profile => {
     }
   };
 
-  return fetch("/api/profiles", sendProfile).then(res => res.ok);
+  return fetchWithAuthorization("/api/profiles", sendProfile).then(
+    res => res.ok
+  );
 };
