@@ -6,6 +6,7 @@ const cors = require("cors");
 const app = express();
 const api = require("./api");
 const auth = require("./auth/routes");
+const passport = require("passport");
 
 require("./auth/passport");
 
@@ -19,7 +20,7 @@ app.use(cors());
  * register routes
  */
 app.use("/auth", auth);
-app.use("/api", api);
+app.use("/api", passport.authenticate("jwt", { session: false }), api);
 
 /**
  * In development environemnt, we use the create-react-app dev server.
