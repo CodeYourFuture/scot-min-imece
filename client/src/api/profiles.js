@@ -17,3 +17,9 @@ export const postProfile = profile => {
 
   return fetch("/api/profiles", sendProfile).then(res => res.ok);
 };
+
+export const deleteProfile = profileId => {
+  fetch(`/api/profiles/${profileId}`, {
+    method: "DELETE"
+  }).then(res => res.ok);
+};
