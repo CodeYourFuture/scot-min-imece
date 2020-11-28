@@ -40,7 +40,7 @@ router.post("/", (req, res) => {
 });
 
 router.delete("/:profileId",(req, res)=>{
-	 const profileId = req.param("profileId");
+	 const profileId = req.params.profileId;
 	 usersDb
 		  .deleteProfile(profileId)
 		  .then((rows) =>{
