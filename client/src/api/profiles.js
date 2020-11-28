@@ -17,3 +17,7 @@ export const postProfile = profile => {
 
   return fetch("/api/profiles", sendProfile).then(res => res.ok);
 };
+
+export const getNationalities = () => {
+  return fetch("/api/profiles/nationality").then(res => res.json());
+};
