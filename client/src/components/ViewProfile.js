@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Container, Button, Card, Divider, Icon } from "semantic-ui-react";
-import { getProfile } from "../api/profiles";
-import { useParams } from "react-router-dom";
+import { Button, Card, Divider, Icon, Modal, Header } from "semantic-ui-react";
+import { getProfile, deleteProfile } from "../api/profiles";
+import { useParams, useHistory } from "react-router-dom";
 
 const ViewProfile = () => {
   const [profile, setProfile] = useState([]);
+  const [delProfile, setDelProfile] = useState(false);
+  const [modalStatus, setModalStatus] = useState(false);
 
   let { profileId } = useParams();
+  let history = useHistory();
 
   useEffect(() => {
-    getProfile(profileId).then(response => {
-      setProfile(response);
-      document.title = `${response.first_name} ${response.last_name}  Profile`;
-    });
-  }, [profileId]);
+    if (delProfile === false) {
+      getProfile(profileId).then(response => {
+        setProfile(response);
+        document.title = `${response.first_name} ${response.last_name}  Profile`;
+      });
+    } else {
+      deleteProfile(profileId);
+      history.goBack();
+    }
+  }, [profileId, delProfile, history]);
 
   return (
     <Card color="black" textAlign="center" style={{ width: "auto" }}>
@@ -54,11 +62,34 @@ const ViewProfile = () => {
           <Button basic color="black">
             Edit
           </Button>
-          <Button basic color="black">
+          <Button basic color="black" onClick={() => setModalStatus(true)}>
             Delete
           </Button>
         </div>
       </Card.Content>
+      <Modal open={modalStatus} size="small">
+        <Header content="!Delete this profile" />
+        <Modal.Content>
+          <p>
+            Are you sure you want to delete this profile? Once deleted, it
+            cannot be recovered.
+          </p>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button basic negative onClick={() => setModalStatus(false)}>
+            <Icon name="cancel" /> No
+          </Button>
+          <Button
+            basic
+            positive
+            onClick={() => {
+              setDelProfile(true);
+            }}
+          >
+            <Icon name="check" /> Yes
+          </Button>
+        </Modal.Actions>
+      </Modal>
     </Card>
   );
 };
