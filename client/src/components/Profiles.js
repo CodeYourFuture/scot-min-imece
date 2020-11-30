@@ -5,16 +5,14 @@ import {
   Table,
   Button,
   Grid,
-  Dropdown,
-  Input,
-  Container
+  Dropdown
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { getProfiles, getNationalities } from "../api/profiles";
 
 const Profiles = () => {
   const [profiles, setProfiles] = useState([]);
-  const [nationality, setNationality] = useState([]);
+  const [nationalities, setNationalities] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [selectDropdown, setSelectDropdown] = useState([]);
 
@@ -30,37 +28,35 @@ const Profiles = () => {
       setProfiles(response);
     });
     getNationalities().then(response => {
-      setNationality(response);
+      setNationalities(response);
     });
   }, []);
 
-  const options = nationality.map(national => ({
+  const options = nationalities.map(national => ({
     key: national.id,
-    text: `${national.id} -${national.nationality} `,
+    text: national.nationality,
     value: national.id
   }));
 
   const searchString = searchInput.toLowerCase();
   const isMatch = field => field.toLowerCase().includes(searchString);
 
-  let filterProfiles = () => {
-    return selectDropdown.length === 0
-      ? profiles.filter(
-          profile =>
-            isMatch(profile.first_name) ||
-            isMatch(profile.last_name) ||
-            isMatch(profile.email) ||
-            (profile.address && isMatch(profile.address)) ||
-            (profile.phone_number && isMatch(profile.phone_number)) ||
-            (profile.occupation && isMatch(profile.occupation))
-        )
-      : profiles.filter(profile =>
-          selectDropdown.includes(profile.nationality_id)
-        );
-  };
+  let filteredProfiles = profiles;
+  if (selectDropdown.length > 0) {
+    filteredProfiles = filteredProfiles.filter(profile =>
+      selectDropdown.includes(profile.nationality_id)
+    );
+  }
 
-  let filteredProfiles = filterProfiles();
-
+  filteredProfiles = filteredProfiles.filter(
+    profile =>
+      isMatch(profile.first_name) ||
+      isMatch(profile.last_name) ||
+      isMatch(profile.email) ||
+      (profile.address && isMatch(profile.address)) ||
+      (profile.phone_number && isMatch(profile.phone_number)) ||
+      (profile.occupation && isMatch(profile.occupation))
+  );
   return (
     <>
       <Grid style={{ margin: "30px 0" }} columns={2}>
@@ -97,7 +93,6 @@ const Profiles = () => {
               <Table.HeaderCell>Phone</Table.HeaderCell>
               <Table.HeaderCell>Email</Table.HeaderCell>
               <Table.HeaderCell>Occupation</Table.HeaderCell>
-              <Table.HeaderCell>Nationality</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -110,7 +105,6 @@ const Profiles = () => {
                 <Table.Cell children={profile.phone_number}></Table.Cell>
                 <Table.Cell children={profile.email}></Table.Cell>
                 <Table.Cell children={profile.occupation}></Table.Cell>
-                <Table.Cell children={profile.nationality_id}></Table.Cell>
                 <Table.Cell>
                   <Button
                     as={Link}
