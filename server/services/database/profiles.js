@@ -40,6 +40,7 @@ const getProfileById = (id) => {
 		.query("SELECT * FROM profiles where id = $1", [id])
 		.then((result) => result.rows[0])
 };
+
 const getAllNationalities = () => {
 	return pool
 		.query(
