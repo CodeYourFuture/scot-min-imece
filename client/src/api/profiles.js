@@ -29,3 +29,7 @@ export const deleteProfile = profileId => {
     method: "DELETE"
   }).then(res => res.ok);
 };
+
+export const getNationalities = () => {
+  return fetch("/api/profiles/nationality").then(res => res.json());
+};

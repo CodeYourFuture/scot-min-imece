@@ -41,9 +41,18 @@ const getProfileById = (id) => {
 		.then((result) => result.rows[0])
 };
 
+const getAllNationalities = () => {
+	return pool
+		.query(
+			"SELECT * FROM nationalities",
+		)
+		.then((result) => result.rows);
+};
+
 module.exports = {
 	getAllProfiles,
 	getProfileById,
 	createProfile,
-	deleteProfile
+	deleteProfile,
+	getAllNationalities
 };

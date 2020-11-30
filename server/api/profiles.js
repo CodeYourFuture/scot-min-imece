@@ -13,6 +13,17 @@ router.get("/", (req, res) => {
 			res.send(500);
 		});
 });
+router.get("/nationality", (req, res) => {
+	usersDb
+		.getAllNationalities()
+		.then((data) => {
+			res.send(data);
+		})
+		.catch((err)=> {
+			console.error(err);
+			res.send(500);
+		});
+});
 
 router.get("/:profileId", (req, res) => {
 	const profileId = req.params.profileId;
