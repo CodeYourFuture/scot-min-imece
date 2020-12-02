@@ -272,3 +272,11 @@ INSERT INTO profiles (first_name, last_name, gender, date_of_birth, email, addre
 INSERT INTO profiles (first_name, last_name, gender, nationality_id, date_of_birth, email, address, type) values ('Rares', 'Smith', 'male', 200, '1989-10-15', 'rares_smith@cyf.org', '6 Seyfettin ince cad., Dalaman', 'service_user');
 INSERT INTO profiles (first_name, last_name, gender, nationality_id, date_of_birth, email, address, phone_number, occupation, type) values ('Mimi', 'Mouse', 'female', 100, '1967-01-30', 'happy_mood@cyf.org', '176 Battal Gazi sok., Dalaman', '+44 1345 56788', 'teacher', 'service_user');
 
+INSERT INTO profile_group (profile_id,group_id) VALUES (1,1);
+INSERT INTO profile_group (profile_id,group_id) VALUES (1,2);
+INSERT INTO profile_group (profile_id,group_id) VALUES (2,7);
+INSERT INTO profile_group (profile_id,group_id) VALUES (5,4);
+INSERT INTO profile_group (profile_id,group_id) VALUES (5,5);
+INSERT INTO profile_group (profile_id,group_id) VALUES (4,3);
+INSERT INTO profile_group (profile_id,group_id) VALUES (6,3);
+INSERT INTO profile_group (profile_id,group_id) VALUES (7,2);
