@@ -17,7 +17,7 @@ const AddNewProfile = () => {
     support_type: "",
     profile_type: "",
     status: "new",
-    nationalities: "",
+    nationality: "",
     join_date: new Date()
   });
   const [errors, setErrors] = useState([]);
@@ -51,7 +51,7 @@ const AddNewProfile = () => {
     });
     setErrors([]);
   };
-console.log(errors)
+console.log("errors",errors)//to remove
   const handleDropdownAndDateChange = (event, data) => {
     updateField(data.name, data.value);
   };
@@ -81,20 +81,22 @@ console.log(errors)
     {key: "other", value: "other", text: "Other"},
     {key: "not_provided", value: "not_provided", text: "Not provided"}
   ];
-
+ 
   useEffect(() => {
-    getNationalities().then(response => {
-      setNationalities(response);
+     getNationalities().then(response => {
+      console.log("res",response)
+      setNationalities(response); 
     });
   }, []);
 
-  const nationalityOptions = nationalities.map(national => ({
-    key: national.id,
-    text: national.nationality,
-    value: national.id
+  const nationalityOptions = nationalities.map(nationality => ({
+    key: nationality.id,
+    text: nationality.nationality,
+    value: nationality.nationality
   }));
-console.log(nationalities)
-console.log(profileData)
+console.log(nationalities)//to remove
+console.log(profileData)//to remove
+console.log("options", nationalityOptions)
   return (
       
     <Form onSubmit={createProfile}>
