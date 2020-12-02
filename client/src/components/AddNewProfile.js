@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SemanticDatepicker from "react-semantic-ui-datepickers";
 import { Form, Dropdown } from "semantic-ui-react";
 import { postProfile } from "../api/profiles";
+import { getNationalities } from "../api/profiles";
 
 const AddNewProfile = () => {
   const [profileData, setProfileData] = useState({
@@ -16,21 +17,41 @@ const AddNewProfile = () => {
     support_type: "",
     profile_type: "",
     status: "new",
+    nationalities: "",
     join_date: new Date()
   });
-
+  const [errors, setErrors] = useState([]);
   const [profileCreated, setProfileCreated] = useState(null);
+  const [nationalities, setNationalities] = useState([]);
 
   const handleChange = event => {
     updateField(event.target.name, event.target.value);
   };
 
   const createProfile = () => {
+    let errs = [];
+    if (profileData.firstname.length === 0) {
+      errs.push(<li><p>First name cannot be empty</p></li>);
+    }
+    if (profileData.lastname.length === 0) {
+      errs.push(<li><p>Last name cannot be empty</p></li>);
+    }
+    if (profileData.phone.length < 10) {
+      errs.push(<li><p>Phone number must be 10 characters</p></li>);
+    }
+    if (profileData.address.length === 0) {
+      errs.push(<li><p>Address cannot be empty</p></li>);
+    }
+    if (errs.length > 0) {
+      setErrors(errs);
+      return;
+    }
     postProfile(profileData).then(isSuccessful => {
       setProfileCreated(isSuccessful);
     });
+    setErrors([]);
   };
-
+console.log(errors)
   const handleDropdownAndDateChange = (event, data) => {
     updateField(data.name, data.value);
   };
@@ -54,8 +75,32 @@ const AddNewProfile = () => {
     { key: "inactive", value: "inactive", text: "Inactive" }
   ];
 
+  const genderOptions = [
+    {key: "male", value: "male", text: "Male"},
+    {key: "female", value: "female", text: "Female"},
+    {key: "other", value: "other", text: "Other"},
+    {key: "not_provided", value: "not_provided", text: "Not provided"}
+  ];
+
+  useEffect(() => {
+    getNationalities().then(response => {
+      setNationalities(response);
+    });
+  }, []);
+
+  const nationalityOptions = nationalities.map(national => ({
+    key: national.id,
+    text: national.nationality,
+    value: national.id
+  }));
+console.log(nationalities)
+console.log(profileData)
   return (
+      
     <Form onSubmit={createProfile}>
+      <ul class="errors">
+                <p>{ errors }</p>
+        </ul>
       <Form.Field>
         <label htmlFor="first-name">First name</label>
         <input
@@ -121,12 +166,13 @@ const AddNewProfile = () => {
       </Form.Field>
       <Form.Field>
         <label htmlFor="gender">Gender</label>
-        <input
+        <Dropdown
           id="gender"
           placeholder="Gender"
           name="gender"
           value={profileData.gender}
-          onChange={handleChange}
+          onChange={handleDropdownAndDateChange}
+          fluid selection options = {genderOptions}
         />
       </Form.Field>
       <Form.Field>
@@ -174,6 +220,22 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
+        <label>Nationality</label>
+      <Dropdown
+            // button
+            // labeled
+            // icon="world"
+            // className="icon"
+            name="nationality"
+            value={profileData.nationality}
+            fluid
+            selection
+            options={nationalityOptions}
+            onChange={handleDropdownAndDateChange}
+            placeholder="Nationality"
+          />
+</Form.Field>
+      <Form.Field>
         <label for="join-date">Join date</label>
         <SemanticDatepicker
           id="join-date"
@@ -189,6 +251,7 @@ const AddNewProfile = () => {
         <p>Something went wrong when creating the profile. Please try again.</p>
       )}
     </Form>
+    
   );
 };
 
