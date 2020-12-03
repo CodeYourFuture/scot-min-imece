@@ -88,7 +88,6 @@ const Profiles = () => {
         <Table celled collapsing>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>#</Table.HeaderCell>
               <Table.HeaderCell>Name</Table.HeaderCell>
               <Table.HeaderCell>Phone</Table.HeaderCell>
               <Table.HeaderCell>Email</Table.HeaderCell>
@@ -97,8 +96,7 @@ const Profiles = () => {
           </Table.Header>
           <Table.Body>
             {filteredProfiles.map(profile => (
-              <Table.Row key={profile.id}>
-                <Table.Cell children={profile.id}></Table.Cell>
+              <Table.Row>
                 <Table.Cell
                   children={`${profile.first_name} ${profile.last_name}`}
                 ></Table.Cell>
