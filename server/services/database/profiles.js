@@ -11,9 +11,9 @@ const getAllProfiles = () => {
 };
 
 const createProfile = (newProfile) => {
-	return pool
+	pool
 		.query(
-			"INSERT INTO profiles ( first_name, last_name, date_of_birth, gender, email, address, phone_number ) values ( $1, $2, $3, $4, $5, $6, $7)",
+			"INSERT INTO profiles ( first_name, last_name, date_of_birth, gender, email, address, phone_number ) values ( $1, $2, $3, $4, $5, $6, $7) RETURNING id",
 			[
 				newProfile.firstname,
 				newProfile.lastname,
@@ -24,8 +24,16 @@ const createProfile = (newProfile) => {
 				newProfile.phone,
 			],
 		)
-		.then((result) => result.rows);
-};
+		.then((result) => {
+		 let id= result.row[0].id;
+		newProfile.groups.forEach(groupId =>{
+			 pool
+				.query("INSERT INTO profile_group values($1,$2)",[id,groupId])
+			.then((result)=>{});
+
+		});
+		return whatever;
+});
 
 const deleteProfile = (profileId) => {
 	return pool

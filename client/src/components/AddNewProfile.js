@@ -12,7 +12,7 @@ const AddNewProfile = () => {
     email: "",
     phone: "",
     gender: "",
-    groups: "",
+    groups: [],
     support_type: "",
     profile_type: "",
     status: "new",
