@@ -18,40 +18,49 @@ const AddNewProfile = () => {
     profile_type: "",
     status: "new",
     nationality: "",
-    join_date: new Date()
+    join_date: new Date(),
   });
   const [errors, setErrors] = useState([]);
   const [profileCreated, setProfileCreated] = useState(null);
-  const [nationalities, setNationalities] = useState([]);
+  const [nationality, setNationality] = useState([]);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     updateField(event.target.name, event.target.value);
   };
 
   const createProfile = () => {
     let errs = [];
     if (profileData.firstname.length === 0) {
-      errs.push(<li><p>First name cannot be empty</p></li>);
+      errs.push(
+        <li>
+          <p>First name cannot be empty</p>
+        </li>
+      );
     }
     if (profileData.lastname.length === 0) {
-      errs.push(<li><p>Last name cannot be empty</p></li>);
+      errs.push(
+        <li>
+          <p>Last name cannot be empty</p>
+        </li>
+      );
     }
     if (profileData.phone.length < 10) {
-      errs.push(<li><p>Phone number must be 10 characters</p></li>);
-    }
-    if (profileData.address.length === 0) {
-      errs.push(<li><p>Address cannot be empty</p></li>);
+      errs.push(
+        <li>
+          <p>Phone number must have at least 10 digits</p>
+        </li>
+      );
     }
     if (errs.length > 0) {
       setErrors(errs);
       return;
     }
-    postProfile(profileData).then(isSuccessful => {
+    postProfile(profileData).then((isSuccessful) => {
       setProfileCreated(isSuccessful);
     });
     setErrors([]);
   };
-console.log("errors",errors)//to remove
+  
   const handleDropdownAndDateChange = (event, data) => {
     updateField(data.name, data.value);
   };
@@ -59,50 +68,45 @@ console.log("errors",errors)//to remove
   const updateField = (name, value) => {
     const updatedProfileData = {
       ...profileData,
-      [name]: value
+      [name]: value,
     };
     setProfileData(updatedProfileData);
   };
 
   const profileTypeOptions = [
     { key: "volunteer", value: "volunteer", text: "Volunteer" },
-    { key: "service user", value: "service_user", text: "Service user" }
+    { key: "service user", value: "service_user", text: "Service user" },
   ];
 
   const statusOptions = [
     { key: "new", value: "new", text: "New" },
     { key: "active", value: "active", text: "Active" },
-    { key: "inactive", value: "inactive", text: "Inactive" }
+    { key: "inactive", value: "inactive", text: "Inactive" },
   ];
 
   const genderOptions = [
-    {key: "male", value: "male", text: "Male"},
-    {key: "female", value: "female", text: "Female"},
-    {key: "other", value: "other", text: "Other"},
-    {key: "not_provided", value: "not_provided", text: "Not provided"}
+    { key: "male", value: "male", text: "Male" },
+    { key: "female", value: "female", text: "Female" },
+    { key: "other", value: "other", text: "Other" },
+    { key: "not_provided", value: "not_provided", text: "Not provided" },
   ];
- 
+
   useEffect(() => {
-     getNationalities().then(response => {
-      console.log("res",response)
-      setNationalities(response); 
+    getNationalities().then((response) => {
+      setNationality(response);
     });
   }, []);
 
-  const nationalityOptions = nationalities.map(nationality => ({
+  const nationalityOptions = nationality.map((nationality) => ({
     key: nationality.id,
     text: nationality.nationality,
-    value: nationality.nationality
+    value: nationality.nationality,
   }));
-console.log(nationalities)//to remove
-console.log(profileData)//to remove
-console.log("options", nationalityOptions)
+
   return (
-      
     <Form onSubmit={createProfile}>
-      <ul class="errors">
-                <p>{ errors }</p>
-        </ul>
+      <ul class="errors">{errors}
+      </ul>
       <Form.Field>
         <label htmlFor="first-name">First name</label>
         <input
@@ -174,7 +178,9 @@ console.log("options", nationalityOptions)
           name="gender"
           value={profileData.gender}
           onChange={handleDropdownAndDateChange}
-          fluid selection options = {genderOptions}
+          fluid
+          selection
+          options={genderOptions}
         />
       </Form.Field>
       <Form.Field>
@@ -223,20 +229,16 @@ console.log("options", nationalityOptions)
       </Form.Field>
       <Form.Field>
         <label>Nationality</label>
-      <Dropdown
-            // button
-            // labeled
-            // icon="world"
-            // className="icon"
-            name="nationality"
-            value={profileData.nationality}
-            fluid
-            selection
-            options={nationalityOptions}
-            onChange={handleDropdownAndDateChange}
-            placeholder="Nationality"
-          />
-</Form.Field>
+        <Dropdown
+          name="nationality"
+          value={profileData.nationality}
+          fluid
+          selection
+          options={nationalityOptions}
+          onChange={handleDropdownAndDateChange}
+          placeholder="Nationality"
+        />
+      </Form.Field>
       <Form.Field>
         <label for="join-date">Join date</label>
         <SemanticDatepicker
@@ -253,7 +255,6 @@ console.log("options", nationalityOptions)
         <p>Something went wrong when creating the profile. Please try again.</p>
       )}
     </Form>
-    
   );
 };
 
