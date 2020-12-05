@@ -3,7 +3,8 @@ const config = require("../../config");
 const pool = new Pool(config);
 
 const getAllProfiles = () => {
-	return pool.query("SELECT * FROM profiles").then((result) => result.rows);
+	return pool.query("select * from profiles")
+                .then((result) => result.rows);
 };
 
 const createProfile = (newProfile) => {
@@ -40,10 +41,20 @@ const getAllNationalities = () => {
 	return pool.query("SELECT * FROM nationalities").then((result) => result.rows);
 };
 
+const getAllGroups = () => {
+	return pool.query("select id, group_name, coalesce(array_agg(profile_id) filter (where profile_group.profile_id is not null), '{}') members \
+					   from groups \
+					   left join profile_group \
+						on groups.id = group_id \
+					   group by (id) order by id;")
+	          .then((result) => result.rows);
+};
+
 module.exports = {
 	getAllProfiles,
 	getProfileById,
 	createProfile,
 	deleteProfile,
 	getAllNationalities,
+	getAllGroups
 };
