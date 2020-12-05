@@ -19,9 +19,7 @@ export const postProfile = profile => {
     }
   };
 
-  return fetchWithAuthorization("/api/profiles", sendProfile).then(
-    res => res.ok
-  );
+  return fetch("/api/profiles", sendProfile).then(res => res.ok);
 };
 
 export const deleteProfile = profileId => {
