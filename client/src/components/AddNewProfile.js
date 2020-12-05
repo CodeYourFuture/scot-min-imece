@@ -12,7 +12,7 @@ const AddNewProfile = () => {
     email: "",
     phone: "",
     gender: "",
-    groups: "",
+    groups: [],
     support_type: "",
     profile_type: "",
     status: "new",
@@ -35,6 +35,11 @@ const AddNewProfile = () => {
     updateField(data.name, data.value);
   };
 
+  const groupsHandler = (event, data) => {
+    const selectedGroups = data.value;
+    profileData.groups = selectedGroups;
+  };
+
   const updateField = (name, value) => {
     const updatedProfileData = {
       ...profileData,
@@ -52,6 +57,19 @@ const AddNewProfile = () => {
     { key: "new", value: "new", text: "New" },
     { key: "active", value: "active", text: "Active" },
     { key: "inactive", value: "inactive", text: "Inactive" }
+  ];
+
+  const groupsOptions = [
+    { key: 1, value: 1, text: "MIN Voices" },
+    { key: 2, value: 2, text: "Oasis Women Group" },
+    { key: 3, value: 3, text: "Men Group" },
+    { key: 4, value: 4, text: "Family Group" },
+    { key: 5, value: 5, text: "Gardening Group" },
+    { key: 6, value: 6, text: "Joyous Choir" },
+    { key: 7, value: 7, text: "ESOL" },
+    { key: 8, value: 8, text: "Volunteer" },
+    { key: 9, value: 9, text: "Knit for Unity" },
+    { key: 10, value: 10, text: "Echo Dance Project" }
   ];
 
   return (
@@ -130,13 +148,15 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label htmlFor="groups">Groups</label>
-        <input
-          id="groups"
-          placeholder="Groups"
+        <label>Groups</label>
+        <Dropdown
+          multiple
+          fluid
+          selection
+          options={groupsOptions}
+          onChange={groupsHandler}
           name="groups"
-          value={profileData.groups}
-          onChange={handleChange}
+          placeholder="Groups"
         />
       </Form.Field>
       <Form.Field>
