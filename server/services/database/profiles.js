@@ -45,7 +45,7 @@ const deleteProfile = (profileId) => {
 
 const getProfileById = (id) => {
 	return pool
-		.query("select profiles.*, array_agg(' ' || groups.group_name || ' ') as groups \
+		.query("select profiles.*, array_agg(' ' || groups.group_name ) as groups \
 				from profile_group \
 				inner join groups \
 				   on groups.id=profile_group.group_id\
