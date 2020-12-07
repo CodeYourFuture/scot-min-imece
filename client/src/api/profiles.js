@@ -31,5 +31,11 @@ export const deleteProfile = profileId => {
 };
 
 export const getNationalities = () => {
-  return fetchWithAuthorization("/api/profiles/nationalities").then(res => res.json());
+  return fetchWithAuthorization("/api/profiles/nationalities").then(res =>
+    res.json()
+  );
+};
+
+export const getGroups = () => {
+  return fetchWithAuthorization("/api/profiles/groups").then(res => res.json());
 };
