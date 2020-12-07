@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 			res.send(500);
 		});
 });
-router.get("/nationality", (req, res) => {
+router.get("/nationalities", (req, res) => {
 	usersDb
 		.getAllNationalities()
 		.then((data) => {

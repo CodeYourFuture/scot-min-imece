@@ -25,13 +25,13 @@ export const postProfile = profile => {
 };
 
 export const deleteProfile = profileId => {
-  fetch(`/api/profiles/${profileId}`, {
+  fetchWithAuthorization(`/api/profiles/${profileId}`, {
     method: "DELETE"
   }).then(res => res.ok);
 };
 
 export const getNationalities = () => {
-  return fetchWithAuthorization("/api/profiles/nationality").then(res =>
+  return fetchWithAuthorization("/api/profiles/nationalities").then(res =>
     res.json()
   );
 };
