@@ -22,7 +22,7 @@ const AddNewProfile = () => {
   });
   const [errors, setErrors] = useState([]);
   const [profileCreated, setProfileCreated] = useState(null);
-  const [nationality, setNationality] = useState([]);
+  const [nationalities, setNationalities] = useState([]);
 
   const handleChange = (event) => {
     updateField(event.target.name, event.target.value);
@@ -31,25 +31,13 @@ const AddNewProfile = () => {
   const createProfile = () => {
     let errs = [];
     if (profileData.firstname.length === 0) {
-      errs.push(
-        <li>
-          <p>First name cannot be empty</p>
-        </li>
-      );
+      errs.push('First name cannot be empty');
     }
     if (profileData.lastname.length === 0) {
-      errs.push(
-        <li>
-          <p>Last name cannot be empty</p>
-        </li>
-      );
+      errs.push('Last name cannot be empty');
     }
     if (profileData.phone.length < 10) {
-      errs.push(
-        <li>
-          <p>Phone number must have at least 10 digits</p>
-        </li>
-      );
+      errs.push('Phone number must have at least 10 digits');
     }
     if (errs.length > 0) {
       setErrors(errs);
@@ -93,19 +81,20 @@ const AddNewProfile = () => {
 
   useEffect(() => {
     getNationalities().then((response) => {
-      setNationality(response);
+      setNationalities(response);
     });
   }, []);
 
-  const nationalityOptions = nationality.map((nationality) => ({
+  const nationalityOptions = nationalities.map((nationality) => ({
     key: nationality.id,
     text: nationality.nationality,
     value: nationality.nationality,
   }));
-
+console.log(nationalities)
   return (
     <Form onSubmit={createProfile}>
-      <ul class="errors">{errors}
+      <ul class="errors">
+      {errors.map(error => <li><p>{error}</p></li>)}
       </ul>
       <Form.Field>
         <label htmlFor="first-name">First name</label>
@@ -228,10 +217,11 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label>Nationality</label>
+        <label for="nationality">Nationality</label>
         <Dropdown
+        id="nationality"
           name="nationality"
-          value={profileData.nationality}
+          value={profileData.nationalities}
           fluid
           selection
           options={nationalityOptions}
