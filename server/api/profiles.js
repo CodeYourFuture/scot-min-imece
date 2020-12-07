@@ -29,9 +29,7 @@ router.get("/groups", (req, res) => {
 	usersDb
 		.getAllGroups()
 		.then((data) => {
-			console.log(data);
 			res.send(data);
-			console.log("data",data);
 		})
 		.catch((err)=> {
 			console.error(err);
