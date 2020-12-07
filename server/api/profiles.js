@@ -13,11 +13,25 @@ router.get("/", (req, res) => {
 			res.send(500);
 		});
 });
-router.get("/nationality", (req, res) => {
+router.get("/nationalities", (req, res) => {
 	usersDb
 		.getAllNationalities()
 		.then((data) => {
 			res.send(data);
+		})
+		.catch((err)=> {
+			console.error(err);
+			res.send(500);
+		});
+});
+
+router.get("/groups", (req, res) => {
+	usersDb
+		.getAllGroups()
+		.then((data) => {
+			console.log(data);
+			res.send(data);
+			console.log("data",data);
 		})
 		.catch((err)=> {
 			console.error(err);
