@@ -90,7 +90,6 @@ const AddNewProfile = () => {
     text: nationality.nationality,
     value: nationality.nationality,
   }));
-console.log(nationalities)
   return (
     <Form onSubmit={createProfile}>
       <ul class="errors">
