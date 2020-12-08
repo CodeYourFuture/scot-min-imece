@@ -1,16 +1,16 @@
 const { Pool } = require("pg");
 const config = require("../../config");
 const pool = new Pool(config);
+const format = require("pg-format");
 
 const getAllProfiles = () => {
-	return pool.query("select * from profiles")
-                .then((result) => result.rows);
+	return pool.query("select * from profiles").then((result) => result.rows);
 };
 
 const createProfile = (newProfile) => {
 	return pool
 		.query(
-			"INSERT INTO profiles ( first_name, last_name, date_of_birth, gender, email, address, phone_number, type, nationality_id) values ( $1, $2, $3, $4, $5, $6, $7, $8, $9)",
+			"INSERT INTO profiles ( first_name, last_name, date_of_birth, gender, email, address, phone_number, type, nationality_id) values ( $1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id",
 			[
 				newProfile.firstname,
 				newProfile.lastname,
@@ -23,7 +23,15 @@ const createProfile = (newProfile) => {
 				newProfile.nationalities,
 			],
 		)
-		.then((result) => result.rows);
+		.then((result)=>{
+			let profileId=result.rows[0].id;
+			const values = newProfile.groups.map((groupId) => [profileId, groupId]);
+
+			if(values.length > 0) {
+				let sql = format("INSERT INTO profile_group VALUES %L", values);
+				return pool.query(sql);
+			}
+		});
 };
 
 const deleteProfile = (profileId) => {
@@ -46,9 +54,9 @@ const getAllGroups = () => {
 	return pool.query("select id, group_name, coalesce(array_agg(profile_id) filter (where profile_group.profile_id is not null), '{}') members \
 					   from groups \
 					   left join profile_group \
-						on groups.id = group_id \
+				    	on groups.id = group_id \
 					   group by (id) order by id;")
-	          .then((result) => result.rows);
+		.then((result) => result.rows);
 };
 
 module.exports = {
@@ -57,5 +65,5 @@ module.exports = {
 	createProfile,
 	deleteProfile,
 	getAllNationalities,
-	getAllGroups
+	getAllGroups,
 };
