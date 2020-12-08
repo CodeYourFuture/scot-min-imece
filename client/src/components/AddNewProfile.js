@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SemanticDatepicker from "react-semantic-ui-datepickers";
 import { Form, Dropdown } from "semantic-ui-react";
 import { postProfile } from "../api/profiles";
+import { getNationalities } from "../api/profiles";
 
 const AddNewProfile = () => {
   const [profileData, setProfileData] = useState({
@@ -16,21 +17,38 @@ const AddNewProfile = () => {
     support_type: "",
     profile_type: "",
     status: "new",
-    join_date: new Date()
+    nationality: "",
+    join_date: new Date(),
   });
-
+  const [errors, setErrors] = useState([]);
   const [profileCreated, setProfileCreated] = useState(null);
+  const [nationalities, setNationalities] = useState([]);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     updateField(event.target.name, event.target.value);
   };
 
   const createProfile = () => {
-    postProfile(profileData).then(isSuccessful => {
+    let errs = [];
+    if (profileData.firstname.length === 0) {
+      errs.push('First name cannot be empty');
+    }
+    if (profileData.lastname.length === 0) {
+      errs.push('Last name cannot be empty');
+    }
+    if (profileData.phone.length < 10) {
+      errs.push('Phone number must have at least 10 digits');
+    }
+    if (errs.length > 0) {
+      setErrors(errs);
+      return;
+    }
+    postProfile(profileData).then((isSuccessful) => {
       setProfileCreated(isSuccessful);
     });
+    setErrors([]);
   };
-
+  
   const handleDropdownAndDateChange = (event, data) => {
     updateField(data.name, data.value);
   };
@@ -38,24 +56,45 @@ const AddNewProfile = () => {
   const updateField = (name, value) => {
     const updatedProfileData = {
       ...profileData,
-      [name]: value
+      [name]: value,
     };
     setProfileData(updatedProfileData);
   };
 
   const profileTypeOptions = [
     { key: "volunteer", value: "volunteer", text: "Volunteer" },
-    { key: "service user", value: "service_user", text: "Service user" }
+    { key: "service user", value: "service_user", text: "Service user" },
   ];
 
   const statusOptions = [
     { key: "new", value: "new", text: "New" },
     { key: "active", value: "active", text: "Active" },
-    { key: "inactive", value: "inactive", text: "Inactive" }
+    { key: "inactive", value: "inactive", text: "Inactive" },
   ];
 
+  const genderOptions = [
+    { key: "male", value: "male", text: "Male" },
+    { key: "female", value: "female", text: "Female" },
+    { key: "other", value: "other", text: "Other" },
+    { key: "not_provided", value: "not_provided", text: "Not provided" },
+  ];
+
+  useEffect(() => {
+    getNationalities().then((response) => {
+      setNationalities(response);
+    });
+  }, []);
+
+  const nationalityOptions = nationalities.map((nationality) => ({
+    key: nationality.id,
+    text: nationality.nationality,
+    value: nationality.nationality,
+  }));
   return (
     <Form onSubmit={createProfile}>
+      <ul class="errors">
+      {errors.map(error => <li><p>{error}</p></li>)}
+      </ul>
       <Form.Field>
         <label htmlFor="first-name">First name</label>
         <input
@@ -121,12 +160,15 @@ const AddNewProfile = () => {
       </Form.Field>
       <Form.Field>
         <label htmlFor="gender">Gender</label>
-        <input
+        <Dropdown
           id="gender"
           placeholder="Gender"
           name="gender"
           value={profileData.gender}
-          onChange={handleChange}
+          onChange={handleDropdownAndDateChange}
+          fluid
+          selection
+          options={genderOptions}
         />
       </Form.Field>
       <Form.Field>
@@ -171,6 +213,19 @@ const AddNewProfile = () => {
           fluid
           selection
           options={statusOptions}
+        />
+      </Form.Field>
+      <Form.Field>
+        <label for="nationality">Nationality</label>
+        <Dropdown
+        id="nationality"
+          name="nationality"
+          value={profileData.nationalities}
+          fluid
+          selection
+          options={nationalityOptions}
+          onChange={handleDropdownAndDateChange}
+          placeholder="Nationality"
         />
       </Form.Field>
       <Form.Field>
