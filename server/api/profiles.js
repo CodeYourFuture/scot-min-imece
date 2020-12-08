@@ -25,6 +25,18 @@ router.get("/nationalities", (req, res) => {
 		});
 });
 
+router.get("/groups", (req, res) => {
+	usersDb
+		.getAllGroups()
+		.then((data) => {
+			res.send(data);
+		})
+		.catch((err)=> {
+			console.error(err);
+			res.send(500);
+		});
+});
+
 router.get("/:profileId", (req, res) => {
 	const profileId = req.params.profileId;
 	usersDb

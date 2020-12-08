@@ -4,7 +4,7 @@ const pool = new Pool(config);
 const format = require("pg-format");
 
 const getAllProfiles = () => {
-	return pool.query("SELECT * FROM profiles").then((result) => result.rows);
+	return pool.query("select * from profiles").then((result) => result.rows);
 };
 
 const createProfile = (newProfile) => {
@@ -20,14 +20,12 @@ const createProfile = (newProfile) => {
 				newProfile.address,
 				newProfile.phone,
 				newProfile.profile_type,
+				newProfile.nationalities,
 			],
 		)
 		.then((result)=>{
 			let profileId=result.rows[0].id;
-			let values=[];
-			newProfile.groups.forEach((groupId) => {
-				values.push([profileId,groupId]);
-			});
+			const values = newProfile.groups.map((groupId) => [profileId, groupId]);
 
 			if(values.length > 0) {
 				let sql = format("INSERT INTO profile_group VALUES %L", values);
@@ -52,10 +50,20 @@ const getAllNationalities = () => {
 	return pool.query("SELECT * FROM nationalities").then((result) => result.rows);
 };
 
+const getAllGroups = () => {
+	return pool.query("select id, group_name, coalesce(array_agg(profile_id) filter (where profile_group.profile_id is not null), '{}') members \
+					   from groups \
+					   left join profile_group \
+				    	on groups.id = group_id \
+					   group by (id) order by id;")
+		.then((result) => result.rows);
+};
+
 module.exports = {
 	getAllProfiles,
 	getProfileById,
 	createProfile,
 	deleteProfile,
 	getAllNationalities,
+	getAllGroups,
 };
