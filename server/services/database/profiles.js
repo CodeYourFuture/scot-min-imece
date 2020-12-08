@@ -10,7 +10,7 @@ const getAllProfiles = () => {
 const createProfile = (newProfile) => {
 	return pool
 		.query(
-			"INSERT INTO profiles ( first_name, last_name, date_of_birth, gender, email, address, phone_number, type) values ( $1, $2, $3, $4, $5, $6, $7, $8) RETURNING id",
+			"INSERT INTO profiles ( first_name, last_name, date_of_birth, gender, email, address, phone_number, type, nationality_id) values ( $1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id",
 			[
 				newProfile.firstname,
 				newProfile.lastname,
