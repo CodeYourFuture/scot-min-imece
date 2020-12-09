@@ -35,10 +35,15 @@ const createProfile = (newProfile) => {
 };
 
 const deleteProfile = (profileId) => {
-	return pool
-		.query("DELETE FROM profiles WHERE id = $1", [profileId])
-		.then((result) => result.rows);
-};
+	pool
+		.query("DELETE FROM profile_group WHERE profile_id= $1 ",[profileId]);
+
+	 if(profileId) {
+     return pool
+     .query("DELETE FROM profiles WHERE id = $1",[profileId]);
+	};
+}
+
 
 const getProfileById = (id) => {
 	return pool
