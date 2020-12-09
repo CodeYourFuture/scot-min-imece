@@ -54,6 +54,11 @@ const AddNewProfile = () => {
     updateField(data.name, data.value);
   };
 
+  const nationalityHandler = (event, data) => {
+    const selectedNationality = data.value;
+    setProfileData({ ...profileData, nationality: selectedNationality });
+  };
+
   const groupsHandler = (event, data) => {
     const selectedGroups = data.value;
     setProfileData({ ...profileData, groups: selectedGroups });
@@ -97,7 +102,7 @@ const AddNewProfile = () => {
   const nationalityOptions = nationalities.map(nationality => ({
     key: nationality.id,
     text: nationality.nationality,
-    value: nationality.nationality
+    value: nationality.id
   }));
 
   const groupsOptions = groups.map(group => ({
@@ -242,11 +247,11 @@ const AddNewProfile = () => {
         <Dropdown
           id="nationality"
           name="nationality"
-          value={profileData.nationalities}
+          value={profileData.nationality}
           fluid
           selection
           options={nationalityOptions}
-          onChange={handleDropdownAndDateChange}
+          onChange={nationalityHandler}
           placeholder="Nationality"
         />
       </Form.Field>
