@@ -20,7 +20,7 @@ const createProfile = (newProfile) => {
 				newProfile.address,
 				newProfile.phone,
 				newProfile.profile_type,
-				newProfile.nationalities,
+				newProfile.nationality,
 			],
 		)
 		.then((result)=>{

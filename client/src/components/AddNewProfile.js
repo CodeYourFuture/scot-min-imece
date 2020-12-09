@@ -97,7 +97,7 @@ const AddNewProfile = () => {
   const nationalityOptions = nationalities.map(nationality => ({
     key: nationality.id,
     text: nationality.nationality,
-    value: nationality.nationality
+    value: nationality.id
   }));
 
   const groupsOptions = groups.map(group => ({
@@ -238,11 +238,10 @@ const AddNewProfile = () => {
         />
       </Form.Field>
       <Form.Field>
-        <label for="nationality">Nationality</label>
+        <label>Nationality</label>
         <Dropdown
-          id="nationality"
           name="nationality"
-          value={profileData.nationalities}
+          value={profileData.nationality}
           fluid
           selection
           options={nationalityOptions}

@@ -81,9 +81,7 @@ const Profiles = () => {
       isMatch(profile.email) ||
       (profile.address && isMatch(profile.address)) ||
       (profile.phone_number && isMatch(profile.phone_number)) ||
-      (profile.occupation && isMatch(profile.occupation))(
-        profile.group_id && isMatch(profile.group_id)
-      )
+      (profile.occupation && isMatch(profile.occupation))
   );
   return (
     <>
