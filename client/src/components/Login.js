@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
 import { loginUser } from "../api/auth";
 
-const Login = () => {
+const Login = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -22,7 +22,7 @@ const Login = () => {
 
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(data.user));
-        document.location.reload();
+        props.loginUser();
       })
       .catch(() => {
         setError(true);
