@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Home from "./components/Home";
@@ -20,6 +20,12 @@ const logout = e => {
 };
 
 const Routes = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const loginUser = () => {
+    setIsLoggedIn(true);
+  };
+
   return (
     <Router>
       <Menu inverted>
@@ -30,7 +36,13 @@ const Routes = () => {
           <Menu.Item as={NavLink} to="/about" name="about">
             FAQ
           </Menu.Item>
-          <Menu.Item as={NavLink} to="/add-new-profile" name="addNewProfile" />
+          {isLoggedIn && (
+            <Menu.Item
+              as={NavLink}
+              to="/add-new-profile"
+              name="addNewProfile"
+            />
+          )}
           {localStorage.getItem("token") ? (
             <Menu.Item onClick={logout} position="right" name="logout" />
           ) : (
@@ -40,10 +52,17 @@ const Routes = () => {
       </Menu>
       <main className="content">
         <Container text>
-          <Route path="/" exact component={Home} />
+          <Route
+            path="/"
+            exact
+            render={() => <Home isLoggedIn={isLoggedIn} />}
+          />
           <Route path="/about/" component={About} />
           <Route path="/status/" component={Status} />
-          <Route path="/login/" component={Login} />
+          <Route
+            path="/login/"
+            render={() => <Login loginUser={loginUser} />}
+          />
           <Route path="/profiles/:profileId" component={ViewProfile} />
           <Route path="/add-new-profile" component={AddNewProfile} />
         </Container>

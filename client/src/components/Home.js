@@ -2,11 +2,15 @@ import React from "react";
 import Profiles from "../components/Profiles";
 import { Container, Header } from "semantic-ui-react";
 
-const Home = () => {
+const Home = props => {
   return (
     <>
       <Header as="h1">Dashboard</Header>
-      <Profiles />
+      {props.isLoggedIn ? (
+        <Profiles />
+      ) : (
+        "You need to login to view the dashboard"
+      )}
     </>
   );
 };

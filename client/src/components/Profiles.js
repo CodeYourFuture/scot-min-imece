@@ -8,19 +8,24 @@ import {
   Dropdown
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { getProfiles, getNationalities } from "../api/profiles";
+import { getProfiles, getNationalities, getGroups } from "../api/profiles";
 
 const Profiles = () => {
   const [profiles, setProfiles] = useState([]);
   const [nationalities, setNationalities] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [selectDropdown, setSelectDropdown] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [selectedGroupsId, setSelectedGroupsId] = useState([]);
 
   const handleSearchChange = event => {
     setSearchInput(event.target.value);
   };
   const handleOnChange = (e, data) => {
     setSelectDropdown(data.value);
+  };
+  const handleOnGroupChange = (e, data) => {
+    setSelectedGroupsId(data.value);
   };
 
   useEffect(() => {
@@ -30,12 +35,20 @@ const Profiles = () => {
     getNationalities().then(response => {
       setNationalities(response);
     });
+    getGroups().then(response => {
+      setGroups(response);
+    });
   }, []);
 
-  const options = nationalities.map(national => ({
+  const nationality_options = nationalities.map(national => ({
     key: national.id,
     text: national.nationality,
     value: national.id
+  }));
+  const group_options = groups.map(group => ({
+    key: group.id,
+    text: group.group_name,
+    value: group.id
   }));
 
   const searchString = searchInput.toLowerCase();
@@ -45,6 +58,19 @@ const Profiles = () => {
   if (selectDropdown.length > 0) {
     filteredProfiles = filteredProfiles.filter(profile =>
       selectDropdown.includes(profile.nationality_id)
+    );
+  }
+
+  if (selectedGroupsId.length > 0) {
+    let selectedGroups = groups.filter(group =>
+      selectedGroupsId.includes(group.id)
+    );
+    let groupMembers = [];
+    selectedGroups.forEach(group => {
+      groupMembers = groupMembers.concat(group.members);
+    });
+    filteredProfiles = filteredProfiles.filter(profile =>
+      groupMembers.includes(profile.id)
     );
   }
 
@@ -76,9 +102,19 @@ const Profiles = () => {
             selection
             search
             multiple
-            options={options}
+            options={nationality_options}
             onChange={handleOnChange}
             placeholder="Nationality"
+          />
+        </Grid.Column>
+        <Grid.Column>
+          <Dropdown
+            selection
+            search
+            multiple
+            options={group_options}
+            onChange={handleOnGroupChange}
+            placeholder="Groups"
           />
         </Grid.Column>
       </Grid>
@@ -88,7 +124,6 @@ const Profiles = () => {
         <Table celled collapsing>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>#</Table.HeaderCell>
               <Table.HeaderCell>Name</Table.HeaderCell>
               <Table.HeaderCell>Phone</Table.HeaderCell>
               <Table.HeaderCell>Email</Table.HeaderCell>
@@ -97,8 +132,7 @@ const Profiles = () => {
           </Table.Header>
           <Table.Body>
             {filteredProfiles.map(profile => (
-              <Table.Row key={profile.id}>
-                <Table.Cell children={profile.id}></Table.Cell>
+              <Table.Row>
                 <Table.Cell
                   children={`${profile.first_name} ${profile.last_name}`}
                 ></Table.Cell>
