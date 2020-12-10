@@ -32,13 +32,14 @@ const deleteProfile = (profileId) => {
 
 const getProfileById = (id) => {
 	return pool
-		.query("select profiles.*, array_agg(' ' || groups.group_name ) as groups \
-				from profile_group \
-				inner join groups \
-				   on groups.id=profile_group.group_id\
-				full outer join profiles \
-				   on profiles.id=profile_group.profile_id \
-				group by(profiles.id) having profiles.id=$1", 
+		.query("select profiles.*, coalesce(array_agg(group_name) filter (where profile_group.profile_id is not null), '{}') as groups\
+			from profiles\
+			left join profile_group\
+			   on profile_group.profile_id = profiles.id\
+			left join groups\
+			   on profile_group.group_id = groups.id\
+			where profiles.id = $1\
+			group by profiles.id;", 
 				[id])
 		.then((result) => result.rows[0]);
 };
