@@ -29,7 +29,7 @@ const ViewProfile = () => {
         <Card.Header>
           {`${profile.first_name} ${profile.last_name}`}
         </Card.Header>
-        <Card.Meta> {`${profile.groups}`} </Card.Meta>
+        <Card.Meta>{profile.groups && profile.groups.join(",")} </Card.Meta>
         <Divider></Divider>
         <Card.Content>
           <Card.Description>
