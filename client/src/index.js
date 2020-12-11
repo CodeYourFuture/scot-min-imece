@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Status from "./components/Status";
 import AddNewProfile from "./components/AddNewProfile";
+import EditProfile from "./components/EditProfile";
 import { NavLink, BrowserRouter as Router, Route } from "react-router-dom";
 import { Menu, Container, Image } from "semantic-ui-react";
 import Login from "./components/Login";
@@ -44,8 +45,9 @@ const Routes = () => {
           <Route path="/about/" component={About} />
           <Route path="/status/" component={Status} />
           <Route path="/login/" component={Login} />
-          <Route path="/profiles/:profileId" component={ViewProfile} />
+          <Route exact path="/profiles/:profileId" component={ViewProfile} />
           <Route path="/add-new-profile" component={AddNewProfile} />
+          <Route exact path="/profiles/:profileId/edit" component={EditProfile} />
         </Container>
       </main>
       <Footer />
