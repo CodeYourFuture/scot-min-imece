@@ -55,7 +55,9 @@ const Routes = () => {
           <Route
             path="/"
             exact
-            render={() => <Home isLoggedIn={isLoggedIn} />}
+            render={() => (
+              <Home isLoggedIn={isLoggedIn} loginUser={loginUser} />
+            )}
           />
           <Route path="/about/" component={About} />
           <Route path="/status/" component={Status} />
