@@ -10,13 +10,13 @@ import {
 import { Link } from "react-router-dom";
 import { getProfiles, getNationalities, getGroups } from "../api/profiles";
 
-const Profiles = () => {
+const Profiles = props => {
   const [profiles, setProfiles] = useState([]);
-  const [nationalities, setNationalities] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [selectDropdown, setSelectDropdown] = useState([]);
   const [groups, setGroups] = useState([]);
   const [selectedGroupsId, setSelectedGroupsId] = useState([]);
+  const nationalities = props.nationalities;
 
   const handleSearchChange = event => {
     setSearchInput(event.target.value);
@@ -31,9 +31,6 @@ const Profiles = () => {
   useEffect(() => {
     getProfiles().then(response => {
       setProfiles(response);
-    });
-    getNationalities().then(response => {
-      setNationalities(response);
     });
     getGroups().then(response => {
       setGroups(response);

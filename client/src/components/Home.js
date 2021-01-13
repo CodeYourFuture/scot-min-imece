@@ -7,7 +7,7 @@ const Home = props => {
     <>
       <Header as="h1">Dashboard</Header>
       {props.isLoggedIn ? (
-        <Profiles />
+        <Profiles nationalities={props.nationalities} />
       ) : (
         "You need to login to view the dashboard"
       )}

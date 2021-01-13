@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Home from "./components/Home";
@@ -12,6 +12,7 @@ import "semantic-ui-css/semantic.min.css";
 import Footer from "./components/Footer";
 import banner from "./assets/banner.jpg";
 import ViewProfile from "./components/ViewProfile";
+import { getNationalities } from "./api/profiles";
 
 const logout = e => {
   e.preventDefault();
@@ -21,6 +22,15 @@ const logout = e => {
 
 const Routes = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [nationalities, setNationalities] = useState([]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      getNationalities().then(response => {
+        setNationalities(response);
+      });
+    }
+  }, [isLoggedIn]);
 
   const loginUser = () => {
     setIsLoggedIn(true);
@@ -55,7 +65,9 @@ const Routes = () => {
           <Route
             path="/"
             exact
-            render={() => <Home isLoggedIn={isLoggedIn} />}
+            render={() => (
+              <Home isLoggedIn={isLoggedIn} nationalities={nationalities} />
+            )}
           />
           <Route path="/about/" component={About} />
           <Route path="/status/" component={Status} />
