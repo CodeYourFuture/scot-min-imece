@@ -91,7 +91,7 @@ const Profiles = () => {
       (profile.occupation && isMatch(profile.occupation))
   );
 
-  const getClassNamesFor = status => {
+  const getClassNames = status => {
     let color;
     if (status === "new") {
       color = "new";
@@ -100,41 +100,36 @@ const Profiles = () => {
     } else color = "reds";
     return color;
   };
-
-  const isVolunteer = profileType => {
-    if (profileType === "volunteer") {
-      return "Yes";
-    }
-    return "No";
-  };
-
-  const filteredGroupsNames = profileId => {
-    let memberGroupsNames = [];
+  const getProfilesGroups = profileId => {
+    let profileGroupsNames = [];
     let filteredGroups = groups.filter(group => group.members.length > 0);
     filteredGroups.map(group =>
       group.members.filter(member => {
         if (member === profileId) {
-          memberGroupsNames.push(group.group_name);
+          profileGroupsNames.push(group.group_name);
         }
-        return memberGroupsNames;
+        return profileGroupsNames;
       })
     );
-    return memberGroupsNames;
+    return profileGroupsNames;
   };
 
-  let date = new Date();
-  const newProfile = profiles.filter(
-    profile =>
-      profile.join_date.split("-")[0].includes(date.getMonth()) &&
-      profile.join_date.split("-")[0].includes(date.getFullYear())
-  );
-  const activeProfile = profiles.filter(profile => profile.status === "active");
-  const inactiveProfile = profiles.filter(
-    profile => profile.status === "inactive"
-  );
-  const volunteerProfile = profiles.filter(
-    profile => profile.type === "volunteer"
-  );
+  let totalNewProfiles = 0;
+  profiles.forEach(profile => {
+    if (profile.status === "new") totalNewProfiles++;
+  });
+  let totalActiveProfiles = 0;
+  profiles.forEach(profile => {
+    if (profile.status === "active") totalActiveProfiles++;
+  });
+  let totalInactiveProfiles = 0;
+  profiles.forEach(profile => {
+    if (profile.status === "inactive") totalInactiveProfiles++;
+  });
+  let totalVolunteerProfiles = 0;
+  profiles.forEach(profile => {
+    if (profile.type === "volunteer") totalVolunteerProfiles++;
+  });
 
   return (
     <>
@@ -234,15 +229,15 @@ const Profiles = () => {
                         ></Table.Cell>
                         <Table.Cell children={profile.email}></Table.Cell>
                         <Table.Cell
-                          children={filteredGroupsNames(profile.id).join(", ")}
+                          children={getProfilesGroups(profile.id).join(", ")}
                         ></Table.Cell>
                         <Table.Cell
-                          children={isVolunteer(profile.type)}
+                          children={profile.type === "volunteer" ? "Yes" : "No"}
                         ></Table.Cell>
                         <Table.Cell>
                           <Button
                             style={{ minWidth: "92px" }}
-                            className={getClassNamesFor(profile.status)}
+                            className={getClassNames(profile.status)}
                           >
                             {profile.status}
                           </Button>
@@ -254,41 +249,29 @@ const Profiles = () => {
               )}
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row columns="equal">
+          <Grid.Row>
             <Grid.Column>
               <Header as="h3" content="This month" />
-            </Grid.Column>
-            <Grid.Column textAlign="right">
-              <Button
-                className="yellows"
-                content="Collapse"
-                icon="minus circle"
-                labelPosition="right"
-              />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns="equal" textAlign="center" className="last-row">
             <Grid.Column>
-              <Label>{newProfile.length}</Label>
-              <br />
+              <Label>{totalNewProfiles}</Label>
               <Header as="h4" content="Total of New People" />
               <Divider className="new" />
             </Grid.Column>
             <Grid.Column>
-              <Label>{activeProfile.length}</Label>
-              <br />
+              <Label>{totalActiveProfiles}</Label>
               <Header as="h4" content="Total of Active People" />
               <Divider className="purples" />
             </Grid.Column>
             <Grid.Column>
-              <Label>{inactiveProfile.length}</Label>
-              <br />
+              <Label>{totalInactiveProfiles}</Label>
               <Header as="h4" content="Total of Inactive People" />
               <Divider className="reds" />
             </Grid.Column>
             <Grid.Column>
-              <Label>{volunteerProfile.length}</Label>
-              <br />
+              <Label>{totalVolunteerProfiles}</Label>
               <Header as="h4" content="Total of Volunteers" />
               <Divider className="blues" />
             </Grid.Column>
