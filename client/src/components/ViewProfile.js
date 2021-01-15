@@ -24,11 +24,12 @@ const ViewProfile = () => {
   }, [profileId, delProfile, history]);
 
   return (
-    <Card color="black" textAlign="center" style={{ width: "auto" }}>
+    <Card color="black" style={{ width: "auto" }}>
       <Card.Content>
         <Card.Header>
           {`${profile.first_name} ${profile.last_name}`}
         </Card.Header>
+        <Card.Meta>{profile.groups && profile.groups.join(", ")} </Card.Meta>
         <Divider></Divider>
         <Card.Content>
           <Card.Description>

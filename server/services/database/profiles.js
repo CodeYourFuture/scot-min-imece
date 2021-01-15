@@ -45,7 +45,15 @@ const deleteProfile = (profileId) => {
 
 const getProfileById = (id) => {
 	return pool
-		.query("SELECT * FROM profiles where id = $1", [id])
+		.query("select profiles.*, coalesce(array_agg(group_name) filter (where profile_group.profile_id is not null), '{}') as groups\
+			from profiles\
+			left join profile_group\
+			   on profile_group.profile_id = profiles.id\
+			left join groups\
+			   on profile_group.group_id = groups.id\
+			where profiles.id = $1\
+			group by profiles.id;", 
+				[id])
 		.then((result) => result.rows[0]);
 };
 
