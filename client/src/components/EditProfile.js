@@ -227,12 +227,12 @@ if (loaded){
       </Form.Field>
     <Form.Field>
         <label htmlFor="join-date">Join date</label>
-        <SemanticDatepicker
+        {/* <SemanticDatepicker
           id="join-date"
           onChange={handleDropdownAndDateChange}
           name="join_date"
           value={profileData.join_date}
-        /> 
+        />  */}
       </Form.Field> 
       <Button primary >
         Update profile
