@@ -50,8 +50,8 @@ const Routes = () => {
           )}
         </Container>
       </Menu>
-      <main className="content">
-        <Container text>
+      <main className="main-content">
+        <Container>
           <Route
             path="/"
             exact

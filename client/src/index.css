@@ -13,7 +13,7 @@ body {
   flex-direction: column;
 }
 
-.content {
+.main-content {
   flex: 1 0 auto;
   padding-top: 35px;
 }
