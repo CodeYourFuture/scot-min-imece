@@ -1,12 +1,10 @@
 .dashboard-segment {
   border: 3px solid #aad6e4 !important;
 }
-
 .dashboard-grid {
   margin: 10px 0 !important;
   color: black !important;
 }
-
 .new {
   background-color: #e2e89e !important ;
 }
@@ -22,7 +20,6 @@
 .yellows {
   background-color: #f7f083 !important;
 }
-
 .ui.table {
   color: black !important;
   border: 2px solid #aad6e4 !important;
@@ -30,7 +27,7 @@
 .ui.table th {
   background-color: #aad6e4 !important;
 }
-.last-row .column h4 {
+.last-row h4 {
   margin-top: 10px !important;
 }
 .last-row > .column {
@@ -40,11 +37,9 @@
   font-size: large;
   background-color: white;
 }
-
 .last-row {
   border: 3px solid #aad6e4 !important;
 }
-
 .ui.divider {
   height: 5px !important;
 }
