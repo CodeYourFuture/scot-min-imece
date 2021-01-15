@@ -1,5 +1,5 @@
 import React from "react";
-import CYFLogo from "../assets/CYF.jpeg";
+import CYFLogo from "../assets/cyf_brand.png";
 import {
   Container,
   Grid,
@@ -11,17 +11,17 @@ import {
 
 const Footer = () => {
   return (
-    <Segment inverted textAlign="center">
+    <Segment
+      textAlign="center"
+      style={{ backgroundColor: "#F7F083", color: "black" }}
+    >
       <Container>
         <Grid divided columns={3}>
           <Grid.Column width={4}>
-            <Header inverted as="h4" content="Min-Imece-Team" />
-            <List link inverted>
-              <List.Item>Samuel</List.Item>
-              <List.Item>Natalia</List.Item>
-              <List.Item>Mawaddah</List.Item>
-              <List.Item>Fatma</List.Item>
-              <List.Item>Hacer</List.Item>
+            <Header as="h4" content="Min-Imece-Team" />
+            <List>
+              <List.Item>Samuel | Natalia | Mawaddah </List.Item>
+              <List.Item>Fatma | Hacer</List.Item>
             </List>
           </Grid.Column>
           <Grid.Column width={8}>
@@ -35,7 +35,7 @@ const Footer = () => {
             <Image
               src={CYFLogo}
               as="a"
-              size="tiny"
+              size="medium"
               href="https://codeyourfuture.io"
             />
           </Grid.Column>
