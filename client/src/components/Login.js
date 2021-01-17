@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
 import { loginUser } from "../api/auth";
 
@@ -32,7 +33,7 @@ const Login = props => {
   const token = localStorage.getItem("token");
 
   if (token) {
-    return <p>You are already logged in.</p>;
+    <Redirect to="/" />;
   }
 
   return (

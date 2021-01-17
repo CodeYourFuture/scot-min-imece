@@ -1,15 +1,18 @@
 import React from "react";
 import Profiles from "../components/Profiles";
-import { Container, Header } from "semantic-ui-react";
+import Login from "../components/Login";
+import { Header } from "semantic-ui-react";
 
 const Home = props => {
   return (
     <>
-      <Header as="h1">Dashboard</Header>
       {props.isLoggedIn ? (
-        <Profiles />
+        <>
+          <Header as="h1">Dashboard</Header>
+          <Profiles />
+        </>
       ) : (
-        "You need to login to view the dashboard"
+        <Login loginUser={props.loginUser} />
       )}
     </>
   );
