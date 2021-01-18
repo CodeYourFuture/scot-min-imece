@@ -5,12 +5,11 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Status from "./components/Status";
 import AddNewProfile from "./components/AddNewProfile";
-import { NavLink, BrowserRouter as Router, Route } from "react-router-dom";
-import { Menu, Container, Image } from "semantic-ui-react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { List, Container, Button, Segment } from "semantic-ui-react";
 import Login from "./components/Login";
 import "semantic-ui-css/semantic.min.css";
 import Footer from "./components/Footer";
-import banner from "./assets/banner.jpg";
 import ViewProfile from "./components/ViewProfile";
 
 const logout = e => {
@@ -28,34 +27,47 @@ const Routes = () => {
 
   return (
     <Router>
-      <Menu inverted>
-        <Container>
-          <Menu.Item as={NavLink} to="/">
-            <Image size="small" src={banner} alt="Maryhill Integration logo" />
-          </Menu.Item>
-          <Menu.Item as={NavLink} to="/about" name="about">
-            FAQ
-          </Menu.Item>
+      <Segment className="header-container" fluid>
+        <List horizontal floated="right" size="large">
+          <List.Item>
+            <Button as={Link} to="/">
+              Home
+            </Button>
+          </List.Item>
+          <List.Item>
+            <Button as={Link} to="/about">
+              FAQ
+            </Button>
+          </List.Item>
+
           {isLoggedIn && (
-            <Menu.Item
-              as={NavLink}
-              to="/add-new-profile"
-              name="addNewProfile"
-            />
+            <List.Item>
+              <Button as={Link} to="/add-new-profile">
+                New Profile
+              </Button>
+            </List.Item>
           )}
           {localStorage.getItem("token") ? (
-            <Menu.Item onClick={logout} position="right" name="logout" />
+            <List.Item name="logout">
+              <Button onClick={logout}>Logout </Button>
+            </List.Item>
           ) : (
-            <Menu.Item as={NavLink} to="/login" name="login" position="right" />
+            <List.Item name="login">
+              <Button as={Link} to="/login">
+                Login
+              </Button>
+            </List.Item>
           )}
-        </Container>
-      </Menu>
-      <main className="content">
+        </List>
+      </Segment>
+      <main className="main-content">
         <Container>
           <Route
             path="/"
             exact
-            render={() => <Home isLoggedIn={isLoggedIn} />}
+            render={() => (
+              <Home isLoggedIn={isLoggedIn} loginUser={loginUser} />
+            )}
           />
           <Route path="/about/" component={About} />
           <Route path="/status/" component={Status} />

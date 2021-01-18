@@ -1,0 +1,15 @@
+.login-grid {
+  height: 60vh;
+}
+.login-grid > .column {
+  border: 3px solid #f7f083;
+  max-width: 600px;
+}
+.login-grid .ui.form {
+  border: 3px solid #f7f083;
+  margin: 15px 60px 60px 60px !important;
+}
+.login-grid h2 {
+  margin-top: 20px !important;
+  color: #aad6e4 !important;
+}

@@ -157,6 +157,7 @@ const Profiles = () => {
                 as="h3"
                 content="Service Users"
                 style={{ marginTop: "5px" }}
+                floated="left"
               />
             </Grid.Column>
             <Grid.Column width={5}>
@@ -245,7 +246,7 @@ const Profiles = () => {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              <Header as="h3" content="This month" />
+              <Header as="h3" content="This month" floated="left" />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns="equal" textAlign="center" className="last-row">

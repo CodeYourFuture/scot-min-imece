@@ -1,4 +1,5 @@
 body {
+  overflow-y: scroll;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -8,12 +9,42 @@ body {
 }
 
 #root {
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.content {
+.main-content {
   flex: 1 0 auto;
-  padding-top: 35px;
+  font-size: 20px !important;
+  margin-top: 30px;
+}
+
+.header-container {
+  min-height: 180px;
+  background-image: url("./assets/nav-banner.png") !important ;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.header-container .ui.list {
+  margin-right: 450px !important;
+  margin-top: 70px !important;
+}
+
+.header-container .ui.list .ui.button {
+  background-color: #bfe0eb;
+  width: 130px;
+  height: 40px;
+}
+@media (max-width: 768px) {
+  .header-container .ui.list {
+    float: left !important;
+    margin-top: 0 !important;
+  }
+  .header-container .ui.list > .item {
+    margin-left: 0em !important;
+  }
 }
