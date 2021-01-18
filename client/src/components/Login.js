@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
 import { loginUser } from "../api/auth";
+import "../styles/login.css";
 
 const Login = props => {
   const [email, setEmail] = useState("");
@@ -37,12 +38,12 @@ const Login = props => {
   }
 
   return (
-    <Grid textAlign="center" style={{ height: "50vh" }} verticalAlign="middle">
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" color="teal" textAlign="center">
+    <Grid textAlign="center" className="login-grid" verticalAlign="middle">
+      <Grid.Column>
+        <Header as="h2" textAlign="center">
           Log-in to your account
         </Header>
-        <Form size="large">
+        <Form>
           <Segment stacked>
             <Form.Input
               name="email"
