@@ -39,6 +39,11 @@ body {
   width: 130px;
   height: 40px;
 }
+
+.header-container .ui.list .ui.button:hover {
+  background-color: #97b2ba;
+}
+
 @media (max-width: 768px) {
   .header-container .ui.list {
     float: left !important;
