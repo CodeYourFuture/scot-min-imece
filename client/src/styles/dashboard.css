@@ -27,6 +27,26 @@
 .ui.table th {
   background-color: #aad6e4 !important;
 }
+
+@media (max-width: 769px) {
+  .search-filter {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .search-filter .column {
+    margin-bottom: 4px !important;
+  }
+}
+.search-filter .column {
+  max-width: 220px !important;
+  padding-right: 0 !important;
+}
+.first-row .column:last-child {
+  padding-right: 0 !important;
+}
+.first-row .column:first-child {
+  padding-left: 0 !important;
+}
 .last-row h4 {
   margin-top: 10px !important;
 }
