@@ -13,3 +13,10 @@
   margin-top: 20px !important;
   color: #92b2ba !important;
 }
+.ui.teal.button {
+  background-color: #bfe0eb !important;
+  color: #000 !important;
+}
+.ui.teal.button:hover {
+  background-color: #97b2ba !important;
+}
