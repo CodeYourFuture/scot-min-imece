@@ -115,19 +115,14 @@ const Profiles = () => {
   };
 
   let totalNewProfiles = 0;
+  let totalActiveProfiles = 0;
+  let totalInactiveProfiles = 0;
+  let totalVolunteerProfiles = 0;
+
   profiles.forEach(profile => {
     if (profile.status === "new") totalNewProfiles++;
-  });
-  let totalActiveProfiles = 0;
-  profiles.forEach(profile => {
     if (profile.status === "active") totalActiveProfiles++;
-  });
-  let totalInactiveProfiles = 0;
-  profiles.forEach(profile => {
     if (profile.status === "inactive") totalInactiveProfiles++;
-  });
-  let totalVolunteerProfiles = 0;
-  profiles.forEach(profile => {
     if (profile.type === "volunteer") totalVolunteerProfiles++;
   });
 
@@ -135,7 +130,7 @@ const Profiles = () => {
     <>
       <Segment className="dashboard-segment">
         <Grid className="dashboard-grid">
-          <Grid.Row>
+          <Grid.Row columns="equal" className="first-row">
             <Grid.Column>
               <Button
                 as={Link}
@@ -147,19 +142,31 @@ const Profiles = () => {
                 className="new"
               />
             </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns="equal">
-            <Grid.Column>
-              <Header as="h3" content="Service Users" />
+            <Grid.Column textAlign="right">
+              <Button
+                icon="setting"
+                labelPosition="right"
+                content="Settings"
+                className="reds"
+              />
             </Grid.Column>
-            <Grid.Column>
+          </Grid.Row>
+          <Grid.Row className="search-filter">
+            <Grid.Column width={3}>
+              <Header
+                as="h3"
+                content="Service Users"
+                style={{ marginTop: "5px" }}
+              />
+            </Grid.Column>
+            <Grid.Column width={5}>
               <Search
                 onSearchChange={handleSearchChange}
                 value={searchInput}
                 showNoResults={false}
               />
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column width={5}>
               <Dropdown
                 style={{ backgroundColor: " #aad6e4" }}
                 button
@@ -186,68 +193,55 @@ const Profiles = () => {
                 placeholder="Groups"
               />
             </Grid.Column>
-            <Grid.Column textAlign="right">
-              <Button
-                icon="setting"
-                labelPosition="right"
-                content="Settings"
-                className="blues"
-              />
-            </Grid.Column>
           </Grid.Row>
-          <Grid.Row centered>
-            <Grid.Column width={1}> </Grid.Column>
-            <Grid.Column width={14}>
-              {filteredProfiles.length === 0 ? (
-                <Message>No matching profiles found</Message>
-              ) : (
-                <Table sortable selectable celled collapsing>
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.HeaderCell>Name</Table.HeaderCell>
-                      <Table.HeaderCell>Last Name</Table.HeaderCell>
-                      <Table.HeaderCell>Phone</Table.HeaderCell>
-                      <Table.HeaderCell>Email</Table.HeaderCell>
-                      <Table.HeaderCell>Group</Table.HeaderCell>
-                      <Table.HeaderCell>Volunteer</Table.HeaderCell>
-                      <Table.HeaderCell>Status</Table.HeaderCell>
+          <Grid.Row>
+            {filteredProfiles.length === 0 ? (
+              <Message>No matching profiles found</Message>
+            ) : (
+              <Table sortable selectable celled>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>Name</Table.HeaderCell>
+                    <Table.HeaderCell>Last Name</Table.HeaderCell>
+                    <Table.HeaderCell>Phone</Table.HeaderCell>
+                    <Table.HeaderCell>Email</Table.HeaderCell>
+                    <Table.HeaderCell>Group</Table.HeaderCell>
+                    <Table.HeaderCell>Volunteer</Table.HeaderCell>
+                    <Table.HeaderCell>Status</Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                  {filteredProfiles.map(profile => (
+                    <Table.Row
+                      onClick={() => history.push(`/profiles/${profile.id}`)}
+                    >
+                      <Table.Cell
+                        children={`${profile.first_name}`}
+                      ></Table.Cell>
+                      <Table.Cell
+                        children={`${profile.last_name}`}
+                      ></Table.Cell>
+                      <Table.Cell children={profile.phone_number}></Table.Cell>
+                      <Table.Cell children={profile.email}></Table.Cell>
+                      <Table.Cell
+                        children={getProfilesGroups(profile.id).join(", ")}
+                      ></Table.Cell>
+                      <Table.Cell
+                        children={profile.type === "volunteer" ? "Yes" : "No"}
+                      ></Table.Cell>
+                      <Table.Cell>
+                        <Button
+                          style={{ minWidth: "92px" }}
+                          className={getClassNames(profile.status)}
+                        >
+                          {profile.status}
+                        </Button>
+                      </Table.Cell>
                     </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
-                    {filteredProfiles.map(profile => (
-                      <Table.Row
-                        onClick={() => history.push(`/profiles/${profile.id}`)}
-                      >
-                        <Table.Cell
-                          children={`${profile.first_name}`}
-                        ></Table.Cell>
-                        <Table.Cell
-                          children={`${profile.last_name}`}
-                        ></Table.Cell>
-                        <Table.Cell
-                          children={profile.phone_number}
-                        ></Table.Cell>
-                        <Table.Cell children={profile.email}></Table.Cell>
-                        <Table.Cell
-                          children={getProfilesGroups(profile.id).join(", ")}
-                        ></Table.Cell>
-                        <Table.Cell
-                          children={profile.type === "volunteer" ? "Yes" : "No"}
-                        ></Table.Cell>
-                        <Table.Cell>
-                          <Button
-                            style={{ minWidth: "92px" }}
-                            className={getClassNames(profile.status)}
-                          >
-                            {profile.status}
-                          </Button>
-                        </Table.Cell>
-                      </Table.Row>
-                    ))}
-                  </Table.Body>
-                </Table>
-              )}
-            </Grid.Column>
+                  ))}
+                </Table.Body>
+              </Table>
+            )}
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
