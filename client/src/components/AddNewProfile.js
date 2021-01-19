@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SemanticDatepicker from "react-semantic-ui-datepickers";
-import { Form, Dropdown } from "semantic-ui-react";
+import { Form, Dropdown, Segment } from "semantic-ui-react";
 import { postProfile } from "../api/profiles";
 import { getNationalities, getGroups } from "../api/profiles";
 
@@ -107,164 +107,175 @@ const AddNewProfile = () => {
   }));
 
   return (
-    <Form onSubmit={createProfile}>
-      <ul class="errors">
-        {errors.map(error => (
-          <li>
-            <p>{error}</p>
-          </li>
-        ))}
-      </ul>
-      <Form.Field>
-        <label htmlFor="first-name">First name</label>
-        <input
-          id="first-name"
-          placeholder="First Name"
-          name="firstname"
-          value={profileData.firstname}
-          onChange={handleChange}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label htmlFor="last-name">Last Name</label>
-        <input
-          id="last-name"
-          placeholder="Last Name"
-          name="lastname"
-          value={profileData.lastname}
-          onChange={handleChange}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label htmlFor="dob">DOB</label>
-        <input
-          id="dob"
-          type="date"
-          placeholder="Date of birth"
-          name="dob"
-          value={profileData.dob}
-          onChange={handleChange}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label htmlFor="address">Address</label>
-        <input
-          id="address"
-          placeholder="Address"
-          name="address"
-          value={profileData.address}
-          onChange={handleChange}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          placeholder="Email Address"
-          name="email"
-          value={profileData.email}
-          onChange={handleChange}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label htmlFor="phone">Phone</label>
-        <input
-          id="phone"
-          type="tel"
-          placeholder="Phone"
-          name="phone"
-          value={profileData.phone}
-          onChange={handleChange}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label htmlFor="gender">Gender</label>
-        <Dropdown
-          id="gender"
-          placeholder="Gender"
-          name="gender"
-          value={profileData.gender}
-          onChange={handleDropdownAndDateChange}
-          fluid
-          selection
-          options={genderOptions}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label>Groups</label>
-        <Dropdown
-          multiple
-          fluid
-          selection
-          options={groupsOptions}
-          onChange={groupsHandler}
-          name="groups"
-          placeholder="Groups"
-        />
-      </Form.Field>
-      <Form.Field>
-        <label htmlFor="support">Support type</label>
-        <input
-          id="support"
-          placeholder="Support type"
-          name="support_type"
-          value={profileData.support_type}
-          onChange={handleChange}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label>Profile type</label>
-        <Dropdown
-          onChange={handleDropdownAndDateChange}
-          name="profile_type"
-          value={profileData.profile_type}
-          placeholder="Select profile type"
-          fluid
-          selection
-          options={profileTypeOptions}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label>Status</label>
-        <Dropdown
-          onChange={handleDropdownAndDateChange}
-          name="status"
-          value={profileData.status}
-          placeholder="Select status"
-          fluid
-          selection
-          options={statusOptions}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label>Nationality</label>
-        <Dropdown
-          name="nationality"
-          value={profileData.nationality}
-          fluid
-          selection
-          options={nationalityOptions}
-          onChange={handleDropdownAndDateChange}
-          placeholder="Nationality"
-        />
-      </Form.Field>
-      <Form.Field>
-        <label for="join-date">Join date</label>
-        <SemanticDatepicker
-          id="join-date"
-          onChange={handleDropdownAndDateChange}
-          name="join_date"
-          value={profileData.join_date}
-        />
-      </Form.Field>
-      <Form.Button primary type="submit">
-        Add new profile
-      </Form.Button>
-      {profileCreated === false && (
-        <p>Something went wrong when creating the profile. Please try again.</p>
-      )}
-    </Form>
+    <Segment style={{ border: " 3px solid #d1a1b7" }}>
+      <Form onSubmit={createProfile}>
+        <ul class="errors">
+          {errors.map(error => (
+            <li>
+              <p>{error}</p>
+            </li>
+          ))}
+        </ul>
+        <Form.Field>
+          <label htmlFor="first-name">First name</label>
+          <input
+            id="first-name"
+            placeholder="First Name"
+            name="firstname"
+            value={profileData.firstname}
+            onChange={handleChange}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="last-name">Last Name</label>
+          <input
+            id="last-name"
+            placeholder="Last Name"
+            name="lastname"
+            value={profileData.lastname}
+            onChange={handleChange}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="dob">DOB</label>
+          <input
+            id="dob"
+            type="date"
+            placeholder="Date of birth"
+            name="dob"
+            value={profileData.dob}
+            onChange={handleChange}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="address">Address</label>
+          <input
+            id="address"
+            placeholder="Address"
+            name="address"
+            value={profileData.address}
+            onChange={handleChange}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Email Address"
+            name="email"
+            value={profileData.email}
+            onChange={handleChange}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="phone">Phone</label>
+          <input
+            id="phone"
+            type="tel"
+            placeholder="Phone"
+            name="phone"
+            value={profileData.phone}
+            onChange={handleChange}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="gender">Gender</label>
+          <Dropdown
+            id="gender"
+            placeholder="Gender"
+            name="gender"
+            value={profileData.gender}
+            onChange={handleDropdownAndDateChange}
+            fluid
+            selection
+            options={genderOptions}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Groups</label>
+          <Dropdown
+            multiple
+            fluid
+            selection
+            options={groupsOptions}
+            onChange={groupsHandler}
+            name="groups"
+            placeholder="Groups"
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="support">Support type</label>
+          <input
+            id="support"
+            placeholder="Support type"
+            name="support_type"
+            value={profileData.support_type}
+            onChange={handleChange}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Profile type</label>
+          <Dropdown
+            onChange={handleDropdownAndDateChange}
+            name="profile_type"
+            value={profileData.profile_type}
+            placeholder="Select profile type"
+            fluid
+            selection
+            options={profileTypeOptions}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Status</label>
+          <Dropdown
+            onChange={handleDropdownAndDateChange}
+            name="status"
+            value={profileData.status}
+            placeholder="Select status"
+            fluid
+            selection
+            options={statusOptions}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Nationality</label>
+          <Dropdown
+            name="nationality"
+            value={profileData.nationality}
+            fluid
+            selection
+            options={nationalityOptions}
+            onChange={handleDropdownAndDateChange}
+            placeholder="Nationality"
+          />
+        </Form.Field>
+        <Form.Field>
+          <label for="join-date">Join date</label>
+          <SemanticDatepicker
+            id="join-date"
+            onChange={handleDropdownAndDateChange}
+            name="join_date"
+            value={profileData.join_date}
+          />
+        </Form.Field>
+        <Form.Button
+          type="submit"
+          style={{
+            backgroundColor: "#aad6e4",
+            fontSize: "large",
+            color: "000"
+          }}
+        >
+          Add new profile
+        </Form.Button>
+        {profileCreated === false && (
+          <p>
+            Something went wrong when creating the profile. Please try again.
+          </p>
+        )}
+      </Form>
+    </Segment>
   );
 };
 
