@@ -16,6 +16,7 @@
 .ui.teal.button {
   background-color: #bfe0eb !important;
   color: #000 !important;
+  font-size: large !important;
 }
 .ui.teal.button:hover {
   background-color: #97b2ba !important;
