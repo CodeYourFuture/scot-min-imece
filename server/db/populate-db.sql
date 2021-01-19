@@ -264,19 +264,114 @@ INSERT INTO languages (id, language) VALUES (21, 'Wolof');
 INSERT INTO languages (id, language) VALUES (22, 'Yoruba');
 
 
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, email, type) values ('Fatma', 'Oymak', 'female', 209, 'sun@cyf.org', 'service_user');
-INSERT INTO profiles (first_name, last_name, gender, email, type) values ('Su', 'Oymak', 'female', 'water@cyf.org', 'service_user');
-INSERT INTO profiles (first_name, last_name, gender, email, address, type) values ('Gun', 'Ozguven', 'male', 'bedizma@cyf.org', '29, White hart lane, N8 1UG', 'service_user');
-INSERT INTO profiles (first_name, last_name, gender, date_of_birth, email, address, type) values ('Arda', 'Acar', 'male', '2008-07-30', 's@cyf.org', '1 Glasgow street, Edinburgh', 'service_user');
-INSERT INTO profiles (first_name, last_name, gender, date_of_birth, email, address, type) values ('Natalia', 'Andrei', 'female', '1950-07-05', 'nat_and@cyf.org', '176 Battal Gazi sok., Dalaman', 'service_user');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, date_of_birth, email, address, type) values ('Rares', 'Smith', 'male', 200, '1989-10-15', 'rares_smith@cyf.org', '6 Seyfettin ince cad., Dalaman', 'service_user');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, date_of_birth, email, address, phone_number, occupation, type) values ('Mimi', 'Mouse', 'female', 100, '1967-01-30', 'happy_mood@cyf.org', '176 Battal Gazi sok., Dalaman', '+44 1345 56788', 'teacher', 'service_user');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+date_of_birth, email, address, phone_number, occupation, type, status) values 
+('Michael', 'Mayer', 'male', 177, '1967-01-30', 'happy_mood@cyf.org', 'Abercorn 
+Avenue, Hillington Park  G52 4JL', '+44 1345 56788', 'teacher', 'service_user', 
+'inactive');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+date_of_birth, email, address, phone_number, occupation, type, status) values 
+('Sandra', 'Vinyard', 'female', 23, '1989-12-08', 'S.Vinyard@gmail.com', 
+'Calderwood Road  G43 2RP', '+44 1367 334567', 'housewife', 'service_user', 
+'active');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+date_of_birth, email, address, phone_number, occupation, type, status) values 
+('Aaishah', 'Malik', 'female', 15, '1993-05-19', 'malika@hotmail.co.uk', 'Leglen 
+Wood Crescent  G21 3PT', '+44 1235 78950', 'student', 'service_user', 'active');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+date_of_birth, email, address, phone_number, occupation, type, status) values 
+('Zubeda', 'Nicol', 'female', 85, '1978-10-25', 'Nicolz@gmail.com', 'Kingsbridge 
+Park Gardens  G44 4JG', '+44 1555 56755', 'plumber', 'service_user', 'inactive');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+date_of_birth, email, address, phone_number, occupation, type, status) values 
+('Khalid', 'Abbasood', 'male', 209, '1985-11-03', 'khalid_abbasood@outlook.com', 
+'Torrington Crescent  G32 9NU', '+44 1498 56787', 'IT technician', 
+'service_user', 'active');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+date_of_birth, email, address, phone_number, occupation, type, status) values 
+('Lola', 'Chard', 'female', 108, '1990-02-18', 'LChard@hotmail.com', 'Yoker Mill 
+Gardens  G13 4JJ', '+44 1433 332112', 'student', 'service_user', 'inactive');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+date_of_birth, email, address, phone_number, occupation, type, status) values 
+('Caroline', 'Abraham', 'female', 224, '1988-04-22', 'carabrah@hotmail.co.uk', 
+'North Hanover Street  G1 2AD', '+44 1777 982356', 'accountant', 'service_user', 
+'inactive');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+date_of_birth, email, address, phone_number, occupation, type, status) values 
+('Abbas', 'Marchal', 'male', 49, '1971-06-30', 'marchal.abbas@gmail.com', 
+'Plantation Drive, Bishopbriggs  G64 2FH', '+44 7793 234521', 'unemployed', 
+'service_user', 'active');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+date_of_birth, email, address, phone_number, occupation, type, status) values 
+('Matt', 'Chambers', 'male', 158, '1981-03-10', 'sunflower_s@gmail.com', 
+'Craigieburn Gardens  G20 0NU', '+44 5342 992309', 'carpenter', 'service_user', 
+'active');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+date_of_birth, email, address, phone_number, occupation, type, status) values 
+('Samia', 'Khan', 'female', 1, '1993-08-11', 'Khan_samia@yahoo.com', 'Ailsa Gate, 
+Barrhead  G78 1PU', '+44 3425 881290', 'student', 'service_user', 'active');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+date_of_birth, email, address, phone_number, occupation, type, status) values 
+('Usman', 'Zaim', 'male', 63, '1982-05-16', 'zaimusman@hotmail.com', 'Broomhill 
+Path  G11 7AL', '+44 1121 120956', 'driver', 'service_user', 'active');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+date_of_birth, email, address, phone_number, occupation, type, status) values 
+('Darren', 'Scarlat', 'male', 100, '1962-02-07', 'Darren_slet@yahoo.co.uk', 'Zena 
+Crescent  G33 1HZ', '+44 1672 334675', 'student', 'volunteer', 'active');
+INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+date_of_birth, email, address, phone_number, occupation, type, status) values 
+('Mozafer', 'Haider', 'male', 194, '1986-02-07', 'kabaros@mozafariscool.com', 'St. Vincent
+Crescent  G3 1RH', '+44 876 3289', 'developer', 'volunteer', 'active');
 
 INSERT INTO profile_group (profile_id,group_id) VALUES (1,1);
-INSERT INTO profile_group (profile_id,group_id) VALUES (1,2);
-INSERT INTO profile_group (profile_id,group_id) VALUES (2,7);
-INSERT INTO profile_group (profile_id,group_id) VALUES (5,4);
+INSERT INTO profile_group (profile_id,group_id) VALUES (1,9);
 INSERT INTO profile_group (profile_id,group_id) VALUES (5,5);
-INSERT INTO profile_group (profile_id,group_id) VALUES (4,3);
-INSERT INTO profile_group (profile_id,group_id) VALUES (6,3);
+INSERT INTO profile_group (profile_id,group_id) VALUES (8,3);
+INSERT INTO profile_group (profile_id,group_id) VALUES (1,8);
+INSERT INTO profile_group (profile_id,group_id) VALUES (12,9);
+INSERT INTO profile_group (profile_id,group_id) VALUES (9,3);
+INSERT INTO profile_group (profile_id,group_id) VALUES (6,6);
+INSERT INTO profile_group (profile_id,group_id) VALUES (11,3);
+INSERT INTO profile_group (profile_id,group_id) VALUES (7,8);
+INSERT INTO profile_group (profile_id,group_id) VALUES (5,4);
+INSERT INTO profile_group (profile_id,group_id) VALUES (5,3);
+INSERT INTO profile_group (profile_id,group_id) VALUES (2,2);
+INSERT INTO profile_group (profile_id,group_id) VALUES (8,6);
+INSERT INTO profile_group (profile_id,group_id) VALUES (2,7);
+INSERT INTO profile_group (profile_id,group_id) VALUES (3,2);
+INSERT INTO profile_group (profile_id,group_id) VALUES (8,1);
+INSERT INTO profile_group (profile_id,group_id) VALUES (10,1);
+INSERT INTO profile_group (profile_id,group_id) VALUES (2,10);
+INSERT INTO profile_group (profile_id,group_id) VALUES (1,3);
+INSERT INTO profile_group (profile_id,group_id) VALUES (4,5);
+INSERT INTO profile_group (profile_id,group_id) VALUES (9,1);
+INSERT INTO profile_group (profile_id,group_id) VALUES (4,8);
+INSERT INTO profile_group (profile_id,group_id) VALUES (6,2);
+INSERT INTO profile_group (profile_id,group_id) VALUES (10,2);
+INSERT INTO profile_group (profile_id,group_id) VALUES (2,4);
+INSERT INTO profile_group (profile_id,group_id) VALUES (4,4);
+INSERT INTO profile_group (profile_id,group_id) VALUES (9,9);
+INSERT INTO profile_group (profile_id,group_id) VALUES (12,3);
+INSERT INTO profile_group (profile_id,group_id) VALUES (10,5);
+INSERT INTO profile_group (profile_id,group_id) VALUES (2,1);
+INSERT INTO profile_group (profile_id,group_id) VALUES (6,4);
+INSERT INTO profile_group (profile_id,group_id) VALUES (6,8);
+INSERT INTO profile_group (profile_id,group_id) VALUES (1,5);
+INSERT INTO profile_group (profile_id,group_id) VALUES (1,7);
+INSERT INTO profile_group (profile_id,group_id) VALUES (12,8);
+INSERT INTO profile_group (profile_id,group_id) VALUES (7,6);
+INSERT INTO profile_group (profile_id,group_id) VALUES (11,10);
+INSERT INTO profile_group (profile_id,group_id) VALUES (8,4);
+INSERT INTO profile_group (profile_id,group_id) VALUES (11,5);
+INSERT INTO profile_group (profile_id,group_id) VALUES (4,9);
+INSERT INTO profile_group (profile_id,group_id) VALUES (4,2);
 INSERT INTO profile_group (profile_id,group_id) VALUES (7,2);
+INSERT INTO profile_group (profile_id,group_id) VALUES (7,4);
+INSERT INTO profile_group (profile_id,group_id) VALUES (1,6);
+INSERT INTO profile_group (profile_id,group_id) VALUES (7,1);
+INSERT INTO profile_group (profile_id,group_id) VALUES (8,10);
+INSERT INTO profile_group (profile_id,group_id) VALUES (7,5);
+INSERT INTO profile_group (profile_id,group_id) VALUES (12,10);
+INSERT INTO profile_group (profile_id,group_id) VALUES (12,1);
+INSERT INTO profile_group (profile_id,group_id) VALUES (1,10);
+
