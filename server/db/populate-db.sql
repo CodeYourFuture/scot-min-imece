@@ -275,7 +275,7 @@ date_of_birth, email, address, phone_number, occupation, type, status, notes) va
 ('Zubeda', 'Nicol', 'female', 85, '1978-10-25', 'Nicolz@gmail.com', 'Kingsbridge Park Gardens  G44 4JG', '+44 1555 56755', 'plumber', 'service_user', 'inactive', 'Has a strong dislike of cats');
 INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
 date_of_birth, email, address, phone_number, occupation, type, status) values 
-('Sandra', 'Vinyard', 'female', 23, '1989-12-08', 'S.Vinyard@gmail.com', 'Calderwood Road  G43 2RP', '+44 1367 334567', 'housewife', 'service_user', 'active');
+('Sandra', 'Vinyard', 'female', 23, '1989-12-08', 'S.Vinyard@gmail.com', 'Calderwood Road  G43 2RP', '+44 1367 334567', 'housewife', 'service_user', 'new');
 INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
 date_of_birth, email, address, phone_number, occupation, type, status) values 
 ('Khalid', 'Abbasood', 'male', 209, '1985-11-03', 'khalid_abbasood@outlook.com', 'Torrington Crescent  G32 9NU', '+44 1498 56787', 'IT technician', 'service_user', 'active');
@@ -287,7 +287,7 @@ date_of_birth, email, address, phone_number, occupation, type, status) values
 ('Caroline', 'Abraham', 'female', 224, '1988-04-22', 'carabrah@hotmail.co.uk', 'North Hanover Street  G1 2AD', '+44 1777 982356', 'accountant', 'service_user', 'inactive');
 INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
 date_of_birth, email, address, phone_number, occupation, type, status) values 
-('Abbas', 'Marchal', 'male', 49, '1971-06-30', 'marchal.abbas@gmail.com', 'Plantation Drive, Bishopbriggs  G64 2FH', '+44 7793 234521', 'unemployed', 'service_user', 'active');
+('Abbas', 'Marchal', 'male', 49, '1971-06-30', 'marchal.abbas@gmail.com', 'Plantation Drive, Bishopbriggs  G64 2FH', '+44 7793 234521', 'unemployed', 'service_user', 'new');
 INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
 date_of_birth, email, address, phone_number, occupation, type, status) values 
 ('Matt', 'Chambers', 'male', 158, '1981-03-10', 'sunflower_s@gmail.com', 'Craigieburn Gardens  G20 0NU', '+44 5342 992309', 'carpenter', 'service_user', 'active');
