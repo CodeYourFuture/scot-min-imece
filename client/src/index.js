@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import "semantic-ui-css/semantic.min.css";
 import "./index.css";
 import Home from "./components/Home";
 import About from "./components/About";
 import Status from "./components/Status";
 import AddNewProfile from "./components/AddNewProfile";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { List, Container, Button, Segment } from "semantic-ui-react";
 import Login from "./components/Login";
-import "semantic-ui-css/semantic.min.css";
 import Footer from "./components/Footer";
 import ViewProfile from "./components/ViewProfile";
+import MINLogo from "./assets/nav-banner.png";
 
 const logout = e => {
   e.preventDefault();
@@ -27,57 +27,48 @@ const Routes = () => {
 
   return (
     <Router>
-      <Segment className="header-container" fluid>
-        <List horizontal floated="right" size="large">
-          <List.Item>
-            <Button as={Link} to="/">
-              Home
-            </Button>
-          </List.Item>
-          <List.Item>
-            <Button as={Link} to="/about">
-              FAQ
-            </Button>
-          </List.Item>
-
+      <div className="absolute w-full">
+        <img
+          className="h-24 object-cover object-right w-full z-0 md:h-36"
+          src={MINLogo}
+          alt="MIN Logo"
+        ></img>
+      </div>
+      <nav className="flex flex-col justify-center h-24 ml-2 z-10 md:h-36 md:items-center">
+        <div className="h-12 flex space-x-4">
+          <Link to="/" className="nav-btn">
+            Home
+          </Link>
+          <Link to="/about" className="nav-btn">
+            FAQ
+          </Link>
           {isLoggedIn && (
-            <List.Item>
-              <Button as={Link} to="/add-new-profile">
-                New Profile
-              </Button>
-            </List.Item>
+            <Link to="/add-new-profile" className="nav-btn">
+              New Profile
+            </Link>
           )}
           {localStorage.getItem("token") ? (
-            <List.Item name="logout">
-              <Button onClick={logout}>Logout </Button>
-            </List.Item>
+            <button onClick={logout} className="nav-btn">
+              Logout{" "}
+            </button>
           ) : (
-            <List.Item name="login">
-              <Button as={Link} to="/login">
-                Login
-              </Button>
-            </List.Item>
+            <Link to="/login" className="nav-btn">
+              Login
+            </Link>
           )}
-        </List>
-      </Segment>
-      <main className="main-content">
-        <Container>
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <Home isLoggedIn={isLoggedIn} loginUser={loginUser} />
-            )}
-          />
-          <Route path="/about/" component={About} />
-          <Route path="/status/" component={Status} />
-          <Route
-            path="/login/"
-            render={() => <Login loginUser={loginUser} />}
-          />
-          <Route path="/profiles/:profileId" component={ViewProfile} />
-          <Route path="/add-new-profile" component={AddNewProfile} />
-        </Container>
+        </div>
+      </nav>
+      <main className="flex flex-1">
+        <Route
+          path="/"
+          exact
+          render={() => <Home isLoggedIn={isLoggedIn} loginUser={loginUser} />}
+        />
+        <Route path="/about/" component={About} />
+        <Route path="/status/" component={Status} />
+        <Route path="/login/" render={() => <Login loginUser={loginUser} />} />
+        <Route path="/profiles/:profileId" component={ViewProfile} />
+        <Route path="/add-new-profile" component={AddNewProfile} />
       </main>
       <Footer />
     </Router>
