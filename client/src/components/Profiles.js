@@ -111,14 +111,14 @@ const Profiles = () => {
 
   return (
     <>
-      <div className="flex flex-col w-full mx-10">
-        <div className="flex justify-between mt-5">
+      <div className="flex flex-col">
+        <div className="flex justify-between">
           <NewProfileButton />
           <SettingsButton />
         </div>
         <div className="flex flex-col md:flex-row md:items-center mt-8">
           <h3 className="text-2xl text-gray-700 font-bold">Service Users</h3>
-          <div class="flex-1 flex items-center justify-center px-2 ml-10 lg:mr-6 lg:justify-start">
+          <div className="flex-1 flex items-center justify-center px-2 ml-10 lg:mr-6 lg:justify-start">
             <Search onChange={handleSearchChange} value={searchInput} />
           </div>
           <Select

@@ -42,11 +42,6 @@ const Routes = () => {
           <Link to="/about" className="nav-btn">
             FAQ
           </Link>
-          {isLoggedIn && (
-            <Link to="/add-new-profile" className="nav-btn">
-              New Profile
-            </Link>
-          )}
           {localStorage.getItem("token") ? (
             <button onClick={logout} className="nav-btn">
               Logout{" "}
@@ -58,7 +53,7 @@ const Routes = () => {
           )}
         </div>
       </nav>
-      <main className="flex flex-1">
+      <main className="flex-1 mx-10 my-10">
         <Route
           path="/"
           exact
