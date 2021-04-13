@@ -1,24 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Card,
-  Divider,
-  Icon,
-  Modal,
-  Header,
-  Segment,
-  Grid,
-  Label,
-  List
-} from "semantic-ui-react";
 import { getProfile, deleteProfile } from "../api/profiles";
 import { useParams, useHistory } from "react-router-dom";
-import "../styles/profile.css";
 
 const ViewProfile = () => {
   const [profile, setProfile] = useState([]);
   const [delProfile, setDelProfile] = useState(false);
-  const [modalStatus, setModalStatus] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   let { profileId } = useParams();
   let history = useHistory();
@@ -35,150 +22,197 @@ const ViewProfile = () => {
     }
   }, [profileId, delProfile, history]);
 
+  const confirmDelete = deleteOrNot => {
+    setDelProfile(deleteOrNot);
+    setShowDeleteModal(false);
+  };
   return (
     <>
-      <Grid className="first-grid">
-        <Grid.Column floated="left" width={5} className="left-column">
-          <Label as="a" onClick={() => history.goBack()}>
-            <Icon
-              name="arrow alternate circle left"
-              className="left-arrow"
-              size="large"
-            />
-            Go back
-          </Label>
-        </Grid.Column>
-        <Grid.Column
-          floated="right"
-          width={4}
-          className="right-column"
-          textAlign="right"
-        >
-          <Button>Edit</Button>
-          <Button onClick={() => setModalStatus(true)}>Delete</Button>
-        </Grid.Column>
-      </Grid>
-      <Segment className="main-segment">
-        <Grid columns={3}>
-          <Grid.Row>
-            <Grid.Column width={5} textAlign="left">
-              <Label>Status:</Label>
-              <Label className="dark-yellow">{profile.status}</Label>
-            </Grid.Column>
-            <Grid.Column width={6}>
-              <Header as="h2">{`${profile.first_name} ${profile.last_name}`}</Header>
-            </Grid.Column>
-            <Grid.Column width={5} textAlign="right">
-              <Label>Volunteering:</Label>{" "}
-              <Label className="reddish">
-                {profile.type === "volunteer" ? "Yes" : "No"}
-              </Label>
-            </Grid.Column>
-          </Grid.Row>
-          <Divider />
-          <Grid.Row centered>
-            <Grid.Column>
-              <Card>
-                <Card.Content>
-                  <Header as="h3">Personal Details</Header>
-                  <List>
-                    <List.Item>
-                      <Label>Age:</Label> {profile.first_name}
-                    </List.Item>
-                    <List.Item>
-                      <Label>Nationality:</Label>
-                    </List.Item>
-                    <List.Item>
-                      <Label>Gender:</Label> {profile.gender}
-                    </List.Item>
-                    <List.Item>
-                      <Label>Languages:</Label>
-                    </List.Item>
-                    <List.Item>
-                      <Label>Immigration Status:</Label> {profile.asylum_status}
-                    </List.Item>
-                  </List>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-            <Grid.Column>
-              <Card className="contact-card">
-                <Card.Content>
-                  <Header as="h3">Contact Details</Header>
-                  <Card.Content>
-                    <List>
-                      <List.Item>
-                        <Label>
-                          <Icon name="mail" />
-                        </Label>
-                        {profile.email}
-                      </List.Item>
-                      <List.Item>
-                        <Label>
-                          <Icon name="phone" />
-                        </Label>
-                        {profile.phone_number}
-                      </List.Item>
-                      <List.Item>
-                        <Label>
-                          <Icon name="address card outline" />
-                        </Label>
-                        {profile.address}
-                      </List.Item>
-                    </List>
-                  </Card.Content>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-            <Grid.Column width={4}>
-              <Card>
-                <Card.Content>
-                  <Header as="h3" textAlign="center">
-                    MIN Details
-                  </Header>
-                  <Card.Content>
-                    <Label>Groups:</Label>
-                    <p>{profile.groups && profile.groups.join(", ")}</p>
-                    <Label>How did they hear about us:</Label>
-                    <p>{profile.how_did_they_hear}</p>
-                    <Label>they joined:</Label>
-                    <p>
-                      {new Date(profile.join_date).toString().substring(4, 15)}
-                    </p>
-                    <Label>Notes:</Label>
-                    <p>{profile.notes}</p>
-                  </Card.Content>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-          </Grid.Row>
-          <Modal open={modalStatus} size="small">
-            <Header content="!Delete this profile" />
-            <Modal.Content>
-              <p>
-                Are you sure you want to delete this profile? Once deleted, it
-                cannot be recovered.
-              </p>
-            </Modal.Content>
-            <Modal.Actions>
-              <Button basic negative onClick={() => setModalStatus(false)}>
-                <Icon name="cancel" /> No
-              </Button>
-              <Button
-                basic
-                positive
-                onClick={() => {
-                  setDelProfile(true);
-                }}
+      <div className="flex flex-col">
+        <div className="flex justify-between">
+          <div>
+            <a
+              className="group flex items-center text-xl font-semibold cursor-pointer"
+              onClick={() => history.goBack()}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-blue-300 mr-3 h-8 w-8"
+                viewBox="0 0 20 20"
+                fill="currentColor"
               >
-                <Icon name="check" /> Yes
-              </Button>
-            </Modal.Actions>
-          </Modal>
-        </Grid>
-      </Segment>
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              Go back
+            </a>
+          </div>
+          <div>
+            <button className="btn px-6 py-3" disabled>
+              Edit
+            </button>
+            <button
+              className="btn px-4 py-3 ml-4"
+              onClick={() => setShowDeleteModal(true)}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+        <div>
+          <div className="flex justify-left items-center mt-10 space-x-5">
+            <h1 className="text-2xl font-bold">{`${profile.first_name} ${profile.last_name}`}</h1>
+            <div className="text-lg">{profile.status}</div>
+            <div>{profile.type === "volunteer" ? "Volunteer" : ""}</div>
+          </div>
+          <div className="flex mt-10">
+            <div className="flex-1">
+              <h2 className="text-lg font-bold mb-3">Personal Details</h2>
+              <div className="flex flex-col space-y-2 text-gray-900 text-xl">
+                <div>
+                  <Label>Age:</Label> {profile.first_name}
+                </div>
+                <div>
+                  <Label>Nationality:</Label> {profile.nationality_id}
+                </div>
+                <div>
+                  <Label>Gender:</Label> {profile.gender}
+                </div>
+                <div>
+                  <Label>Languages:</Label>
+                </div>
+                <div>
+                  <Label>Immigration Status:</Label> {profile.asylum_status}
+                </div>
+              </div>
+            </div>
+            <div className="flex-1">
+              <h2 className="text-lg font-bold">Contact Details</h2>
+              <div className="flex flex-col space-y-2 text-gray-900 text-xl">
+                <div>
+                  <Label>Email:</Label> {profile.email}
+                </div>
+                <div>
+                  <Label>Phone:</Label> {profile.phone_number}
+                </div>
+                <div>
+                  <Label>Address: </Label> {profile.address}
+                </div>
+              </div>
+            </div>
+            <div className="flex-1">
+              <h2 className="text-lg font-bold">MIN Details</h2>
+              <div className="flex flex-col space-y-2 text-gray-900 text-xl">
+                <div>
+                  <Label>Groups:</Label>{" "}
+                  {profile.groups && profile.groups.join(", ")}
+                </div>
+                <div>
+                  <Label>How did they hear about us:</Label>
+                  <p>{profile.how_did_they_hear}</p>
+                </div>
+                <div>
+                  <Label>Joined:</Label>{" "}
+                  {new Date(profile.join_date).toString().substring(4, 15)}
+                </div>
+                <div>
+                  <Label>Notes:</Label>
+                  <p>{profile.notes}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {showDeleteModal ? (
+            <Modal
+              heading="Delete this profile"
+              content="Are you sure you want to delete this profile? Once deleted, it cannot be recovered."
+              action={confirmDelete}
+              yes="Delete"
+              no="Cancel"
+            />
+          ) : null}
+        </div>
+      </div>
     </>
   );
 };
+
+const Label = ({ children }) => (
+  <span className="text-base text-gray-500 font-semibold mr-2">{children}</span>
+);
+
+const Modal = props => (
+  <div
+    className="fixed z-10 inset-0 overflow-y-auto"
+    aria-labelledby="modal-title"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div
+        className="fixed inset-0 bg-gray-500 bg-opacity-75"
+        aria-hidden="true"
+      ></div>
+      <span
+        className="hidden sm:inline-block sm:align-middle sm:h-screen"
+        aria-hidden="true"
+      >
+        &#8203;
+      </span>
+
+      <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+        <div className="sm:flex sm:items-start">
+          <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+            <svg
+              className="h-6 w-6 text-red-600"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+          </div>
+          <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <h3
+              className="text-lg leading-6 font-medium text-gray-900"
+              id="modal-title"
+            >
+              {props.heading}
+            </h3>
+            <div className="mt-2">
+              <p className="text-sm text-gray-500">{props.content}</p>
+            </div>
+          </div>
+        </div>
+        <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+          <button
+            type="button"
+            onClick={() => props.action(true)}
+            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+          >
+            {props.yes}
+          </button>
+          <button
+            type="button"
+            onClick={() => props.action(false)}
+            className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
+          >
+            {props.no}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 export default ViewProfile;

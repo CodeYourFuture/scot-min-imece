@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { getProfiles, getNationalities, getGroups } from "../api/profiles";
-import "../styles/dashboard.css";
 import Select from "react-select";
 
 const Profiles = () => {
@@ -140,13 +139,13 @@ const Profiles = () => {
             }
           />
         </div>
-        <div className="mt-8 shadow border-b border-gray-200 sm:rounded-lg">
+        <div className="mt-8">
           {filteredProfiles.length === 0 ? (
             <div className="text-gray-600 text-xl mt-6">
               No matching profiles found
             </div>
           ) : (
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="min-w-full divide-y divide-gray-200 shadow border-b border-gray-200 sm:rounded-lg">
               <thead class="bg-blue-50">
                 <tr>
                   <th

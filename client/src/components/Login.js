@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { loginUser } from "../api/auth";
-import "../styles/login.css";
 
 const Login = props => {
   const [email, setEmail] = useState("");
