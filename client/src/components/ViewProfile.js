@@ -28,7 +28,7 @@ const ViewProfile = () => {
   };
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col max-w-5xl mx-auto">
         <div className="flex justify-between">
           <div>
             <a
@@ -68,8 +68,8 @@ const ViewProfile = () => {
             <div className="text-lg">{profile.status}</div>
             <div>{profile.type === "volunteer" ? "Volunteer" : ""}</div>
           </div>
-          <div className="flex mt-10">
-            <div className="flex-1">
+          <div className="flex flex-col justify-between md:flex-row mt-10">
+            <div className="flex-1 mb-8">
               <h2 className="text-lg font-bold mb-3">Personal Details</h2>
               <div className="flex flex-col space-y-2 text-gray-900 text-xl">
                 <div>
@@ -89,7 +89,7 @@ const ViewProfile = () => {
                 </div>
               </div>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 mb-8">
               <h2 className="text-lg font-bold">Contact Details</h2>
               <div className="flex flex-col space-y-2 text-gray-900 text-xl">
                 <div>
@@ -103,7 +103,7 @@ const ViewProfile = () => {
                 </div>
               </div>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 mb-8">
               <h2 className="text-lg font-bold">MIN Details</h2>
               <div className="flex flex-col space-y-2 text-gray-900 text-xl">
                 <div>

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import SemanticDatepicker from "react-semantic-ui-datepickers";
-import { Form, Dropdown, Segment } from "semantic-ui-react";
 import { postProfile } from "../api/profiles";
 import { getNationalities, getGroups } from "../api/profiles";
+import Select from "react-select";
 
 const AddNewProfile = () => {
   const [profileData, setProfileData] = useState({
@@ -28,7 +27,7 @@ const AddNewProfile = () => {
   const handleChange = event => {
     updateField(event.target.name, event.target.value);
   };
-
+  console.log(profileData);
   const createProfile = () => {
     let errs = [];
     if (profileData.firstname.length === 0) {
@@ -50,15 +49,6 @@ const AddNewProfile = () => {
     setErrors([]);
   };
 
-  const handleDropdownAndDateChange = (event, data) => {
-    updateField(data.name, data.value);
-  };
-
-  const groupsHandler = (event, data) => {
-    const selectedGroups = data.value;
-    setProfileData({ ...profileData, groups: selectedGroups });
-  };
-
   const updateField = (name, value) => {
     const updatedProfileData = {
       ...profileData,
@@ -68,21 +58,21 @@ const AddNewProfile = () => {
   };
 
   const profileTypeOptions = [
-    { key: "volunteer", value: "volunteer", text: "Volunteer" },
-    { key: "service user", value: "service_user", text: "Service user" }
+    { key: "service user", value: "service_user", label: "Service user" },
+    { key: "volunteer", value: "volunteer", label: "Volunteer" }
   ];
 
   const statusOptions = [
-    { key: "new", value: "new", text: "New" },
-    { key: "active", value: "active", text: "Active" },
-    { key: "inactive", value: "inactive", text: "Inactive" }
+    { key: "new", value: "new", label: "New" },
+    { key: "active", value: "active", label: "Active" },
+    { key: "inactive", value: "inactive", label: "Inactive" }
   ];
 
   const genderOptions = [
-    { key: "male", value: "male", text: "Male" },
-    { key: "female", value: "female", text: "Female" },
-    { key: "other", value: "other", text: "Other" },
-    { key: "not_provided", value: "not_provided", text: "Not provided" }
+    { key: "male", value: "male", label: "Male" },
+    { key: "female", value: "female", label: "Female" },
+    { key: "other", value: "other", label: "Other" },
+    { key: "not_provided", value: "not_provided", label: "Not provided" }
   ];
 
   useEffect(() => {
@@ -96,187 +86,202 @@ const AddNewProfile = () => {
 
   const nationalityOptions = nationalities.map(nationality => ({
     key: nationality.id,
-    text: nationality.nationality,
+    label: nationality.nationality,
     value: nationality.id
   }));
 
   const groupsOptions = groups.map(group => ({
     key: group.id,
-    text: group.group_name,
+    label: group.group_name,
     value: group.id
   }));
 
   return (
-    <Segment style={{ border: " 3px solid #d1a1b7" }}>
-      <Form onSubmit={createProfile}>
-        <ul class="errors">
+    <div className="px-10 max-w-4xl mx-auto">
+      <form onSubmit={createProfile}>
+        <ul className="errors">
           {errors.map(error => (
             <li>
               <p>{error}</p>
             </li>
           ))}
         </ul>
-        <Form.Field>
-          <label htmlFor="first-name">First name</label>
-          <input
-            id="first-name"
-            placeholder="First Name"
-            name="firstname"
-            value={profileData.firstname}
-            onChange={handleChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label htmlFor="last-name">Last Name</label>
-          <input
-            id="last-name"
-            placeholder="Last Name"
-            name="lastname"
-            value={profileData.lastname}
-            onChange={handleChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label htmlFor="dob">DOB</label>
-          <input
-            id="dob"
-            type="date"
-            placeholder="Date of birth"
-            name="dob"
-            value={profileData.dob}
-            onChange={handleChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label htmlFor="address">Address</label>
-          <input
-            id="address"
-            placeholder="Address"
-            name="address"
-            value={profileData.address}
-            onChange={handleChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Email Address"
-            name="email"
-            value={profileData.email}
-            onChange={handleChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label htmlFor="phone">Phone</label>
-          <input
-            id="phone"
-            type="tel"
-            placeholder="Phone"
-            name="phone"
-            value={profileData.phone}
-            onChange={handleChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label htmlFor="gender">Gender</label>
-          <Dropdown
-            id="gender"
-            placeholder="Gender"
-            name="gender"
-            value={profileData.gender}
-            onChange={handleDropdownAndDateChange}
-            fluid
-            selection
-            options={genderOptions}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Groups</label>
-          <Dropdown
-            multiple
-            fluid
-            selection
-            options={groupsOptions}
-            onChange={groupsHandler}
-            name="groups"
-            placeholder="Groups"
-          />
-        </Form.Field>
-        <Form.Field>
-          <label htmlFor="support">Support type</label>
-          <input
-            id="support"
-            placeholder="Support type"
-            name="support_type"
-            value={profileData.support_type}
-            onChange={handleChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Profile type</label>
-          <Dropdown
-            onChange={handleDropdownAndDateChange}
-            name="profile_type"
-            value={profileData.profile_type}
-            placeholder="Select profile type"
-            fluid
-            selection
-            options={profileTypeOptions}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Status</label>
-          <Dropdown
-            onChange={handleDropdownAndDateChange}
-            name="status"
-            value={profileData.status}
-            placeholder="Select status"
-            fluid
-            selection
-            options={statusOptions}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Nationality</label>
-          <Dropdown
-            name="nationality"
-            value={profileData.nationality}
-            fluid
-            selection
-            options={nationalityOptions}
-            onChange={handleDropdownAndDateChange}
-            placeholder="Nationality"
-          />
-        </Form.Field>
-        <Form.Field>
-          <label for="join-date">Join date</label>
-          <SemanticDatepicker
-            id="join-date"
-            onChange={handleDropdownAndDateChange}
-            name="join_date"
-            value={profileData.join_date}
-          />
-        </Form.Field>
-        <Form.Button
-          type="submit"
-          style={{
-            backgroundColor: "#aad6e4",
-            fontSize: "large",
-            color: "000"
-          }}
-        >
-          Add new profile
-        </Form.Button>
-        {profileCreated === false && (
-          <p>
-            Something went wrong when creating the profile. Please try again.
-          </p>
-        )}
-      </Form>
-    </Segment>
+        <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+          <div className="sm:col-span-3">
+            <Field
+              label="First name"
+              name="firstname"
+              type="text"
+              value={profileData.firstname}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="sm:col-span-3">
+            <Field
+              label="Last name"
+              name="lastname"
+              type="text"
+              value={profileData.lastname}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="sm:col-span-6">
+            <Field
+              label="Address"
+              name="address"
+              type="text"
+              value={profileData.address}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="sm:col-span-3">
+            <Field
+              label="Email address"
+              name="email"
+              type="email"
+              value={profileData.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="sm:col-span-3">
+            <Field
+              label="Phone"
+              name="phone"
+              type="tel"
+              value={profileData.phone}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="sm:col-span-2">
+            <label
+              className="font-semibold text-gray-700"
+              htmlFor="nationality"
+            >
+              Nationality
+            </label>
+            <Select
+              id="nationality"
+              name="nationality"
+              options={nationalityOptions}
+              onChange={selected => updateField("nationality", selected.value)}
+            />
+          </div>
+          <div className="sm:col-span-2">
+            <label className="font-semibold text-gray-700" htmlFor="gender">
+              Gender
+            </label>
+            <Select
+              id="gender"
+              name="gender"
+              options={genderOptions}
+              onChange={selected => updateField("gender", selected.value)}
+            />
+          </div>
+          <div className="sm:col-span-2">
+            <Field
+              label="Date of birth"
+              type="date"
+              onChange={event =>
+                updateField("dob", new Date(event.target.value))
+              }
+              name="dob"
+              value={
+                profileData.dob
+                  ? profileData.dob.toISOString().substring(0, 10)
+                  : ""
+              }
+            />
+          </div>
+          <div class="sm:col-span-6">
+            <label className="font-semibold text-gray-700" htmlFor="groups">
+              Groups
+            </label>
+            <Select
+              id="groups"
+              name="groups"
+              placeholder="Select groups ..."
+              isMulti
+              options={groupsOptions}
+              onChange={selected =>
+                updateField(
+                  "groups",
+                  selected.map(s => s.value)
+                )
+              }
+            />
+          </div>
+          <div class="sm:col-span-6">
+            <Field
+              label="Support type"
+              name="support_type"
+              value={profileData.support_type}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="sm:col-span-2">
+            <label htmlFor="profile_type">Profile type</label>
+            <Select
+              id="profile_type"
+              name="profile_type"
+              options={profileTypeOptions}
+              onChange={selected => updateField("profile_type", selected.value)}
+            />
+          </div>
+          <div className="sm:col-span-2">
+            <label htmlFor="status">Status</label>
+            <Select
+              id="status"
+              name="status"
+              defaultValue={statusOptions[0]}
+              options={statusOptions}
+              onChange={selected => updateField("status", selected.value)}
+            />
+          </div>
+          <div className="sm:col-span-2">
+            <Field
+              label="Join date"
+              type="date"
+              onChange={event =>
+                updateField("join_date", new Date(event.target.value))
+              }
+              name="join_date"
+              value={profileData.join_date.toISOString().substring(0, 10)}
+            />
+          </div>
+          {profileCreated === false && (
+            <p>
+              Something went wrong when creating the profile. Please try again.
+            </p>
+          )}
+        </div>
+        <div class="pt-5">
+          <div class="flex justify-end">
+            <button type="submit" class="btn px-3 py-2">
+              Add new profile
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
+
+const Field = ({ label, name, type, value, onChange }) => (
+  <>
+    <label htmlFor={name} className="block text-sm font-semibold text-gray-700">
+      {label}
+    </label>
+    <div className="mt-1">
+      <input
+        id={name}
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange}
+        className="form-input shadow-sm focus:ring-blue-300 focus:border-blue-300 block w-full sm:text-sm border-gray-300 rounded-md"
+      />
+    </div>
+  </>
+);
 
 export default AddNewProfile;
