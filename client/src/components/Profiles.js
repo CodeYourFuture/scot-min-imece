@@ -110,7 +110,7 @@ const Profiles = () => {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col max-w-screen-2xl mx-auto">
         <div className="flex justify-between">
           <NewProfileButton />
           <SettingsButton />
@@ -145,69 +145,35 @@ const Profiles = () => {
               No matching profiles found
             </div>
           ) : (
-            <table class="min-w-full divide-y divide-gray-200 shadow border-b border-gray-200 sm:rounded-lg">
-              <thead class="bg-blue-50">
+            <table className="min-w-full divide-y divide-gray-200 shadow border-b border-gray-200 sm:rounded-lg">
+              <thead className="bg-blue-50">
                 <tr>
-                  <th
-                    scope="col"
-                    class="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
-                  >
-                    Name
-                  </th>
+                  <Th>Name</Th>
                   <th
                     scope="col"
                     class="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider whitespace-nowrap"
                   >
                     Last Name
                   </th>
-                  <th
-                    scope="col"
-                    class="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
-                  >
-                    Phone
-                  </th>
-                  <th
-                    scope="col"
-                    class="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
-                  >
-                    Email
-                  </th>
-                  <th
-                    scope="col"
-                    class="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
-                  >
-                    Groups
-                  </th>
-                  <th
-                    scope="col"
-                    class="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
-                  >
-                    Volunteer
-                  </th>
-                  <th
-                    scope="col"
-                    class="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
-                  >
-                    Status
-                  </th>
+                  <Th>Phone</Th>
+                  <Th>Email</Th>
+                  <Th>Groups</Th>
+                  <Th>Volunteer</Th>
+                  <Th>Status</Th>
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
                 {filteredProfiles.map(profile => (
                   <tr onClick={() => history.push(`/profiles/${profile.id}`)}>
-                    <td className="px-5 py-3">{`${profile.first_name}`}</td>
-                    <td className="px-5 py-3">{`${profile.last_name}`}</td>
+                    <Td>{`${profile.first_name}`}</Td>
+                    <Td>{`${profile.last_name}`}</Td>
                     <td className="px-5 py-3 whitespace-nowrap">
                       {profile.phone_number}
                     </td>
-                    <td className="px-5 py-3">{profile.email}</td>
-                    <td className="px-5 py-3">
-                      {getProfilesGroups(profile.id).join(", ")}
-                    </td>
-                    <td className="px-5 py-3">
-                      {profile.type === "volunteer" ? "Yes" : "No"}
-                    </td>
-                    <td className="px-5 py-3">
+                    <Td>{profile.email}</Td>
+                    <Td>{getProfilesGroups(profile.id).join(", ")}</Td>
+                    <Td>{profile.type === "volunteer" ? "Yes" : "No"}</Td>
+                    <Td>
                       <button
                         style={{ minWidth: "5rem" }}
                         className={`py-2 px-3 rounded-md font-medium ${getClassNames(
@@ -216,7 +182,7 @@ const Profiles = () => {
                       >
                         {profile.status}
                       </button>
-                    </td>
+                    </Td>
                   </tr>
                 ))}
               </tbody>
@@ -226,42 +192,50 @@ const Profiles = () => {
         <div className="my-20">
           <h2 className="mb-5 text-xl font-semibold">This month</h2>
           <div className="flex space-x-20 justify-between text-center">
-            <div className="flex-1 pb-4 border-b-4 border-yellow-200">
-              <div className="text-2xl font-bold mb-4">{totalNewProfiles}</div>
-              <h4 className="text-xl font-semibold text-gray-700">
-                New People
-              </h4>
-            </div>
-            <div className="flex-1 pb-4 border-b-4 border-pink-300">
-              <div className="text-2xl font-bold mb-4">
-                {totalActiveProfiles}
-              </div>
-              <h4 className="text-xl font-semibold text-gray-700">
-                Active People
-              </h4>
-            </div>
-            <div className="flex-1 pb-4 border-b-4 border-red-400">
-              <div className="text-2xl font-bold mb-4">
-                {totalInactiveProfiles}
-              </div>
-              <h4 className="text-xl font-semibold text-gray-700">
-                Inactive People
-              </h4>
-            </div>
-            <div className="flex-1 pb-4 border-b-4 border-blue-200">
-              <div className="text-2xl font-bold mb-4">
-                {totalVolunteerProfiles}
-              </div>
-              <h4 className="text-xl font-semibold text-gray-700">
-                Volunteers
-              </h4>
-            </div>
+            <MonthlyTotal
+              name="New People"
+              count={totalNewProfiles}
+              colour="border-yellow-200"
+            />
+            <MonthlyTotal
+              name="Active People"
+              count={totalActiveProfiles}
+              colour="border-pink-300"
+            />
+            <MonthlyTotal
+              name="Inactive People"
+              count={totalInactiveProfiles}
+              colour="border-red-400"
+            />
+            <MonthlyTotal
+              name="Volunteers"
+              count={totalVolunteerProfiles}
+              colour="border-blue-200"
+            />
           </div>
         </div>
       </div>
     </>
   );
 };
+
+const MonthlyTotal = ({ name, colour, count }) => (
+  <div className={`flex-1 pb-4 border-b-4 ${colour}`}>
+    <div className="text-2xl font-bold mb-4">{count}</div>
+    <h4 className="text-xl font-semibold text-gray-700">{name}</h4>
+  </div>
+);
+
+const Th = ({ children }) => (
+  <th
+    scope="col"
+    class="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
+  >
+    {children}
+  </th>
+);
+
+const Td = ({ children }) => <td className="px-5 py-3">{children}</td>;
 
 const Search = props => (
   <div class="max-w-lg w-full lg:max-w-xs">
