@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.1.1",
+    "@tailwindcss/postcss7-compat": "^2.1.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.0",
+    "autoprefixer": "^9.8.6",
+    "@tailwindcss/forms": "^0.3.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
@@ -11,12 +16,10 @@
   },
   "proxy": "http://localhost:4000",
   "scripts": {
-    "build-css": "postcss src/main.css -o src/index.css",
-    "watch-css": "postcss src/main.css -o src/index.css -w",
-    "start": "react-scripts start",
-    "dev": "npm-run-all -p watch-css start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "dev": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -35,15 +38,10 @@
     ]
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.3.2",
-    "autoprefixer": "^10.2.5",
     "husky": "^3.0.3",
     "lint-staged": "^9.2.1",
-    "npm-run-all": "^4.1.5",
-    "postcss": "^8.2.9",
-    "postcss-cli": "^8.3.1",
-    "prettier-eslint-cli": "^5.0.0",
-    "tailwindcss": "^2.1.1"
+    "postcss": "^7.0.35",
+    "prettier-eslint-cli": "^5.0.0"
   },
   "husky": {
     "hooks": {
