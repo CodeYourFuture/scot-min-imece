@@ -22,8 +22,8 @@ const ViewProfile = () => {
     }
   }, [profileId, delProfile, history]);
 
-  const confirmDelete = deleteOrNot => {
-    setDelProfile(deleteOrNot);
+  const confirmDelete = deleteConfirmed => {
+    setDelProfile(deleteConfirmed);
     setShowDeleteModal(false);
   };
   return (
@@ -69,7 +69,7 @@ const ViewProfile = () => {
             <div>{profile.type === "volunteer" ? "Volunteer" : ""}</div>
           </div>
           <div className="flex flex-col justify-between md:flex-row mt-10">
-            <div className="flex-1 mb-8">
+            <div className="flex-1 mb-5">
               <h2 className="text-lg font-bold mb-3">Personal Details</h2>
               <div className="flex flex-col space-y-2 text-gray-900 text-xl">
                 <div>

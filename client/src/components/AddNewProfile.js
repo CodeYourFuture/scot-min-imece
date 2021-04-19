@@ -27,7 +27,7 @@ const AddNewProfile = () => {
   const handleChange = event => {
     updateField(event.target.name, event.target.value);
   };
-  console.log(profileData);
+
   const createProfile = () => {
     let errs = [];
     if (profileData.firstname.length === 0) {
