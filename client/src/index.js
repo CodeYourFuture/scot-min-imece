@@ -18,7 +18,8 @@ const logout = e => {
 };
 
 const Routes = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const token = localStorage.getItem("token");
+  const [isLoggedIn, setIsLoggedIn] = useState(token != null);
 
   const loginUser = () => {
     setIsLoggedIn(true);
@@ -41,7 +42,7 @@ const Routes = () => {
           <Link to="/about" className="nav-btn">
             FAQ
           </Link>
-          {localStorage.getItem("token") ? (
+          {token ? (
             <button onClick={logout} className="nav-btn">
               Logout{" "}
             </button>

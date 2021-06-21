@@ -63,3 +63,4 @@ typings/
 *.sqlite3
 .idea
 .DS_Store
+cypress/videos/
