@@ -48,8 +48,6 @@ CREATE TABLE profiles (
   type            profile_type NOT NULL,
   status          status NOT NULL DEFAULT 'new',
   join_date       DATE NOT NULL DEFAULT current_date,
-  updated_date    DATE,
-  last_edited_by  int references users(id),
   language_id     int references languages(id),
   asylum_status   asylum_status NOT NULL  DEFAULT 'other',
   how_did_they_hear VARCHAR(200),
