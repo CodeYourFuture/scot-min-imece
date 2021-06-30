@@ -28,7 +28,9 @@ const AddNewProfile = () => {
     updateField(event.target.name, event.target.value);
   };
 
-  const createProfile = () => {
+  const createProfile = event => {
+    event.preventDefault();
+
     let errs = [];
     if (profileData.firstname.length === 0) {
       errs.push("First name cannot be empty");
