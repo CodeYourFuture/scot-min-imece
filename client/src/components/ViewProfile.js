@@ -20,6 +20,9 @@ const ViewProfile = () => {
       deleteProfile(profileId);
       history.goBack();
     }
+    return function cleanup() {
+      document.title = "MIN - Imece";
+    };
   }, [profileId, delProfile, history]);
 
   const confirmDelete = deleteConfirmed => {

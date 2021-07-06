@@ -3,6 +3,8 @@ import Profiles from "../components/Profiles";
 import Login from "../components/Login";
 
 const Home = props => {
+  document.title = "MIN - Home";
+
   return (
     <>
       {props.isLoggedIn ? (
