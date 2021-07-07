@@ -5,7 +5,7 @@ import { loginUser } from "../api/auth";
 const Login = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const handleChange = event => {
     if (event.target.name === "email") {
       setEmail(event.target.value);
@@ -19,14 +19,18 @@ const Login = props => {
     event.preventDefault();
     loginUser(email, password)
       .then(data => {
-        const token = data.token;
-
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        props.loginUser();
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+          props.loginUser();
+        } else {
+          setErrorMessage(
+            "The login details are not correct. Please try again"
+          );
+        }
       })
-      .catch(() => {
-        setError(true);
+      .catch(e => {
+        setErrorMessage("Something went wrong. Please try again later");
       });
   };
 
@@ -63,9 +67,7 @@ const Login = props => {
               />
             </label>
             <button className="btn px-5 py-3 mt-1 w-full">Login</button>
-            {error ? (
-              <div>The login details are not correct. Please try again</div>
-            ) : null}
+            <div>{errorMessage}</div>
           </div>
         </form>
       </div>
