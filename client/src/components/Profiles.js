@@ -3,14 +3,15 @@ import { Link, useHistory } from "react-router-dom";
 import { getProfiles, getNationalities, getGroups } from "../api/profiles";
 import Select from "react-select";
 
-const Profiles = () => {
+const Profiles = props => {
   const [profiles, setProfiles] = useState([]);
-  const [nationalities, setNationalities] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [selectedNationalities, setSelectedNationalities] = useState([]);
   const [groups, setGroups] = useState([]);
   const [selectedGroupIds, setSelectedGroupIds] = useState([]);
+  const nationalities = props.allNationalities;
   let history = useHistory();
+  console.log(nationalities);
 
   const handleSearchChange = event => {
     setSearchInput(event.target.value);
@@ -20,18 +21,20 @@ const Profiles = () => {
     getProfiles().then(response => {
       setProfiles(response);
     });
-    getNationalities().then(response => {
-      setNationalities(response);
-    });
-    getGroups().then(response => {
-      setGroups(response);
-    });
+
+    //   getNationalities().then(response => {
+    //     setNationalities(response);
+    //   });
+    //   getGroups().then(response => {
+    //     setGroups(response);
+    //   });
   }, []);
 
   const nationality_options = nationalities.map(national => ({
     label: national.nationality,
     value: national.id
   }));
+  console.log(nationality_options);
   const group_options = groups.map(group => ({
     key: group.id,
     label: group.group_name,

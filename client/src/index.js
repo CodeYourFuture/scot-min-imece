@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Home from "./components/Home";
@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import Footer from "./components/Footer";
 import ViewProfile from "./components/ViewProfile";
 import MINLogo from "./assets/nav-banner.png";
+import { getNationalities } from "./api/profiles.js";
 
 const logout = e => {
   e.preventDefault();
@@ -19,10 +20,25 @@ const logout = e => {
 
 const Routes = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [allNationalities, setAllNationalities] = useState([]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      getNationalities().then(response => {
+        setAllNationalities([response]);
+      });
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    console.log(allNationalities);
+  }, [allNationalities]);
 
   const loginUser = () => {
     setIsLoggedIn(true);
   };
+
+  console.log(allNationalities);
 
   return (
     <Router>
@@ -56,7 +72,13 @@ const Routes = () => {
         <Route
           path="/"
           exact
-          render={() => <Home isLoggedIn={isLoggedIn} loginUser={loginUser} />}
+          render={() => (
+            <Home
+              isLoggedIn={isLoggedIn}
+              loginUser={loginUser}
+              allNationalities={allNationalities}
+            />
+          )}
         />
         <Route path="/about/" component={About} />
         <Route path="/status/" component={Status} />
