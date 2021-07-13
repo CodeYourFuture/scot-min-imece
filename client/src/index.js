@@ -10,7 +10,7 @@ import Login from "./components/Login";
 import Footer from "./components/Footer";
 import ViewProfile from "./components/ViewProfile";
 import MINLogo from "./assets/nav-banner.png";
-import { getNationalities } from "./api/profiles.js";
+import { getNationalities, getGroups } from "./api/profiles.js";
 
 const logout = e => {
   e.preventDefault();
@@ -21,24 +21,23 @@ const logout = e => {
 const Routes = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [allNationalities, setAllNationalities] = useState([]);
+  const [allGroups, setAllGroups] = useState([]);
 
   useEffect(() => {
     if (isLoggedIn) {
       getNationalities().then(response => {
-        setAllNationalities([response]);
+        setAllNationalities(response);
+      });
+
+      getGroups().then(response => {
+        setAllGroups(response);
       });
     }
   }, [isLoggedIn]);
 
-  useEffect(() => {
-    console.log(allNationalities);
-  }, [allNationalities]);
-
   const loginUser = () => {
     setIsLoggedIn(true);
   };
-
-  console.log(allNationalities);
 
   return (
     <Router>
@@ -77,6 +76,7 @@ const Routes = () => {
               isLoggedIn={isLoggedIn}
               loginUser={loginUser}
               allNationalities={allNationalities}
+              allGroups={allGroups}
             />
           )}
         />
