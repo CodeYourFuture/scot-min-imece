@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Home from "./components/Home";
@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import Footer from "./components/Footer";
 import ViewProfile from "./components/ViewProfile";
 import MINLogo from "./assets/nav-banner.png";
+import { getNationalities, getGroups } from "./api/profiles.js";
 
 const logout = e => {
   e.preventDefault();
@@ -20,6 +21,20 @@ const logout = e => {
 const Routes = () => {
   const token = localStorage.getItem("token");
   const [isLoggedIn, setIsLoggedIn] = useState(token != null);
+  const [allNationalities, setAllNationalities] = useState([]);
+  const [allGroups, setAllGroups] = useState([]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      getNationalities().then(response => {
+        setAllNationalities(response);
+      });
+
+      getGroups().then(response => {
+        setAllGroups(response);
+      });
+    }
+  }, [isLoggedIn]);
 
   const loginUser = () => {
     setIsLoggedIn(true);
@@ -57,7 +72,14 @@ const Routes = () => {
         <Route
           path="/"
           exact
-          render={() => <Home isLoggedIn={isLoggedIn} loginUser={loginUser} />}
+          render={() => (
+            <Home
+              isLoggedIn={isLoggedIn}
+              loginUser={loginUser}
+              allNationalities={allNationalities}
+              allGroups={allGroups}
+            />
+          )}
         />
         <Route path="/about/" component={About} />
         <Route path="/status/" component={Status} />

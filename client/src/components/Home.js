@@ -9,7 +9,10 @@ const Home = props => {
     <>
       {props.isLoggedIn ? (
         <>
-          <Profiles />
+          <Profiles
+            allNationalities={props.allNationalities}
+            allGroups={props.allGroups}
+          />
         </>
       ) : (
         <Login loginUser={props.loginUser} />
