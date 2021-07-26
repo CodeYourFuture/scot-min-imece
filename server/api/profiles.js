@@ -13,6 +13,7 @@ router.get("/", (req, res) => {
 			res.send(500);
 		});
 });
+
 router.get("/nationalities", (req, res) => {
 	usersDb
 		.getAllNationalities()

@@ -264,45 +264,45 @@ INSERT INTO languages (id, language) VALUES (21, 'Wolof');
 INSERT INTO languages (id, language) VALUES (22, 'Yoruba');
 
 
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+INSERT INTO profiles (first_name, last_name, gender, nationality, 
 date_of_birth, email, address, phone_number, occupation, type, status, notes, join_date) values 
-('Aaishah', 'Malik', 'female', 15, '1993-05-19', 'malika@hotmail.co.uk', 'Leglen Wood Crescent G21 3PT', '+44 1235 78950', 'student', 'service_user', 'active', 'Food parcel delivered 05-01-2021', '2020-10-11');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+('Aaishah', 'Malik', 'female', 'Bangladeshi', '1993-05-19', 'malika@hotmail.co.uk', 'Leglen Wood Crescent G21 3PT', '+44 1235 78950', 'student', 'service_user', 'active', 'Food parcel delivered 05-01-2021', '2020-10-11');
+INSERT INTO profiles (first_name, last_name, gender, nationality, 
 date_of_birth, email, address, phone_number, occupation, type, status, join_date) values 
-('Michael', 'Mayer', 'male', 177, '1967-01-30', 'happy_mood@cyf.org', 'Abercorn Avenue, Hillington Park  G52 4JL', '+44 1345 56788', 'teacher', 'service_user', 'inactive', '2019-05-01');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+('Michael', 'Mayer', 'male', 'Scottish', '1967-01-30', 'happy_mood@cyf.org', 'Abercorn Avenue, Hillington Park  G52 4JL', '+44 1345 56788', 'teacher', 'service_user', 'inactive', '2019-05-01');
+INSERT INTO profiles (first_name, last_name, gender, nationality, 
 date_of_birth, email, address, phone_number, occupation, type, status, notes) values 
-('Zubeda', 'Nicol', 'female', 85, '1978-10-25', 'Nicolz@gmail.com', 'Kingsbridge Park Gardens  G44 4JG', '+44 1555 56755', 'plumber', 'service_user', 'inactive', 'Has a strong dislike of cats');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+('Zubeda', 'Nicol', 'female', 'Greek', '1978-10-25', 'Nicolz@gmail.com', 'Kingsbridge Park Gardens  G44 4JG', '+44 1555 56755', 'plumber', 'service_user', 'inactive', 'Has a strong dislike of cats');
+INSERT INTO profiles (first_name, last_name, gender, nationality, 
 date_of_birth, email, address, phone_number, occupation, type, status) values 
-('Sandra', 'Vinyard', 'female', 23, '1989-12-08', 'S.Vinyard@gmail.com', 'Calderwood Road  G43 2RP', '+44 1367 334567', 'housewife', 'service_user', 'new');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+('Sandra', 'Vinyard', 'female', 'Bolivian', '1989-12-08', 'S.Vinyard@gmail.com', 'Calderwood Road  G43 2RP', '+44 1367 334567', 'housewife', 'service_user', 'new');
+INSERT INTO profiles (first_name, last_name, gender, nationality, 
 date_of_birth, email, address, phone_number, occupation, type, status) values 
-('Khalid', 'Abbasood', 'male', 209, '1985-11-03', 'khalid_abbasood@outlook.com', 'Torrington Crescent  G32 9NU', '+44 1498 56787', 'IT technician', 'service_user', 'active');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+('Khalid', 'Abbasood', 'male', 'Turkish', '1985-11-03', 'khalid_abbasood@outlook.com', 'Torrington Crescent  G32 9NU', '+44 1498 56787', 'IT technician', 'service_user', 'active');
+INSERT INTO profiles (first_name, last_name, gender, nationality, 
 date_of_birth, email, address, phone_number, occupation, type, status) values 
-('Lola', 'Chard', 'female', 108, '1990-02-18', 'LChard@hotmail.com', 'Yoker Mill Gardens  G13 4JJ', '+44 1433 332112', 'student', 'service_user', 'inactive');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+('Lola', 'Chard', 'female', 'Kazakh', '1990-02-18', 'LChard@hotmail.com', 'Yoker Mill Gardens  G13 4JJ', '+44 1433 332112', 'student', 'service_user', 'inactive');
+INSERT INTO profiles (first_name, last_name, gender, nationality, 
 date_of_birth, email, address, phone_number, occupation, type, status) values 
-('Caroline', 'Abraham', 'female', 224, '1988-04-22', 'carabrah@hotmail.co.uk', 'North Hanover Street  G1 2AD', '+44 1777 982356', 'accountant', 'service_user', 'inactive');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+('Caroline', 'Abraham', 'female', 'Zambian', '1988-04-22', 'carabrah@hotmail.co.uk', 'North Hanover Street  G1 2AD', '+44 1777 982356', 'accountant', 'service_user', 'inactive');
+INSERT INTO profiles (first_name, last_name, gender, nationality, 
 date_of_birth, email, address, phone_number, occupation, type, status) values 
-('Abbas', 'Marchal', 'male', 49, '1971-06-30', 'marchal.abbas@gmail.com', 'Plantation Drive, Bishopbriggs  G64 2FH', '+44 7793 234521', 'unemployed', 'service_user', 'new');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+('Abbas', 'Marchal', 'male', 'Colombian', '1971-06-30', 'marchal.abbas@gmail.com', 'Plantation Drive, Bishopbriggs  G64 2FH', '+44 7793 234521', 'unemployed', 'service_user', 'new');
+INSERT INTO profiles (first_name, last_name, gender, nationality, 
 date_of_birth, email, address, phone_number, occupation, type, status) values 
-('Matt', 'Chambers', 'male', 158, '1981-03-10', 'sunflower_s@gmail.com', 'Craigieburn Gardens  G20 0NU', '+44 5342 992309', 'carpenter', 'service_user', 'active');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+('Matt', 'Chambers', 'male', 'Palestinian', '1981-03-10', 'sunflower_s@gmail.com', 'Craigieburn Gardens  G20 0NU', '+44 5342 992309', 'carpenter', 'service_user', 'active');
+INSERT INTO profiles (first_name, last_name, gender, nationality, 
 date_of_birth, email, address, phone_number, occupation, type, status) values 
-('Samia', 'Khan', 'female', 1, '1993-08-11', 'Khan_samia@yahoo.com', 'Ailsa Gate, Barrhead  G78 1PU', '+44 3425 881290', 'student', 'service_user', 'active');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+('Samia', 'Khan', 'female', 'Afghan', '1993-08-11', 'Khan_samia@yahoo.com', 'Ailsa Gate, Barrhead  G78 1PU', '+44 3425 881290', 'student', 'service_user', 'active');
+INSERT INTO profiles (first_name, last_name, gender, nationality, 
 date_of_birth, email, address, phone_number, occupation, type, status, how_did_they_hear) values 
-('Usman', 'Zaim', 'male', 63, '1982-05-16', 'zaimusman@hotmail.com', 'Broomhill Path  G11 7AL', '+44 1121 120956', 'driver', 'service_user', 'active', 'ESOL class visit');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+('Usman', 'Zaim', 'male', 'Dominican', '1982-05-16', 'zaimusman@hotmail.com', 'Broomhill Path  G11 7AL', '+44 1121 120956', 'driver', 'service_user', 'active', 'ESOL class visit');
+INSERT INTO profiles (first_name, last_name, gender, nationality, 
 date_of_birth, email, address, phone_number, occupation, type, status, how_did_they_hear) values 
-('Darren', 'Scarlat', 'male', 100, '1962-02-07', 'Darren_slet@yahoo.co.uk', 'Zena Crescent  G33 1HZ', '+44 1672 334675', 'student', 'volunteer', 'active', 'ESOL class visit');
-INSERT INTO profiles (first_name, last_name, gender, nationality_id, 
+('Darren', 'Scarlat', 'male', 'Iraqi', '1962-02-07', 'Darren_slet@yahoo.co.uk', 'Zena Crescent  G33 1HZ', '+44 1672 334675', 'student', 'volunteer', 'active', 'ESOL class visit');
+INSERT INTO profiles (first_name, last_name, gender, nationality, 
 date_of_birth, email, address, phone_number, occupation, type, status, how_did_they_hear, notes) values 
-('Mozafer', 'Haider', 'male', 194, '1986-02-07', 'kabaros@mozafariscool.com', 'St. Vincent
+('Mozafer', 'Haider', 'male', 'Sudanese', '1986-02-07', 'kabaros@mozafariscool.com', 'St. Vincent
 Crescent  G3 1RH', '+44 876 3289', 'developer', 'volunteer', 'active', 'Heard through the grapevine', 'Don''t add me to groups!');
 
 INSERT INTO profile_group (profile_id,group_id) VALUES (1,1);

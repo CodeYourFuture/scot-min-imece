@@ -76,10 +76,10 @@ const ViewProfile = () => {
               <h2 className="text-lg font-bold mb-3">Personal Details</h2>
               <div className="flex flex-col space-y-2 text-gray-900 text-xl">
                 <div>
-                  <Label>Age:</Label> {profile.first_name}
+                  <Label>DOB:</Label> {profile.date_of_birth}
                 </div>
                 <div>
-                  <Label>Nationality:</Label> {profile.nationality_id}
+                  <Label>Nationality:</Label> {profile.nationality}
                 </div>
                 <div>
                   <Label>Gender:</Label> {profile.gender}
