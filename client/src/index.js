@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
 import Footer from "./components/Footer";
 import ViewProfile from "./components/ViewProfile";
+import EditProfile from "./components/EditProfile";
 import MINLogo from "./assets/nav-banner.png";
 import { getNationalities, getGroups } from "./api/profiles.js";
 
@@ -86,6 +87,7 @@ const Routes = () => {
         <Route path="/login/" render={() => <Login loginUser={loginUser} />} />
         <Route path="/profiles/:profileId" component={ViewProfile} />
         <Route path="/add-new-profile" component={AddNewProfile} />
+        <Route exact path="/profiles/:profileId/edit" component={EditProfile} />
       </main>
       <Footer />
     </Router>

@@ -70,6 +70,14 @@ const getAllGroups = () => {
 		.then((result) => result.rows);
 };
 
+const updateProfileById = (profileId, updatedProfile) => {
+	console.log(typeof profileId);
+	return  pool.query("UPDATE profiles SET first_name=$1, last_name=$2, gender=$3, email=$4, type=$5, join_date=$6, WHERE id=$7", [updatedProfile.first_name, updatedProfile.last_name,updatedProfile.gender,updatedProfile.email,updatedProfile.type, updatedProfile.join_date,profileId]).then(() => console.log(`Customer ${profileId} updated!`)).catch((e) => console.error(e));
+};
+
+
+
+
 module.exports = {
 	getAllProfiles,
 	getProfileById,
@@ -77,4 +85,6 @@ module.exports = {
 	deleteProfile,
 	getAllNationalities,
 	getAllGroups,
+	updateProfileById,
 };
+

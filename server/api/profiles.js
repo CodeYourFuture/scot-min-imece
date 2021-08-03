@@ -75,4 +75,18 @@ router.delete("/:profileId",(req, res)=>{
 		});
 });
 
+router.put("/:profileId", (req, res) => {
+	const profileId = req.params.profileId;
+	const updatedProfile=req.body;
+	 usersDb
+		.updateProfileById(profileId, updatedProfile)
+		.then((data) => {
+			res.sendStatus(201);
+		})
+		.catch((err) => {
+			console.error(err);
+			res.sendStatus(500);
+		}); 
+});
+
 module.exports = router;

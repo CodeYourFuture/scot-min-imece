@@ -39,3 +39,17 @@ export const getNationalities = () => {
 export const getGroups = () => {
   return fetchWithAuthorization("/api/profiles/groups").then(res => res.json());
 };
+
+export const updateProfileByProfileId = (profile, profileId) => {
+  const updateProfile = {
+    method: "PUT",
+    body: JSON.stringify(profile),
+    headers: {
+      "content-type": "application/json"
+    }
+  };
+  return fetchWithAuthorization(
+    `/api/profiles/${profileId}`,
+    updateProfile
+  ).then(res => res.ok);
+};
