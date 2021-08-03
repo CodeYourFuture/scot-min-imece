@@ -65,9 +65,14 @@ const ViewProfile = props => {
             </a>
           </div>
           <div>
-            <button className="btn px-6 py-3" disabled>
+            <button
+              className="btn px-6 py-3"
+              type="button"
+              onClick={() => history.push(`/profiles/${profileId}/edit`)}
+            >
               Edit
             </button>
+
             <button
               className="btn px-4 py-3 ml-4"
               onClick={() => setShowDeleteModal(true)}

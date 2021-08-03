@@ -19,7 +19,7 @@ router.get("/nationalities", (req, res) => {
 		.then((data) => {
 			res.send(data);
 		})
-		.catch((err)=> {
+		.catch((err) => {
 			console.error(err);
 			res.send(500);
 		});
@@ -31,7 +31,7 @@ router.get("/groups", (req, res) => {
 		.then((data) => {
 			res.send(data);
 		})
-		.catch((err)=> {
+		.catch((err) => {
 			console.error(err);
 			res.send(500);
 		});
@@ -62,14 +62,28 @@ router.post("/", (req, res) => {
 		});
 });
 
-router.delete("/:profileId",(req, res)=>{
-	 const profileId = req.params.profileId;
-	 usersDb
-		  .deleteProfile(profileId)
-		  .then((rows) =>{
-			  res.send("Profile deleted");
-		  })
-		  .catch((err) => {
+router.delete("/:profileId", (req, res) => {
+	const profileId = req.params.profileId;
+	usersDb
+		.deleteProfile(profileId)
+		.then((rows) => {
+			res.send("Profile deleted");
+		})
+		.catch((err) => {
+			console.error(err);
+			res.sendStatus(500);
+		});
+});
+
+router.put("/:profileId", (req, res) => {
+	const profileId = req.params.profileId;
+	const updatedProfile = req.body;
+	usersDb
+		.updateProfileById(profileId, updatedProfile)
+		.then((data) => {
+			res.sendStatus(201);
+		})
+		.catch((err) => {
 			console.error(err);
 			res.sendStatus(500);
 		});
