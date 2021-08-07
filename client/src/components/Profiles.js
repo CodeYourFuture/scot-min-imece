@@ -77,20 +77,6 @@ const Profiles = props => {
     return color;
   };
 
-  const getProfilesGroups = profileId => {
-    let profileGroupsNames = [];
-    let filteredGroups = groups.filter(group => group.members.length > 0);
-    filteredGroups.map(group =>
-      group.members.filter(member => {
-        if (member === profileId) {
-          profileGroupsNames.push(group.group_name);
-        }
-        return profileGroupsNames;
-      })
-    );
-    return profileGroupsNames;
-  };
-
   let totalNewProfiles = 0;
   let totalActiveProfiles = 0;
   let totalInactiveProfiles = 0;
@@ -152,7 +138,6 @@ const Profiles = props => {
                   </th>
                   <Th>Phone</Th>
                   <Th>Email</Th>
-                  <Th>Groups</Th>
                   <Th>Volunteer</Th>
                   <Th>Status</Th>
                 </tr>
@@ -166,7 +151,6 @@ const Profiles = props => {
                       {profile.phone_number}
                     </td>
                     <Td>{profile.email}</Td>
-                    <Td>{getProfilesGroups(profile.id).join(", ")}</Td>
                     <Td>{profile.type === "volunteer" ? "Yes" : "No"}</Td>
                     <Td>
                       <button
