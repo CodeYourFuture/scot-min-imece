@@ -84,7 +84,10 @@ const Routes = () => {
         <Route path="/about/" component={About} />
         <Route path="/status/" component={Status} />
         <Route path="/login/" render={() => <Login loginUser={loginUser} />} />
-        <Route path="/profiles/:profileId" component={ViewProfile} />
+        <Route
+          path="/profiles/:profileId"
+          render={() => <ViewProfile allNationalities={allNationalities} />}
+        />
         <Route path="/add-new-profile" component={AddNewProfile} />
       </main>
       <Footer />
