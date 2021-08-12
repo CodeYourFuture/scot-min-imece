@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { getProfile, deleteProfile } from "../api/profiles";
 import { useParams, useHistory } from "react-router-dom";
 
-const ViewProfile = () => {
+const ViewProfile = props => {
   const [profile, setProfile] = useState([]);
   const [delProfile, setDelProfile] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
+  const nationalities = props.allNationalities;
   let { profileId } = useParams();
   let history = useHistory();
 
@@ -29,6 +29,17 @@ const ViewProfile = () => {
     setDelProfile(deleteConfirmed);
     setShowDeleteModal(false);
   };
+
+  let nationalityName = "";
+  if (profile.nationality_id) {
+    const nationality = nationalities.find(
+      n => n.id === profile.nationality_id
+    );
+    if (nationality) {
+      nationalityName = nationality.nationality;
+    }
+  }
+
   return (
     <>
       <div className="flex flex-col max-w-5xl mx-auto">
@@ -79,7 +90,8 @@ const ViewProfile = () => {
                   <Label>Age:</Label> {profile.first_name}
                 </div>
                 <div>
-                  <Label>Nationality:</Label> {profile.nationality_id}
+                  <Label>Nationality:</Label>
+                  {nationalityName}
                 </div>
                 <div>
                   <Label>Gender:</Label> {profile.gender}
