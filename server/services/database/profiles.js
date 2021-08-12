@@ -45,7 +45,7 @@ const deleteProfile = (profileId) => {
 
 const getProfileById = (id) => {
 	return pool
-		.query("select profiles.*, coalesce(array_agg(group_name) filter (where profile_group.profile_id is not null), '{}') as groups\
+		.query("select age(profiles.date_of_birth) as age, profiles.*, coalesce(array_agg(group_name) filter (where profile_group.profile_id is not null), '{}') as groups\
 			from profiles\
 			left join profile_group\
 			   on profile_group.profile_id = profiles.id\
