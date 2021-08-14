@@ -71,9 +71,13 @@ const getAllGroups = () => {
 };
 
 const updateProfileById = (profileId, updatedProfile) => {
-	console.log(typeof profileId);
-	return  pool.query("UPDATE profiles SET first_name=$1, last_name=$2, gender=$3, email=$4, type=$5, join_date=$6, WHERE id=$7", [updatedProfile.first_name, updatedProfile.last_name,updatedProfile.gender,updatedProfile.email,updatedProfile.type, updatedProfile.join_date,profileId]).then(() => console.log(`Customer ${profileId} updated!`)).catch((e) => console.error(e));
+
+	return  pool.query("UPDATE profiles SET first_name=$1,last_name=$2, address=$3, email=$4, phone_number=$5, nationality_id=$6, gender=$7, date_of_birth=$8, status=$9, join_date=$10 WHERE id=$11",  [updatedProfile.first_name, updatedProfile.last_name,updatedProfile.address, updatedProfile.email,updatedProfile.phone_number, updatedProfile.nationality_id,updatedProfile.gender,updatedProfile.date_of_birth,updatedProfile.status, updatedProfile.join_date,profileId]).then(() => console.log(`Customer ${profileId} updated!`)).catch((e) => console.error(e));
+	//profiles INNER JOIN profile_group ON profiles.id=profile_group.profile_id
 };
+
+
+
 
 
 

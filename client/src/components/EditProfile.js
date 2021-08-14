@@ -12,11 +12,11 @@ import {
 const EditProfile = ({ match }) => {
   const profileId = match.params.profileId;
   const [loaded, setLoaded] = useState(false);
-  const [profileData, setProfileData] = useState(null);
+  const [profileData, setProfileData] = useState();
   const [errors, setErrors] = useState([]);
-  const [profileUpdated, setProfileUpdated] = useState(null);
   const [nationalities, SetNationalities] = useState([]);
   const [groups, setGroups] = useState([]);
+  const [isUpdated, setIsUpdated] = useState(false);
 
   const handleChange = event => {
     updateField(event.target.name, event.target.value);
@@ -38,9 +38,8 @@ const EditProfile = ({ match }) => {
       setErrors(errs);
       return;
     }
-    console.log("hey");
-    updateProfileByProfileId(profileData, profileId).then(isSuccessful => {
-      setProfileUpdated(isSuccessful);
+    updateProfileByProfileId(profileData, profileId).then(result => {
+      setIsUpdated(result);
     });
     setErrors([]);
   };
@@ -99,13 +98,14 @@ const EditProfile = ({ match }) => {
     value: nationality.id
   }));
 
+  console.log(profileData);
   if (loaded) {
     return profileData !== null ? (
       <div className="px-10 max-w-4xl mx-auto">
         <form onSubmit={updateProfile}>
           <ul className="errors">
-            {errors.map(error => (
-              <li>
+            {errors.map((error, index) => (
+              <li key={index}>
                 <p>{error}</p>
               </li>
             ))}
@@ -114,18 +114,18 @@ const EditProfile = ({ match }) => {
             <div className="sm:col-span-3">
               <Field
                 label="First name"
-                name="firstname"
+                name="first_name"
                 type="text"
-                value={profileData.firstname}
+                value={profileData.first_name}
                 onChange={handleChange}
               />
             </div>
             <div className="sm:col-span-3">
               <Field
                 label="Last name"
-                name="lastname"
+                name="last_name"
                 type="text"
-                value={profileData.lastname}
+                value={profileData.last_name}
                 onChange={handleChange}
               />
             </div>
@@ -150,9 +150,9 @@ const EditProfile = ({ match }) => {
             <div className="sm:col-span-3">
               <Field
                 label="Phone"
-                name="phone"
+                name="phone_number"
                 type="tel"
-                value={profileData.phone}
+                value={profileData.phone_number}
                 onChange={handleChange}
               />
             </div>
@@ -165,10 +165,13 @@ const EditProfile = ({ match }) => {
               </label>
               <Select
                 id="nationality"
-                name="nationality"
+                name="nationality_id"
                 options={nationalityOptions}
+                defaultValue={nationalityOptions.find(
+                  option => option.value === profileData.nationality_id
+                )}
                 onChange={selected =>
-                  updateField("nationality", selected.value)
+                  updateField("nationality_id", selected.value)
                 }
               />
             </div>
@@ -180,6 +183,9 @@ const EditProfile = ({ match }) => {
                 id="gender"
                 name="gender"
                 options={genderOptions}
+                defaultValue={genderOptions.find(
+                  option => option.value === profileData.gender
+                )}
                 onChange={selected => updateField("gender", selected.value)}
               />
             </div>
@@ -188,17 +194,19 @@ const EditProfile = ({ match }) => {
                 label="Date of birth"
                 type="date"
                 onChange={event =>
-                  updateField("dob", new Date(event.target.value))
+                  updateField("date_of_birth", event.target.value)
                 }
-                name="dob"
+                name="date_of_birth"
                 value={
-                  profileData.dob
-                    ? profileData.dob.toISOString().substring(0, 10)
+                  profileData.date_of_birth
+                    ? new Date(profileData.date_of_birth)
+                        .toISOString()
+                        .substring(0, 10)
                     : ""
                 }
               />
             </div>
-            <div class="sm:col-span-6">
+            <div className="sm:col-span-6">
               <label className="font-semibold text-gray-700" htmlFor="groups">
                 Groups
               </label>
@@ -208,6 +216,9 @@ const EditProfile = ({ match }) => {
                 placeholder="Select groups ..."
                 isMulti
                 options={groupsOptions}
+                defaultValue={groupsOptions.filter(option =>
+                  profileData.groups.find(group => group === option.label)
+                )}
                 onChange={selected =>
                   updateField(
                     "groups",
@@ -216,7 +227,7 @@ const EditProfile = ({ match }) => {
                 }
               />
             </div>
-            <div class="sm:col-span-6">
+            <div className="sm:col-span-6">
               <Field
                 label="Support type"
                 name="support_type"
@@ -225,14 +236,15 @@ const EditProfile = ({ match }) => {
               />
             </div>
             <div className="sm:col-span-2">
-              <label htmlFor="profile_type">Profile type</label>
+              <label htmlFor="type">Profile type</label>
               <Select
-                id="profile_type"
-                name="profile_type"
+                id="type"
+                name="type"
                 options={profileTypeOptions}
-                onChange={selected =>
-                  updateField("profile_type", selected.value)
-                }
+                defaultValue={profileTypeOptions.find(
+                  option => option.value === profileData.type
+                )}
+                onChange={selected => updateField("type", selected.value)}
               />
             </div>
             <div className="sm:col-span-2">
@@ -240,19 +252,20 @@ const EditProfile = ({ match }) => {
               <Select
                 id="status"
                 name="status"
-                defaultValue={statusOptions[0]}
+                defaultValue={statusOptions.find(
+                  option => option.value === profileData.status
+                )}
                 options={statusOptions}
                 onChange={selected => updateField("status", selected.value)}
               />
             </div>
-
             <div className="sm:col-span-2">
               <Field
                 label="Join date"
                 type="date"
                 onChange={event => {
                   console.log(event.target.value);
-                  updateField("join_date", new Date(event.target.value));
+                  updateField("join_date", event.target.value);
                 }}
                 name="join_date"
                 value={
@@ -264,20 +277,20 @@ const EditProfile = ({ match }) => {
                 }
               />
             </div>
-            {profileUpdated === false && (
+            {profileData === false && (
               <p>
                 Something went wrong when creating the profile. Please try
                 again.
               </p>
             )}
           </div>
-          <div class="pt-5 flex justify-end">
+          <div className="pt-5 flex justify-end">
             <Link to={`/profiles/${profileId}`}>
-              <button type="button" class="btn px-6 py-3">
+              <button type="button" className="btn px-6 py-3">
                 Cancel
               </button>
             </Link>
-            <button type="submit" class="btn px-4 py-3 ml-4">
+            <button type="submit" className="btn px-4 py-3 ml-4">
               Update profile
             </button>
           </div>

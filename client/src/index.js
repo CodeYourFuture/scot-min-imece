@@ -85,7 +85,7 @@ const Routes = () => {
         <Route path="/about/" component={About} />
         <Route path="/status/" component={Status} />
         <Route path="/login/" render={() => <Login loginUser={loginUser} />} />
-        <Route path="/profiles/:profileId" component={ViewProfile} />
+        <Route exact path="/profiles/:profileId" component={ViewProfile} />
         <Route path="/add-new-profile" component={AddNewProfile} />
         <Route exact path="/profiles/:profileId/edit" component={EditProfile} />
       </main>
