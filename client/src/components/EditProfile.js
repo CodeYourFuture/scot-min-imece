@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Field from "./Field";
 import Select from "react-select";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import {
   updateProfileByProfileId,
   getProfile,
@@ -99,6 +99,10 @@ const EditProfile = ({ match }) => {
   }));
 
   console.log(profileData);
+
+  //`/profiles/${profileId}`
+  if (isUpdated) return <Redirect to={`/profiles/${profileId}`} />;
+
   if (loaded) {
     return profileData !== null ? (
       <div className="px-10 max-w-4xl mx-auto">
