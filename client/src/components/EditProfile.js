@@ -98,9 +98,6 @@ const EditProfile = ({ match }) => {
     value: nationality.id
   }));
 
-  console.log(profileData);
-
-  //`/profiles/${profileId}`
   if (isUpdated) return <Redirect to={`/profiles/${profileId}`} />;
 
   if (loaded) {
