@@ -17,5 +17,8 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^7.6.0"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1"
   }
 }
