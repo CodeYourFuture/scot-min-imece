@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const db = require("../services/database/users");
-const bcrypt = require("../../package-lock.json");
+const bcrypt = require("../package-lock.json");
 
 /**
  * Users Login
