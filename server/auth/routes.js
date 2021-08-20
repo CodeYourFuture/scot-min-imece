@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const db = require("../services/database/users");
+const bcrypt = require("../../package-lock.json");
 
 /**
  * Users Login
@@ -11,8 +12,11 @@ router.post("/login", async (req, res, next) => {
 	console.log(`Login attempt ${email}`);
 	try {
 		const user = await db.getUserByEmail(email);
+		const passwordMatches = await bcrypt
+			.compare(password, user.password)
+			.catch((err) => console.error(err.message));
 
-		if (!email || !password || !user || password !== user.password) {
+		if (!email || !password || !user || !passwordMatches) {
 			return res.sendStatus(403);
 		}
 
@@ -32,11 +36,16 @@ router.post("/login", async (req, res, next) => {
  */
 router.post("/register", async (req, res, next) => {
 	const { email, password } = req.body;
-
-	const user = {
-		email,
-		password,
-	};
+	let user = {};
+	bcrypt
+		.hash(password, 10)
+		.then((hash) => {
+			user = {
+				email,
+				hash,
+			};
+		})
+		.catch((err) => console.error(err.message));
 
 	db.createUser(user)
 		.then(() => {
