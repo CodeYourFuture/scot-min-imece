@@ -9,15 +9,13 @@ const bcrypt = require("bcrypt");
  */
 router.post("/login", async (req, res, next) => {
 	const { email, password } = req.body;
-	console.log(`Login attempt ${email}`);
-	console.log(`password: ${password}`);
 	try {
 		const user = await db.getUserByEmail(email);
-		console.log(`hash password:${user.password}`);
-		const passwordMatches = await bcrypt
+		let passwordMatches;
+		await bcrypt
 			.compare(password, user.password)
 			.then((res) => {
-				console.log(res);
+				passwordMatches = res;
 			})
 			.catch((err) => console.error(err.message));
 

@@ -3,8 +3,7 @@
 INSERT INTO users
     (email, password)
 values
-    ('admin@cyf.org', '$2b$10$FoEVT
-.BX4UCDUy7shCpPQu8zLvGtnaUlQuue4ttGXMefVDnjeFX0W');
+    ('admin@cyf.org', '$2b$10$FoEVT.BX4UCDUy7shCpPQu8zLvGtnaUlQuue4ttGXMefVDnjeFX0W');
 INSERT INTO users
     (email, password)
 values
