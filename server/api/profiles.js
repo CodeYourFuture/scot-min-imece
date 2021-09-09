@@ -37,6 +37,19 @@ router.get("/groups", (req, res) => {
 		});
 });
 
+router.get("/languages", (req, res) => {
+	usersDb
+		.getAllLanguages()
+		.then((data) => {
+			console.log(data);
+			res.send(data);
+		})
+		.catch((err) => {
+			console.error(err);
+			res.send(500);
+		});
+});
+
 router.get("/:profileId", (req, res) => {
 	const profileId = req.params.profileId;
 	usersDb
