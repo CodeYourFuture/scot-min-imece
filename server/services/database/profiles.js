@@ -51,9 +51,12 @@ const getProfileById = (id) => {
 			   on profile_group.profile_id = profiles.id\
 			left join groups\
 			   on profile_group.group_id = groups.id\
+			left join profile_languages\
+			   on profile_languages.profile_id = profiles.id\
+			left join languages\
+			   on profile_languages.language_id = languages.id\
 			where profiles.id = $1\
-			group by profiles.id;",
-			[id])
+			group by profiles.id;", [id])
 		.then((result) => result.rows[0]);
 };
 

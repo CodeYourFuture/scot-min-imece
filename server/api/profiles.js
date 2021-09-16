@@ -41,7 +41,6 @@ router.get("/languages", (req, res) => {
 	usersDb
 		.getAllLanguages()
 		.then((data) => {
-			console.log(data);
 			res.send(data);
 		})
 		.catch((err) => {

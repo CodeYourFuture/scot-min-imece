@@ -1314,7 +1314,7 @@ VALUES
     (1, 10);
 
 
--- INSERT INTO profile_language
---     (profile_id,language_id)
--- VALUES
---     (1, 1);
+INSERT INTO profile_languages
+    (profile_id,language_id)
+VALUES
+    (1, 2);

@@ -1,5 +1,6 @@
 -- Drop tables in case they already exist
 DROP TABLE if exists profile_group;
+DROP TABLE if exists profile_languages;
 DROP TABLE if exists profiles;
 DROP TABLE if exists nationalities;
 DROP TABLE if exists groups;
@@ -68,6 +69,7 @@ CREATE TABLE groups
   group_name VARCHAR(100) NOT NULL
 );
 
+
 CREATE TABLE profile_group
 (
   profile_id INT REFERENCES profiles(id),
@@ -75,9 +77,9 @@ CREATE TABLE profile_group
   PRIMARY KEY (profile_id, group_id)
 );
 
--- CREATE TABLE profile_language
--- (
---   profile_id INT REFERENCES profiles(id),
---   language_id INT REFERENCES languages(id),
---   PRIMARY KEY (profile_id, language_id)
--- );
+CREATE TABLE profile_languages
+(
+  profile_id INT REFERENCES profiles(id),
+  language_id INT REFERENCES languages(id),
+  PRIMARY KEY (profile_id, language_id)
+);
