@@ -1,6 +1,5 @@
 -- Drop tables in case they already exist
 DROP TABLE if exists profile_group;
-DROP TABLE if exists profile_languages;
 DROP TABLE if exists profiles;
 DROP TABLE if exists nationalities;
 DROP TABLE if exists groups;
@@ -58,6 +57,7 @@ CREATE TABLE profiles
   status status NOT NULL DEFAULT 'new',
   join_date DATE NOT NULL DEFAULT current_date,
   language_id int references languages(id),
+  other_languages VARCHAR(300),
   asylum_status asylum_status NOT NULL DEFAULT 'other',
   how_did_they_hear VARCHAR(200),
   notes text
@@ -75,11 +75,4 @@ CREATE TABLE profile_group
   profile_id INT REFERENCES profiles(id),
   group_id INT REFERENCES groups(id),
   PRIMARY KEY (profile_id, group_id)
-);
-
-CREATE TABLE profile_languages
-(
-  profile_id INT REFERENCES profiles(id),
-  language_id INT REFERENCES languages(id),
-  PRIMARY KEY (profile_id, language_id)
 );
