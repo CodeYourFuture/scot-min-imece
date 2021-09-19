@@ -120,8 +120,8 @@ const ViewProfile = props => {
                   <Label>Languages:</Label> {languageName}
                 </div>
                 <div>
-                  <Label>Other languages:</Label> {" "}
-                  {profile.languages && profile.languages.join(", ")}
+                  <Label>Other languages:</Label>
+                  {languages.language}
                 </div>
                 <div>
                   <Label>Immigration Status:</Label> {profile.asylum_status}
