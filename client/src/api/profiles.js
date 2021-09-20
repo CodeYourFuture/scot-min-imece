@@ -40,6 +40,10 @@ export const getGroups = () => {
   return fetchWithAuthorization("/api/profiles/groups").then(res => res.json());
 };
 
+export const getLanguages = () => {
+  return fetchWithAuthorization("/api/profiles/languages").then(res => res.json());
+};
+
 export const updateProfileByProfileId = (profile, profileId) => {
   const updateProfile = {
     method: "PUT",

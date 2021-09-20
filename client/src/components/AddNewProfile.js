@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { postProfile } from "../api/profiles";
-import { getNationalities, getGroups } from "../api/profiles";
+import { getNationalities, getGroups, getLanguages } from "../api/profiles";
 import Select from "react-select";
 
 const AddNewProfile = () => {
@@ -13,6 +13,7 @@ const AddNewProfile = () => {
     phone: "",
     gender: "",
     groups: [],
+    languages: "",
     support_type: "",
     profile_type: "",
     status: "new",
@@ -23,6 +24,7 @@ const AddNewProfile = () => {
   const [profileCreated, setProfileCreated] = useState(null);
   const [nationalities, setNationalities] = useState([]);
   const [groups, setGroups] = useState([]);
+  const [languages, setLanguages] = useState([]);
 
   const handleChange = event => {
     updateField(event.target.name, event.target.value);
@@ -84,6 +86,9 @@ const AddNewProfile = () => {
     getGroups().then(response => {
       setGroups(response);
     });
+    getLanguages().then(response => {
+      setLanguages(response);
+    });
   }, []);
 
   const nationalityOptions = nationalities.map(nationality => ({
@@ -96,6 +101,12 @@ const AddNewProfile = () => {
     key: group.id,
     label: group.group_name,
     value: group.id
+  }));
+
+  const languageOptions = languages.map(language => ({
+    key: language.id,
+    label: language.language,
+    value: language.id
   }));
 
   return (
@@ -212,6 +223,19 @@ const AddNewProfile = () => {
               }
             />
           </div>
+          <div class="sm:col-span-6">
+            <label className="font-semibold text-gray-700" htmlFor="groups">
+              Language
+            </label>
+            <Select
+              id="groups"
+              name="groups"
+              placeholder="Select language ..."
+              options={languageOptions}
+              onChange={selected => updateField("languages", selected.value)}
+            />
+          </div>
+
           <div class="sm:col-span-6">
             <Field
               label="Support type"

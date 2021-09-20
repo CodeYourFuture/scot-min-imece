@@ -23,11 +23,11 @@ const createProfile = (newProfile) => {
 				newProfile.nationality,
 			],
 		)
-		.then((result)=>{
-			let profileId=result.rows[0].id;
+		.then((result) => {
+			let profileId = result.rows[0].id;
 			const values = newProfile.groups.map((groupId) => [profileId, groupId]);
 
-			if(values.length > 0) {
+			if (values.length > 0) {
 				let sql = format("INSERT INTO profile_group VALUES %L", values);
 				return pool.query(sql);
 			}
@@ -36,10 +36,10 @@ const createProfile = (newProfile) => {
 
 const deleteProfile = (profileId) => {
 	return pool
-    .query("DELETE FROM profile_group WHERE profile_id = $1", [profileId])
-    .then(() => {
-      return pool.query("DELETE FROM profiles WHERE id = $1", [profileId]);
-    });
+		.query("DELETE FROM profile_group WHERE profile_id = $1", [profileId])
+		.then(() => {
+			return pool.query("DELETE FROM profiles WHERE id = $1", [profileId]);
+		});
 };
 
 
@@ -52,13 +52,16 @@ const getProfileById = (id) => {
 			left join groups\
 			   on profile_group.group_id = groups.id\
 			where profiles.id = $1\
-			group by profiles.id;", 
-				[id])
+			group by profiles.id;", [id])
 		.then((result) => result.rows[0]);
 };
 
 const getAllNationalities = () => {
 	return pool.query("SELECT * FROM nationalities").then((result) => result.rows);
+};
+
+const getAllLanguages = () => {
+	return pool.query("SELECT * FROM languages").then((result) => result.rows);
 };
 
 const getAllGroups = () => {
@@ -72,9 +75,9 @@ const getAllGroups = () => {
 
 const updateProfileById = (profileId, updatedProfile) => {
 
-	return  pool.query("UPDATE profiles SET first_name=$1,last_name=$2, address=$3, email=$4, phone_number=$5, nationality_id=$6, gender=$7, date_of_birth=$8, status=$9, join_date=$10 WHERE id=$11",  [updatedProfile.first_name, updatedProfile.last_name,updatedProfile.address, updatedProfile.email,updatedProfile.phone_number, updatedProfile.nationality_id,updatedProfile.gender,updatedProfile.date_of_birth,updatedProfile.status, updatedProfile.join_date,profileId]).then(() => {return pool.query("DELETE FROM profile_group WHERE profile_id = $1", [profileId]);}).then(() => {
+	return pool.query("UPDATE profiles SET first_name=$1,last_name=$2, address=$3, email=$4, phone_number=$5, nationality_id=$6, gender=$7, date_of_birth=$8, status=$9, join_date=$10 WHERE id=$11", [updatedProfile.first_name, updatedProfile.last_name, updatedProfile.address, updatedProfile.email, updatedProfile.phone_number, updatedProfile.nationality_id, updatedProfile.gender, updatedProfile.date_of_birth, updatedProfile.status, updatedProfile.join_date, profileId]).then(() => { return pool.query("DELETE FROM profile_group WHERE profile_id = $1", [profileId]); }).then(() => {
 		const values = updatedProfile.groups.map((groupId) => [profileId, groupId]);
-		if(values.length > 0) {
+		if (values.length > 0) {
 			let sql = format("INSERT INTO profile_group VALUES %L", values);
 			return pool.query(sql);
 		}
@@ -98,5 +101,6 @@ module.exports = {
 	getAllNationalities,
 	getAllGroups,
 	updateProfileById,
+	getAllLanguages,
 };
 
