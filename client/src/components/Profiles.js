@@ -119,15 +119,6 @@ const Profiles = props => {
               setSelectedGroupIds(selected.map(s => s.value))
             }
           />
-          {/* <Select
-            className="flex-1 md:ml-2"
-            placeholder="Languages"
-            options={group_options}
-            isMulti
-            onChange={selected =>
-              setSelectedGroupIds(selected.map(s => s.value))
-            }
-          /> */}
         </div>
         <div className="mt-8">
           {filteredProfiles.length === 0 ? (
@@ -148,7 +139,6 @@ const Profiles = props => {
                   <Th>Phone</Th>
                   <Th>Email</Th>
                   <Th>Volunteer</Th>
-                  {/* <Th>Language</Th> */}
                   <Th>Status</Th>
                 </tr>
               </thead>
@@ -162,7 +152,6 @@ const Profiles = props => {
                     </td>
                     <Td>{profile.email}</Td>
                     <Td>{profile.type === "volunteer" ? "Yes" : "No"}</Td>
-                    {/* <Td>{profile.language}</Td> */}
                     <Td>
                       <button
                         style={{ minWidth: "5rem" }}

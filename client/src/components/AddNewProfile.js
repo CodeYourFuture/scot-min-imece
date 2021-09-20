@@ -79,10 +79,6 @@ const AddNewProfile = () => {
     { key: "not_provided", value: "not_provided", label: "Not provided" }
   ];
 
-  // const languageOptions = [
-  //   { key: "english", value: "english", label: "English" }
-  // ];
-
   useEffect(() => {
     getNationalities().then(response => {
       setNationalities(response);
@@ -239,24 +235,7 @@ const AddNewProfile = () => {
               onChange={selected => updateField("languages", selected.value)}
             />
           </div>
-          <div class="sm:col-span-6">
-            <label className="font-semibold text-gray-700" htmlFor="groups">
-              Other languages
-            </label>
-            <Select
-              id="groups"
-              name="groups"
-              placeholder="Select languages ..."
-              isMulti
-              options={languageOptions}
-              onChange={selected =>
-                updateField(
-                  "languages",
-                  selected.map(s => s.value)
-                )
-              }
-            />
-          </div>
+
           <div class="sm:col-span-6">
             <Field
               label="Support type"
