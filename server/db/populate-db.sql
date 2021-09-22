@@ -1318,3 +1318,11 @@ INSERT INTO profile_languages
     (profile_id,language_id)
 VALUES
     (1, 2);
+INSERT INTO profile_languages
+    (profile_id,language_id)
+VALUES
+    (1, 3);
+INSERT INTO profile_languages
+    (profile_id,language_id)
+VALUES
+    (2, 5);

@@ -45,16 +45,18 @@ const deleteProfile = (profileId) => {
 
 const getProfileById = (id) => {
 	return pool
-		.query("select age(profiles.date_of_birth) as age, profiles.*, coalesce(array_agg(group_name) filter (where profile_group.profile_id is not null), '{}') as groups\
+		.query("select age(profiles.date_of_birth) as age, profiles.*, \
+				coalesce(array_agg(distinct group_name) filter (where profile_group.profile_id is not null), '{}') as groups, \
+				coalesce(array_agg(distinct l.language) filter (where pl.profile_id is not null), '{}') as languages \
 			from profiles\
 			left join profile_group\
 			   on profile_group.profile_id = profiles.id\
 			left join groups\
 			   on profile_group.group_id = groups.id\
-			left join profile_languages\
-			   on profile_languages.profile_id = profiles.id\
-			left join languages\
-			   on profile_languages.language_id = languages.id\
+			left join profile_languages pl \
+			   on profiles.id=pl.profile_id\
+			left join languages l\
+			   on pl.language_id = l.id\
 			where profiles.id = $1\
 			group by profiles.id;", [id])
 		.then((result) => result.rows[0]);
