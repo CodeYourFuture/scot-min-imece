@@ -79,10 +79,6 @@ const AddNewProfile = () => {
     { key: "not_provided", value: "not_provided", label: "Not provided" }
   ];
 
-  // const languageOptions = [
-  //   { key: "english", value: "english", label: "English" }
-  // ];
-
   useEffect(() => {
     getNationalities().then(response => {
       setNationalities(response);
