@@ -17,8 +17,8 @@ const ViewProfile = props => {
         setProfile(response);
         document.title = `${response.first_name} ${response.last_name}  Profile`;
       });
-      getLanguages().then(responce => {
-        setLanguage(responce);
+      getLanguages().then(response => {
+        setLanguage(response);
       })
     } else {
       deleteProfile(profileId);

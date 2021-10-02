@@ -13,7 +13,8 @@ const AddNewProfile = () => {
     phone: "",
     gender: "",
     groups: [],
-    languages: "",
+    language: "",
+    other_languages: [],
     support_type: "",
     profile_type: "",
     status: "new",
@@ -228,11 +229,11 @@ const AddNewProfile = () => {
               Language
             </label>
             <Select
-              id="groups"
-              name="groups"
+              id="language"
+              name="language"
               placeholder="Select language ..."
               options={languageOptions}
-              onChange={selected => updateField("languages", selected.value)}
+              onChange={selected => updateField("language", selected.value)}
             />
           </div>
           <div class="sm:col-span-6">
@@ -240,14 +241,14 @@ const AddNewProfile = () => {
               Other languages
             </label>
             <Select
-              id="groups"
-              name="groups"
+              id="other_languages"
+              name="other_languages"
               placeholder="Select languages ..."
               isMulti
               options={languageOptions}
               onChange={selected =>
                 updateField(
-                  "languages",
+                  "other_languages",
                   selected.map(s => s.value)
                 )
               }
