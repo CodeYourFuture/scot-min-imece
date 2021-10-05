@@ -3,7 +3,7 @@ import { postProfile } from "../api/profiles";
 import { getNationalities, getGroups, getLanguages } from "../api/profiles";
 import Select from "react-select";
 
-const AddNewProfile = () => {
+const AddNewProfile = props => {
   const [profileData, setProfileData] = useState({
     firstname: "",
     lastname: "",
@@ -25,7 +25,7 @@ const AddNewProfile = () => {
   const [profileCreated, setProfileCreated] = useState(null);
   const [nationalities, setNationalities] = useState([]);
   const [groups, setGroups] = useState([]);
-  const [languages, setLanguages] = useState([]);
+  const languages = props.allLanguages;
 
   const handleChange = event => {
     updateField(event.target.name, event.target.value);
@@ -86,9 +86,6 @@ const AddNewProfile = () => {
     });
     getGroups().then(response => {
       setGroups(response);
-    });
-    getLanguages().then(response => {
-      setLanguages(response);
     });
   }, []);
 

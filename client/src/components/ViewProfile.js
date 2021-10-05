@@ -7,7 +7,7 @@ const ViewProfile = props => {
   const [delProfile, setDelProfile] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const nationalities = props.allNationalities;
-  const [languages, setLanguage] = useState([]);
+  const languages = props.allLanguages;
   let { profileId } = useParams();
   let history = useHistory();
 
@@ -17,9 +17,7 @@ const ViewProfile = props => {
         setProfile(response);
         document.title = `${response.first_name} ${response.last_name}  Profile`;
       });
-      getLanguages().then(response => {
-        setLanguage(response);
-      })
+
     } else {
       deleteProfile(profileId);
       history.goBack();
