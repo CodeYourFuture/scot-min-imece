@@ -10,7 +10,7 @@ const getAllProfiles = () => {
 const createProfile = (newProfile) => {
 	return pool
 		.query(
-			"INSERT INTO profiles ( first_name, last_name, date_of_birth, gender, email, address, phone_number, type, nationality_id) values ( $1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id",
+			"INSERT INTO profiles ( first_name, last_name, date_of_birth, gender, email, address, phone_number, type, nationality_id, language_id) values ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id",
 			[
 				newProfile.firstname,
 				newProfile.lastname,
@@ -21,15 +21,22 @@ const createProfile = (newProfile) => {
 				newProfile.phone,
 				newProfile.profile_type,
 				newProfile.nationality,
+				newProfile.language,
 			],
 		)
 		.then((result) => {
 			let profileId = result.rows[0].id;
 			const values = newProfile.groups.map((groupId) => [profileId, groupId]);
+			const otherLanguages = newProfile.other_languages.map((languageId) => [profileId, languageId]);
 
 			if (values.length > 0) {
 				let sql = format("INSERT INTO profile_group VALUES %L", values);
 				return pool.query(sql);
+			}
+
+			if (otherLanguages.length > 0) {
+				let languages = format("INSERT INTO profile_languages %L", otherLanguages);
+				return pool.query(languages);
 			}
 		});
 };
@@ -81,11 +88,16 @@ const getAllGroups = () => {
 
 const updateProfileById = (profileId, updatedProfile) => {
 
-	return pool.query("UPDATE profiles SET first_name=$1,last_name=$2, address=$3, email=$4, phone_number=$5, nationality_id=$6, gender=$7, date_of_birth=$8, status=$9, join_date=$10 WHERE id=$11", [updatedProfile.first_name, updatedProfile.last_name, updatedProfile.address, updatedProfile.email, updatedProfile.phone_number, updatedProfile.nationality_id, updatedProfile.gender, updatedProfile.date_of_birth, updatedProfile.status, updatedProfile.join_date, profileId]).then(() => { return pool.query("DELETE FROM profile_group WHERE profile_id = $1", [profileId]); }).then(() => {
+	return pool.query("UPDATE profiles SET first_name=$1,last_name=$2, address=$3, email=$4, phone_number=$5, nationality_id=$6, gender=$7, date_of_birth=$8, status=$9, join_date=$10, language=$11 WHERE id=$12", [updatedProfile.first_name, updatedProfile.last_name, updatedProfile.address, updatedProfile.email, updatedProfile.phone_number, updatedProfile.nationality_id, updatedProfile.gender, updatedProfile.date_of_birth, updatedProfile.status, updatedProfile.join_date, updatedProfile.language, profileId]).then(() => { return pool.query("DELETE FROM profile_group WHERE profile_id = $1", [profileId]); }).then(() => {
 		const values = updatedProfile.groups.map((groupId) => [profileId, groupId]);
+		const otherLanguages = updatedProfile.other_languages.map((languageId) => [profileId, languageId]);
 		if (values.length > 0) {
 			let sql = format("INSERT INTO profile_group VALUES %L", values);
 			return pool.query(sql);
+		}
+		if (otherLanguages.length > 0) {
+			let languages = format("INSERT INTO profile_languages %L", otherLanguages);
+			return pool.query(languages);
 		}
 	}).then(() => console.log(`Customer ${profileId} updated!`)).catch((e) => console.error(e));
 

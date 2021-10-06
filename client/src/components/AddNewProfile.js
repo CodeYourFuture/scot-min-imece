@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { postProfile } from "../api/profiles";
-import { getNationalities, getGroups, getLanguages } from "../api/profiles";
+import { getNationalities, getGroups } from "../api/profiles";
 import Select from "react-select";
 
 const AddNewProfile = props => {
