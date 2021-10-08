@@ -31,13 +31,14 @@ const createProfile = (newProfile) => {
 
 			if (values.length > 0) {
 				let sql = format("INSERT INTO profile_group VALUES %L", values);
-				return pool.query(sql);
+				pool.query(sql);
 			}
 
 			if (otherLanguages.length > 0) {
 				let languages = format("INSERT INTO profile_languages VALUES %L", otherLanguages);
-				return pool.query(languages);
+				pool.query(languages);
 			}
+			return result;
 		});
 };
 
