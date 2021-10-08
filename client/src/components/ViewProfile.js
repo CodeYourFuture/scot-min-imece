@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getProfile, deleteProfile } from "../api/profiles";
+import { getProfile, deleteProfile, getLanguages } from "../api/profiles";
 import { useParams, useHistory } from "react-router-dom";
 
 const ViewProfile = props => {
@@ -7,6 +7,7 @@ const ViewProfile = props => {
   const [delProfile, setDelProfile] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const nationalities = props.allNationalities;
+  const languages = props.allLanguages;
   let { profileId } = useParams();
   let history = useHistory();
 
@@ -16,6 +17,7 @@ const ViewProfile = props => {
         setProfile(response);
         document.title = `${response.first_name} ${response.last_name}  Profile`;
       });
+
     } else {
       deleteProfile(profileId);
       history.goBack();
@@ -38,7 +40,17 @@ const ViewProfile = props => {
     if (nationality) {
       nationalityName = nationality.nationality;
     }
-  }
+  };
+
+  let languageName = "";
+  if (profile.language_id) {
+    const language = languages.find(
+      l => l.id === profile.language_id
+    );
+    if (language) {
+      languageName = language.language;
+    }
+  };
 
   return (
     <>
@@ -103,7 +115,11 @@ const ViewProfile = props => {
                   <Label>Gender:</Label> {profile.gender}
                 </div>
                 <div>
-                  <Label>Languages:</Label>
+                  <Label>Languages:</Label> {languageName}
+                </div>
+                <div>
+                  <Label>Other languages:</Label>
+                  {profile.languages && profile.languages.join(", ")}
                 </div>
                 <div>
                   <Label>Immigration Status:</Label> {profile.asylum_status}

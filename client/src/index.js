@@ -11,7 +11,7 @@ import Footer from "./components/Footer";
 import ViewProfile from "./components/ViewProfile";
 import EditProfile from "./components/EditProfile";
 import MINLogo from "./assets/nav-banner.png";
-import { getNationalities, getGroups } from "./api/profiles.js";
+import { getNationalities, getGroups, getLanguages } from "./api/profiles.js";
 
 const logout = e => {
   e.preventDefault();
@@ -24,6 +24,7 @@ const Routes = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(token != null);
   const [allNationalities, setAllNationalities] = useState([]);
   const [allGroups, setAllGroups] = useState([]);
+  const [allLanguages, setAllLanguages] = useState([])
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -33,6 +34,10 @@ const Routes = () => {
 
       getGroups().then(response => {
         setAllGroups(response);
+      });
+
+      getLanguages().then(response => {
+        setAllLanguages(response)
       });
     }
   }, [isLoggedIn]);
@@ -79,6 +84,7 @@ const Routes = () => {
               loginUser={loginUser}
               allNationalities={allNationalities}
               allGroups={allGroups}
+              allLanguages={allLanguages}
             />
           )}
         />
@@ -87,9 +93,12 @@ const Routes = () => {
         <Route path="/login/" render={() => <Login loginUser={loginUser} />} />
         <Route
           exact path="/profiles/:profileId"
-          render={() => <ViewProfile allNationalities={allNationalities} />}
+          render={() => <ViewProfile allNationalities={allNationalities} allLanguages={allLanguages} />}
         />
-        <Route path="/add-new-profile" component={AddNewProfile} />
+        <Route
+          exact path="/add-new-profile"
+          render={() => <AddNewProfile allLanguages={allLanguages} />}
+        />
         <Route exact path="/profiles/:profileId/edit" component={EditProfile} />
       </main>
       <Footer />
