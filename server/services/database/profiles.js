@@ -35,7 +35,7 @@ const createProfile = (newProfile) => {
 			}
 
 			if (otherLanguages.length > 0) {
-				let languages = format("INSERT INTO profile_languages %L", otherLanguages);
+				let languages = format("INSERT INTO profile_languages VALUES %L", otherLanguages);
 				return pool.query(languages);
 			}
 		});
