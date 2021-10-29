@@ -132,7 +132,7 @@ const Profiles = props => {
                   <Th>Name</Th>
                   <th
                     scope="col"
-                    class="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider whitespace-nowrap"
+                    className="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider whitespace-nowrap"
                   >
                     Last Name
                   </th>
@@ -142,7 +142,7 @@ const Profiles = props => {
                   <Th>Status</Th>
                 </tr>
               </thead>
-              <tbody class="bg-white divide-y divide-gray-200">
+              <tbody className="bg-white divide-y divide-gray-200">
                 {filteredProfiles.map(profile => (
                   <tr onClick={() => history.push(`/profiles/${profile.id}`)}>
                     <Td>{`${profile.first_name}`}</Td>
@@ -208,7 +208,7 @@ const MonthlyTotal = ({ name, colour, count }) => (
 const Th = ({ children }) => (
   <th
     scope="col"
-    class="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
+    className="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
   >
     {children}
   </th>
@@ -217,14 +217,14 @@ const Th = ({ children }) => (
 const Td = ({ children }) => <td className="px-5 py-3">{children}</td>;
 
 const Search = props => (
-  <div class="max-w-lg w-full lg:max-w-xs">
-    <label for="search" class="sr-only">
+  <div className="max-w-lg w-full lg:max-w-xs">
+    <label for="search" className="sr-only">
       Search
     </label>
-    <div class="relative">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+    <div className="relative">
+      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <svg
-          class="h-5 w-5 text-gray-400"
+          className="h-5 w-5 text-gray-400"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"

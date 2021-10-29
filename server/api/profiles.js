@@ -46,9 +46,25 @@ router.get("/:profileId", (req, res) => {
 		})
 		.catch((err) => {
 			console.error(err);
-			res.send(500);
+			res.sendStatus(500);
 		});
 });
+//checks if email is not unique
+router.get("/:email", (req, res) => {
+
+	const email = req.params.email;
+	usersDb
+		.getProfileByEmail(email)
+		.then((data) => {
+			res.send(data);
+
+		})
+		.catch((err) => {
+			console.error(err);
+			res.sendStatus(500);
+		});
+});
+
 router.post("/", (req, res) => {
 	const newProfile = req.body;
 	usersDb

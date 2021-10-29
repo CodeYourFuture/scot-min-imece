@@ -10,6 +10,14 @@ export const getProfile = profileId => {
   );
 };
 
+//
+//checks if email is not unique
+export const getProfileByEmail = email => {
+  return fetchWithAuthorization(`/api/profiles/${email}`).then(res =>
+    res.json()
+  );
+};
+
 export const postProfile = profile => {
   const sendProfile = {
     method: "POST",
