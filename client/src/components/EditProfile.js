@@ -8,6 +8,7 @@ import {
   getNationalities,
   getGroups
 } from "../api/profiles";
+import { validateInput } from "../utils/validateInput";
 
 const EditProfile = ({ match }) => {
   const profileId = match.params.profileId;
@@ -24,18 +25,9 @@ const EditProfile = ({ match }) => {
 
   const updateProfile = event => {
     event.preventDefault();
-    let errs = [];
-    if (profileData.first_name.length === 0) {
-      errs.push("First name cannot be empty");
-    }
-    if (profileData.last_name.length === 0) {
-      errs.push("Last name cannot be empty");
-    }
-    if (profileData.phone_number && profileData.phone_number.length < 10) {
-      errs.push("Phone number must have at least 10 digits");
-    }
-    if (errs.length > 0) {
-      setErrors(errs);
+    let errors = [...validateInput(profileData)];
+    if (errors.length > 0) {
+      setErrors(errors);
       return;
     }
     updateProfileByProfileId(profileData, profileId).then(result => {
@@ -97,9 +89,8 @@ const EditProfile = ({ match }) => {
     label: nationality.nationality,
     value: nationality.id
   }));
-
   if (isUpdated) return <Redirect to={`/profiles/${profileId}`} />;
-
+  console.log(profileData);
   if (loaded) {
     return profileData !== null ? (
       <div className="px-10 max-w-4xl mx-auto">

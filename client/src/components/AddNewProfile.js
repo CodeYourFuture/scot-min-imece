@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { postProfile } from "../api/profiles";
+import { postProfile, getProfile, getProfileByEmail } from "../api/profiles";
 import { getNationalities, getGroups } from "../api/profiles";
 import Select from "react-select";
+import { validateInput } from "../utils/validateInput";
 
 const AddNewProfile = () => {
   const [profileData, setProfileData] = useState({
-    firstname: "",
-    lastname: "",
-    dob: "",
+    first_name: "",
+    last_name: "",
+    date_of_birth: "",
     address: "",
     email: "",
-    phone: "",
+    phone_number: "",
     gender: "",
     groups: [],
     support_type: "",
-    profile_type: "",
+    type: "",
     status: "new",
-    nationality: "",
-    join_date: new Date()
+    nationality_id: "",
+    join_date: new Date().toISOString().substring(0, 10)
   });
   const [errors, setErrors] = useState([]);
   const [profileCreated, setProfileCreated] = useState(null);
@@ -30,27 +31,26 @@ const AddNewProfile = () => {
 
   const createProfile = event => {
     event.preventDefault();
-
-    let errs = [];
-    if (profileData.firstname.length === 0) {
-      errs.push("First name cannot be empty");
-    }
-    if (profileData.lastname.length === 0) {
-      errs.push("Last name cannot be empty");
-    }
-    if (profileData.phone.length < 10) {
-      errs.push("Phone number must have at least 10 digits");
-    }
-    if (errs.length > 0) {
-      setErrors(errs);
+    //
+    let errorsList = [...validateInput(profileData)];
+    if (errorsList.length > 0) {
+      setErrors(errorsList);
       return;
+    } else {
+      setErrors([]);
+      getProfileByEmail(profileData.email).then(data => {
+        if (data) {
+          setErrors([...[], "duplicate"]);
+        } else {
+          postProfile(profileData).then(isSuccessful => {
+            setProfileCreated(isSuccessful);
+            return;
+          });
+        }
+        console.log(data);
+      });
     }
-    postProfile(profileData).then(isSuccessful => {
-      setProfileCreated(isSuccessful);
-    });
-    setErrors([]);
   };
-
   const updateField = (name, value) => {
     const updatedProfileData = {
       ...profileData,
@@ -97,7 +97,7 @@ const AddNewProfile = () => {
     label: group.group_name,
     value: group.id
   }));
-
+  console.log(errors);
   return (
     <div className="px-10 max-w-4xl mx-auto">
       <form onSubmit={createProfile}>
@@ -112,18 +112,18 @@ const AddNewProfile = () => {
           <div className="sm:col-span-3">
             <Field
               label="First name"
-              name="firstname"
+              name="first_name"
               type="text"
-              value={profileData.firstname}
+              value={profileData.first_name}
               onChange={handleChange}
             />
           </div>
           <div className="sm:col-span-3">
             <Field
               label="Last name"
-              name="lastname"
+              name="last_name"
               type="text"
-              value={profileData.lastname}
+              value={profileData.last_name}
               onChange={handleChange}
             />
           </div>
@@ -148,9 +148,9 @@ const AddNewProfile = () => {
           <div className="sm:col-span-3">
             <Field
               label="Phone"
-              name="phone"
+              name="phone_number"
               type="tel"
-              value={profileData.phone}
+              value={profileData.phone_number}
               onChange={handleChange}
             />
           </div>
@@ -162,10 +162,12 @@ const AddNewProfile = () => {
               Nationality
             </label>
             <Select
-              id="nationality"
-              name="nationality"
+              id="nationality_id"
+              name="nationality_id"
               options={nationalityOptions}
-              onChange={selected => updateField("nationality", selected.value)}
+              onChange={selected =>
+                updateField("nationality_id", selected.value)
+              }
             />
           </div>
           <div className="sm:col-span-2">
@@ -184,17 +186,17 @@ const AddNewProfile = () => {
               label="Date of birth"
               type="date"
               onChange={event =>
-                updateField("dob", new Date(event.target.value))
+                updateField("date_of_birth", new Date(event.target.value))
               }
-              name="dob"
+              name="date_of_birth"
               value={
-                profileData.dob
-                  ? profileData.dob.toISOString().substring(0, 10)
+                profileData.date_of_birth
+                  ? profileData.date_of_birth.toISOString().substring(0, 10)
                   : ""
               }
             />
           </div>
-          <div class="sm:col-span-6">
+          <div className="sm:col-span-6">
             <label className="font-semibold text-gray-700" htmlFor="groups">
               Groups
             </label>
@@ -212,7 +214,7 @@ const AddNewProfile = () => {
               }
             />
           </div>
-          <div class="sm:col-span-6">
+          <div className="sm:col-span-6">
             <Field
               label="Support type"
               name="support_type"
@@ -221,12 +223,12 @@ const AddNewProfile = () => {
             />
           </div>
           <div className="sm:col-span-2">
-            <label htmlFor="profile_type">Profile type</label>
+            <label htmlFor="type">Profile type</label>
             <Select
-              id="profile_type"
-              name="profile_type"
+              id="type"
+              name="type"
               options={profileTypeOptions}
-              onChange={selected => updateField("profile_type", selected.value)}
+              onChange={selected => updateField("type", selected.value)}
             />
           </div>
           <div className="sm:col-span-2">
@@ -244,10 +246,13 @@ const AddNewProfile = () => {
               label="Join date"
               type="date"
               onChange={event =>
-                updateField("join_date", new Date(event.target.value))
+                updateField(
+                  "join_date",
+                  new Date(event.target.value).toISOString().substring(0, 10)
+                )
               }
               name="join_date"
-              value={profileData.join_date.toISOString().substring(0, 10)}
+              value={profileData.join_date}
             />
           </div>
           {profileCreated === false && (
@@ -256,9 +261,9 @@ const AddNewProfile = () => {
             </p>
           )}
         </div>
-        <div class="pt-5">
-          <div class="flex justify-end">
-            <button type="submit" class="btn px-3 py-2">
+        <div className="pt-5">
+          <div className="flex justify-end">
+            <button type="submit" className="btn px-3 py-2">
               Add new profile
             </button>
           </div>
