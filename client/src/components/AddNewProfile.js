@@ -31,22 +31,26 @@ const AddNewProfile = () => {
 
   const createProfile = event => {
     event.preventDefault();
-
-    let errors = [...validateInput(profileData)];
-    if (errors.length > 0) {
-      setErrors(errors);
+    //
+    let errorsList = [...validateInput(profileData)];
+    if (errorsList.length > 0) {
+      setErrors(errorsList);
       return;
+    } else {
+      setErrors([]);
+      getProfileByEmail(profileData.email).then(data => {
+        if (data) {
+          setErrors([...[], "duplicate"]);
+        } else {
+          postProfile(profileData).then(isSuccessful => {
+            setProfileCreated(isSuccessful);
+            return;
+          });
+        }
+        console.log(data);
+      });
     }
-
-    //
-    getProfileByEmail(profileData.email).then(data => console.log(data));
-    //
-    postProfile(profileData).then(isSuccessful => {
-      setProfileCreated(isSuccessful);
-    });
-    setErrors([]);
   };
-
   const updateField = (name, value) => {
     const updatedProfileData = {
       ...profileData,
@@ -93,7 +97,7 @@ const AddNewProfile = () => {
     label: group.group_name,
     value: group.id
   }));
-
+  console.log(errors);
   return (
     <div className="px-10 max-w-4xl mx-auto">
       <form onSubmit={createProfile}>

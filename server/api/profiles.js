@@ -50,14 +50,13 @@ router.get("/:profileId", (req, res) => {
 		});
 });
 //checks if email is not unique
-router.get("/:email", (req, res) => {
+router.get("/email/:email", (req, res) => {
 
 	const email = req.params.email;
 	usersDb
 		.getProfileByEmail(email)
 		.then((data) => {
 			res.send(data);
-
 		})
 		.catch((err) => {
 			console.error(err);

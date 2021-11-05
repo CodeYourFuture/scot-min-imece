@@ -1,3 +1,5 @@
+import { getProfileByEmail } from "../api/profiles";
+
 export const validateInput = ({
   first_name,
   last_name,
