@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import { postProfile } from "../api/profiles";
 import { getNationalities, getGroups } from "../api/profiles";
 import Select from "react-select";
@@ -97,6 +98,8 @@ const AddNewProfile = () => {
     label: group.group_name,
     value: group.id
   }));
+
+  if (profileCreated) return <Redirect to={"/"} />;
 
   return (
     <div className="px-10 max-w-4xl mx-auto">
